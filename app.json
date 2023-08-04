@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "skeet-solana",
+    "slug": "skeet-solana",
+    "scheme": "skeetsolana",
+    "owner": "elsoul-labo",
+    "platforms": ["web", "ios", "android"],
+    "githubUrl": "https://github.com/elsoul/skeet-solana",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "primaryColor": "#111827",
+    "icon": "./assets/favicon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.elsoullabo.skeetsolana"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/favicon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "versionCode": 1,
+      "package": "com.elsoullabo.skeetsolana"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ]
+  }
+}

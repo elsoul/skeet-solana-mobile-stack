@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "skeet-solana"
+  },
+  "targets": {
+    "skeet-solana": {
+      "hosting": {
+        "skeet-solana": [
+          "skeet-solana"
+        ]
+      }
+    }
+  }
+}
