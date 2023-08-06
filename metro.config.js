@@ -33,6 +33,13 @@ config.resolver = {
     '@lib': path.resolve(__dirname, 'lib'),
     '@root': path.resolve(__dirname),
   },
+  extraNodeModules: {
+    crypto: require.resolve('crypto-browserify'),
+    stream: require.resolve('readable-stream'),
+    zlib: require.resolve('zlib'),
+    path: require.resolve('path-browserify'),
+    url: require.resolve('react-native-url-polyfill'),
+  },
 }
 
 module.exports = config

@@ -3,6 +3,7 @@ import openAiChat from './openAiChat'
 import routes from './routes'
 import settings from './settings'
 import users from './users'
+import solana from './solana'
 
 const translationEN = {
   translation: {
@@ -10,6 +11,7 @@ const translationEN = {
     openAiChat,
     routes,
     settings,
+    solana,
     users,
   },
 }

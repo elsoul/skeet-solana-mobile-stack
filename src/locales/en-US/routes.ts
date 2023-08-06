@@ -5,6 +5,7 @@ const routesEN = {
   CheckEmail: 'Check the email from us',
   Action: 'Account Action',
   OpenAiChat: 'Open AI Chat',
+  SolanaWallet: 'Solana Wallet',
   Settings: 'Settings',
 }
 

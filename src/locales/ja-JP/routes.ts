@@ -5,6 +5,7 @@ const routesJA = {
   CheckEmail: 'メールを確認してください',
   Action: 'アカウントアクション',
   OpenAiChat: 'OpenAIチャット',
+  SolanaWallet: 'Solana ウォレット',
   Settings: '設定',
 }
 

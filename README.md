@@ -1,3 +1,5 @@
+# Skeet Solana Mobile Stack
+
 ![Skeet App Template](https://storage.googleapis.com/skeet-assets/imgs/samples/skeet-app-template.png)
 
 <p align="center">
@@ -20,7 +22,9 @@
   </a>
 </p>
 
-## Skeet Expo & Firebase Boilerplate
+## Skeet Expo & Firebase for Solana Mobile Stack
+
+Solana Mobile Stack: https://docs.solanamobile.com/
 
 - [Firebase - Serverless Platform](https://firebase.google.com/)
 - [Google Cloud - Cloud Platform](https://cloud.google.com/)
@@ -35,6 +39,7 @@
 - [React i18n - Localization](https://react.i18next.com/)
 - [twrnc - TailwindCSS](https://github.com/jaredh159/tailwind-react-native-classnames)
 - [React Navigation - Routing](https://reactnavigation.org/)
+- [Solana Mobile Wallet Adapter](https://docs.solanamobile.com/react-native/overview)
 
 ## What's Skeet?
 
