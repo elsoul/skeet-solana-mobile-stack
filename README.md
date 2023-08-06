@@ -49,6 +49,10 @@ The Skeet project was launched with the goal of reducing software development, o
 
 Build Serverless Apps faster.
 
+## Setup
+
+Solana Mobile Stack - Development Setup: https://docs.solanamobile.com/getting-started/development-setup
+
 ## Dependency
 
 - [TypeScript](https://www.typescriptlang.org/)

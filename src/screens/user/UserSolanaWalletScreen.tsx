@@ -1,11 +1,12 @@
 import tw from '@/lib/tailwind'
-import { Button, Text, View } from 'react-native'
+import { Text, View } from 'react-native'
 import useColorModeRefresh from '@/hooks/useColorModeRefresh'
 import { useTranslation } from 'react-i18next'
 import UserLayout from '@/layouts/user/UserLayout'
 import useAnalytics from '@/hooks/useAnalytics'
 import { ScrollView } from 'react-native-gesture-handler'
 import { transact } from '@solana-mobile/mobile-wallet-adapter-protocol'
+import Button from '@/components/common/atoms/Button'
 
 export default function UserSolanaWalletScreen() {
   useColorModeRefresh()
@@ -51,8 +52,13 @@ export default function UserSolanaWalletScreen() {
                       console.log(authorization)
                     })
                   }}
-                  title="Authorize"
-                />
+                >
+                  <Text
+                    style={tw`text-center font-loaded-bold text-lg text-white`}
+                  >
+                    wallet
+                  </Text>
+                </Button>
               </View>
             </View>
           </View>

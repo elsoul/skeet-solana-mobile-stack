@@ -18,6 +18,7 @@ import { emailSchema, passwordSchema } from '@/utils/form'
 import { auth, db } from '@/lib/firebase'
 import Button from '@/components/common/atoms/Button'
 import clsx from 'clsx'
+import { transact } from '@solana-mobile/mobile-wallet-adapter-protocol'
 
 export default function LoginScreen() {
   useColorModeRefresh()
