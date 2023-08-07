@@ -77,6 +77,9 @@ buck-out/
 # Expo
 .expo/
 web-build/
+*.apk
+android/
+ios/
 
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
@@ -94,4 +97,3 @@ gcloud-key.json
 #firebase
 .firebase
 firebase-debug.log
-*.apk
