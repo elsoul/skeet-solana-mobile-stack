@@ -18,15 +18,15 @@
     "functions:dev": "firebase emulators:start --only functions",
     "functions:deploy": "firebase deploy --only functions",
     "dev": "EXPO_USE_PATH_ALIASES=1 expo start -c",
-    "android": "EXPO_USE_PATH_ALIASES=1 expo start --android",
+    "android": "ANDROID_HOME=/Users/ktm/Library/Android/sdk npx expo run:android",
     "update:packages": "ncu -x 'react-native-reanimated,react-native-svg' && yarn",
     "build:configure": "eas build:configure",
-    "build:development:android": "eas build --platform android --profile development",
-    "build:preview:android": "eas build --platform android --profile preview",
-    "build:production:android": "eas build --platform android --profile production",
+    "build:development:android": "eas build --platform android --profile development --local",
+    "build:preview:android": "eas build --platform android --profile preview --local",
+    "build:production:android": "eas build --platform android --profile production --local",
     "deploy:rules": "npx firebase deploy --only firestore:rules,storage",
-    "check:webapp": "npx serve web-build",
-    "start": "EXPO_USE_PATH_ALIASES=1 expo start -c"
+    "start": "expo start --dev-client",
+    "ios": "expo run:ios"
   },
   "dependencies": {
     "@expo-google-fonts/noto-sans-jp": "0.2.3",
@@ -49,8 +49,9 @@
     "crypto-browserify": "3.12.0",
     "date-fns": "2.30.0",
     "dotenv": "16.0.3",
-    "expo": "48.0.5",
+    "expo": "~48.0.18",
     "expo-checkbox": "2.3.1",
+    "expo-dev-client": "2.2.1",
     "expo-font": "11.1.1",
     "expo-image": "1.0.1",
     "expo-image-picker": "14.1.1",
@@ -81,7 +82,9 @@
     "twrnc": "3.6.1",
     "typesaurus": "7",
     "zlib": "1.0.5",
-    "zod": "3.21.4"
+    "zod": "3.21.4",
+    "expo-splash-screen": "~0.18.2",
+    "expo-status-bar": "~1.4.4"
   },
   "devDependencies": {
     "@babel/core": "7.21.0",

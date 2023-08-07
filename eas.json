@@ -4,8 +4,9 @@
   },
   "build": {
     "development": {
-      "developmentClient": false,
+      "developmentClient": true,
       "distribution": "internal",
+      "env": { "ANDROID_HOME": "/Users/ktm/Library/Android/sdk" },
       "ios": {
         "resourceClass": "m1-medium"
       }

@@ -65,8 +65,7 @@ export default function Routes() {
       subscriber = auth.onAuthStateChanged(onAuthStateChanged)
     }
     return () => subscriber()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [onAuthStateChanged])
 
   const { defaultScreens, userScreens } = useScreens()
 

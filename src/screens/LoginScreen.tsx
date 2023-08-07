@@ -18,6 +18,13 @@ import { emailSchema, passwordSchema } from '@/utils/form'
 import { auth, db } from '@/lib/firebase'
 import Button from '@/components/common/atoms/Button'
 import clsx from 'clsx'
+import { transact } from '@solana-mobile/mobile-wallet-adapter-protocol'
+
+export const APP_IDENTITY = {
+  name: 'Skeet Dev',
+  uri: 'https://skeet.dev/',
+  icon: 'favicon.png', // Full path resolves to https://yourdapp.com/favicon.ico
+}
 
 export default function LoginScreen() {
   useColorModeRefresh()
@@ -238,6 +245,23 @@ export default function LoginScreen() {
                   </Text>
                 </Button>
               </View>
+              <Button
+                onPress={() => {
+                  transact(async (mobileWallet) => {
+                    const authorization = await mobileWallet.authorize({
+                      cluster: 'devnet',
+                      identity: APP_IDENTITY,
+                    })
+                    console.log(authorization)
+                  })
+                }}
+              >
+                <Text
+                  style={tw`text-center font-loaded-bold text-lg text-white`}
+                >
+                  Solana Wallet Connect
+                </Text>
+              </Button>
             </View>
           </View>
         </View>

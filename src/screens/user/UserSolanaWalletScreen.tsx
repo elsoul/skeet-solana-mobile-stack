@@ -7,6 +7,7 @@ import useAnalytics from '@/hooks/useAnalytics'
 import { ScrollView } from 'react-native-gesture-handler'
 import { transact } from '@solana-mobile/mobile-wallet-adapter-protocol'
 import Button from '@/components/common/atoms/Button'
+import { APP_IDENTITY } from '../LoginScreen'
 
 export default function UserSolanaWalletScreen() {
   useColorModeRefresh()
@@ -47,7 +48,7 @@ export default function UserSolanaWalletScreen() {
                     transact(async (mobileWallet) => {
                       const authorization = await mobileWallet.authorize({
                         cluster: 'devnet',
-                        identity: { name: 'My Expo App' },
+                        identity: APP_IDENTITY,
                       })
                       console.log(authorization)
                     })
@@ -56,7 +57,7 @@ export default function UserSolanaWalletScreen() {
                   <Text
                     style={tw`text-center font-loaded-bold text-lg text-white`}
                   >
-                    wallet
+                    Solana Wallet Connect
                   </Text>
                 </Button>
               </View>

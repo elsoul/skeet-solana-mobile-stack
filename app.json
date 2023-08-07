@@ -4,9 +4,9 @@
     "slug": "skeet-solana",
     "scheme": "skeetsolana",
     "owner": "elsoul-labo",
-    "platforms": ["web", "ios", "android"],
+    "platforms": ["ios", "android"],
     "githubUrl": "https://github.com/elsoul/skeet-solana",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "orientation": "portrait",
     "primaryColor": "#111827",
     "icon": "./assets/favicon.png",
@@ -26,7 +26,8 @@
         "backgroundColor": "#ffffff"
       },
       "versionCode": 1,
-      "package": "com.elsoullabo.skeetsolana"
+      "package": "com.elsoullabo.skeetsolana",
+      "permissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -38,6 +39,11 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "d11ff573-5d01-4cd0-a00b-cadda81d59fe"
+      }
+    }
   }
 }

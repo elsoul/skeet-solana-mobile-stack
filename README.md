@@ -62,6 +62,9 @@ Solana Mobile Stack - Development Setup: https://docs.solanamobile.com/getting-s
 
 ## Usage
 
+※ANDROID_HOME environment is important. Please do not forget to put your ANDROID SDK PATH to eas.json and package.json
+(It will be like /Users/ktm/Library/Android/sdk)
+
 ```bash
 $ npm i -g firebase-tools
 $ npm i -g @skeet-framework/cli
@@ -70,6 +73,7 @@ $ npm i -g @skeet-framework/cli
 ```bash
 $ skeet create <project-name>
 $ cd <project-name>
+$ yarn build:development
 $ skeet s
 ```
 
@@ -77,6 +81,7 @@ or if you pulled this repo:
 
 ```bash
 $ skeet yarn install
+$ yarn build:development
 $ skeet s
 ```
 
