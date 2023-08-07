@@ -19,11 +19,12 @@ import { auth, db } from '@/lib/firebase'
 import Button from '@/components/common/atoms/Button'
 import clsx from 'clsx'
 import { transact } from '@solana-mobile/mobile-wallet-adapter-protocol'
+import SolanaLogo from '@assets/logo/solanaLogoMark.svg'
 
 export const APP_IDENTITY = {
   name: 'Skeet Dev',
   uri: 'https://skeet.dev/',
-  icon: 'favicon.png', // Full path resolves to https://yourdapp.com/favicon.ico
+  icon: 'favicon.png', // resolves to uri/icon like https://skeet.dev/favicon.png in this example
 }
 
 export default function LoginScreen() {
@@ -245,23 +246,34 @@ export default function LoginScreen() {
                   </Text>
                 </Button>
               </View>
-              <Button
+
+              <Pressable
                 onPress={() => {
                   transact(async (mobileWallet) => {
                     const authorization = await mobileWallet.authorize({
                       cluster: 'devnet',
                       identity: APP_IDENTITY,
                     })
+                    Toast.show({
+                      type: 'success',
+                      text1: 'Welcome to Skeet Dev🎉',
+                      text2: `You signed with ${authorization.accounts[0].address}`,
+                    })
                     console.log(authorization)
                   })
                 }}
+                style={tw`${clsx(
+                  'flex flex-row items-center justify-center w-full px-3 py-2 bg-gray-900 dark:bg-gray-600'
+                )}`}
               >
+                <SolanaLogo style={tw`${clsx('mr-3 h-6 w-6 flex-shrink-0')}`} />
+
                 <Text
                   style={tw`text-center font-loaded-bold text-lg text-white`}
                 >
-                  Solana Wallet Connect
+                  Connect your wallet
                 </Text>
-              </Button>
+              </Pressable>
             </View>
           </View>
         </View>

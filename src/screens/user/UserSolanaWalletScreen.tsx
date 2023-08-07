@@ -1,13 +1,15 @@
 import tw from '@/lib/tailwind'
-import { Text, View } from 'react-native'
+import { Pressable, Text, View } from 'react-native'
 import useColorModeRefresh from '@/hooks/useColorModeRefresh'
 import { useTranslation } from 'react-i18next'
 import UserLayout from '@/layouts/user/UserLayout'
 import useAnalytics from '@/hooks/useAnalytics'
 import { ScrollView } from 'react-native-gesture-handler'
 import { transact } from '@solana-mobile/mobile-wallet-adapter-protocol'
-import Button from '@/components/common/atoms/Button'
 import { APP_IDENTITY } from '../LoginScreen'
+import Toast from 'react-native-toast-message'
+import SolanaLogo from '@assets/logo/solanaLogoMark.svg'
+import clsx from 'clsx'
 
 export default function UserSolanaWalletScreen() {
   useColorModeRefresh()
@@ -43,23 +45,35 @@ export default function UserSolanaWalletScreen() {
               style={tw`flex flex-col sm:flex-row items-start max-w-md sm:gap-8 px-4 w-full`}
             >
               <View style={tw`flex flex-col w-full`}>
-                <Button
+                <Pressable
                   onPress={() => {
                     transact(async (mobileWallet) => {
                       const authorization = await mobileWallet.authorize({
                         cluster: 'devnet',
                         identity: APP_IDENTITY,
                       })
+                      Toast.show({
+                        type: 'success',
+                        text1: 'Welcome to Skeet Dev🎉',
+                        text2: `You signed with ${authorization.accounts[0].address}`,
+                      })
                       console.log(authorization)
                     })
                   }}
+                  style={tw`${clsx(
+                    'flex flex-row items-center justify-center w-full px-3 py-2 bg-gray-900 dark:bg-gray-600'
+                  )}`}
                 >
+                  <SolanaLogo
+                    style={tw`${clsx('mr-3 h-6 w-6 flex-shrink-0')}`}
+                  />
+
                   <Text
                     style={tw`text-center font-loaded-bold text-lg text-white`}
                   >
-                    Solana Wallet Connect
+                    Connect your wallet
                   </Text>
-                </Button>
+                </Pressable>
               </View>
             </View>
           </View>
