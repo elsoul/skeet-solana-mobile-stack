@@ -19,7 +19,6 @@ export const createUserChatRoom = onRequest(
   publicHttpOption,
   async (req: TypedRequestBody<CreateUserChatRoomParams>, res) => {
     try {
-      console.log(req)
       const body = {
         model: req.body.model || 'gpt-3.5-turbo',
         systemContent:
