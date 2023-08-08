@@ -4,7 +4,6 @@ import { initializeApp, getApp, getApps } from 'firebase/app'
 import { connectAuthEmulator, getAuth } from 'firebase/auth'
 import { getStorage, connectStorageEmulator } from 'firebase/storage'
 import {
-  getFirestore,
   connectFirestoreEmulator,
   initializeFirestore,
 } from 'firebase/firestore'

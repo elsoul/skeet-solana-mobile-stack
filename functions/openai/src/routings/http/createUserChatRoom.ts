@@ -10,8 +10,6 @@ import {
 import {
   addChildCollectionItem,
   getCollectionItem,
-  queryChildCollectionItem,
-  order,
 } from '@skeet-framework/firestore'
 import { publicHttpOption } from '@/routings/options'
 import { CreateUserChatRoomParams } from '@/types/http/createUserChatRoomParams'
@@ -21,6 +19,7 @@ export const createUserChatRoom = onRequest(
   publicHttpOption,
   async (req: TypedRequestBody<CreateUserChatRoomParams>, res) => {
     try {
+      console.log(req)
       const body = {
         model: req.body.model || 'gpt-3.5-turbo',
         systemContent:
@@ -67,6 +66,7 @@ export const createUserChatRoom = onRequest(
         body.systemContent,
         'system'
       )
+
       res.json({ status: 'success', userChatRoomRef, userChatRoomMessageRef })
     } catch (error) {
       res.status(500).json({ status: 'error', message: String(error) })

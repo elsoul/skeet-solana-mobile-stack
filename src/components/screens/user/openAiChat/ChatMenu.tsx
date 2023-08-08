@@ -272,7 +272,7 @@ export default function ChatMenu({
           }
         )
         const data = await res?.json()
-        if (data.status == 'error') {
+        if (data?.status == 'error') {
           throw new Error(data.message)
         }
         Toast.show({
