@@ -3,7 +3,11 @@ import { getAnalytics } from 'firebase/analytics'
 import { initializeApp, getApp, getApps } from 'firebase/app'
 import { connectAuthEmulator, getAuth } from 'firebase/auth'
 import { getStorage, connectStorageEmulator } from 'firebase/storage'
-import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore'
+import {
+  getFirestore,
+  connectFirestoreEmulator,
+  initializeFirestore,
+} from 'firebase/firestore'
 import { Platform } from 'react-native'
 
 export const firebaseApp = !getApps().length
@@ -49,7 +53,9 @@ const getFirebaseStorage = () => {
 export const storage = firebaseApp ? getFirebaseStorage() : undefined
 
 const getFirebaseFirestore = () => {
-  const firestoreDb = getFirestore(firebaseApp)
+  const firestoreDb = initializeFirestore(firebaseApp, {
+    experimentalForceLongPolling: true,
+  })
   if (process.env.NODE_ENV !== 'production' && Platform.OS === 'web') {
     connectFirestoreEmulator(firestoreDb, '127.0.0.1', 8080)
   }
