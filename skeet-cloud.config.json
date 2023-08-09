@@ -1,7 +1,7 @@
 {
   "app": {
-    "name": "skeet-solana",
-    "projectId": "skeet-solana",
+    "name": "skeet-solana-mobile-stack",
+    "projectId": "skeet-solana-mobile-stack",
     "region": "europe-west6",
     "appDomain": "",
     "functionsDomain": "",
@@ -9,7 +9,7 @@
   },
   "cloudArmor": [
     {
-      "securityPolicyName": "skeet-skeet-solana-armor",
+      "securityPolicyName": "skeet-skeet-solana-mobile-stack-armor",
       "rules": [
         {
           "priority": "10",

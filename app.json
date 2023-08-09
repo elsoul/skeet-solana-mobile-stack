@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "skeet-solana",
-    "slug": "skeet-solana",
-    "scheme": "skeetsolana",
+    "name": "skeet-solana-mobile-stack",
+    "slug": "skeet-solana-mobile-stack",
+    "scheme": "skeetsolanamobilestack",
     "owner": "elsoul-labo",
     "platforms": ["ios", "android"],
-    "githubUrl": "https://github.com/elsoul/skeet-solana",
+    "githubUrl": "https://github.com/elsoul/skeet-solana-mobile-stack",
     "version": "0.1.1",
     "orientation": "portrait",
     "primaryColor": "#111827",
@@ -18,7 +18,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.elsoullabo.skeetsolana"
+      "bundleIdentifier": "com.elsoullabo.skeetsolanamobilestack"
     },
     "android": {
       "adaptiveIcon": {
@@ -26,7 +26,7 @@
         "backgroundColor": "#ffffff"
       },
       "versionCode": 1,
-      "package": "com.elsoullabo.skeetsolana",
+      "package": "com.elsoullabo.skeetsolanamobilestack",
       "permissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
@@ -39,11 +39,6 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "d11ff573-5d01-4cd0-a00b-cadda81d59fe"
-      }
-    }
+    ]
   }
 }

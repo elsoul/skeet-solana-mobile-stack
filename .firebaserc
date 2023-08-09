@@ -1,12 +1,12 @@
 {
   "projects": {
-    "default": "skeet-solana"
+    "default": "skeet-solana-mobile-stack"
   },
   "targets": {
-    "skeet-solana": {
+    "skeet-solana-mobile-stack": {
       "hosting": {
-        "skeet-solana": [
-          "skeet-solana"
+        "skeet-solana-mobile-stack": [
+          "skeet-solana-mobile-stack"
         ]
       }
     }
