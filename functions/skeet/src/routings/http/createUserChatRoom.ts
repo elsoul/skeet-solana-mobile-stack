@@ -65,7 +65,6 @@ export const createUserChatRoom = onRequest(
         body.systemContent,
         'system'
       )
-
       res.json({ status: 'success', userChatRoomRef, userChatRoomMessageRef })
     } catch (error) {
       res.status(500).json({ status: 'error', message: String(error) })
