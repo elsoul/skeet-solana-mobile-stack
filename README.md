@@ -22,7 +22,7 @@
   </a>
 </p>
 
-## Skeet Expo & Firebase for Solana Mobile Stack
+## Skeet Expo & Firebase for Solana Mobile Stack + Solana Web dApp
 
 Solana Mobile Stack: https://docs.solanamobile.com/
 
@@ -40,6 +40,10 @@ Solana Mobile Stack: https://docs.solanamobile.com/
 - [twrnc - TailwindCSS](https://github.com/jaredh159/tailwind-react-native-classnames)
 - [React Navigation - Routing](https://reactnavigation.org/)
 - [Solana Mobile Wallet Adapter](https://docs.solanamobile.com/react-native/overview)
+- [Next.js - SSG Framework](https://nextjs.org/)
+- [React - UI Framework](https://reactjs.org/)
+- [Tailwind - CSS Framework](https://tailwindcss.com/)
+- [Solana Wallet Adapter (Web)](https://github.com/solana-labs/wallet-adapter)
 
 ## What's Skeet?
 
