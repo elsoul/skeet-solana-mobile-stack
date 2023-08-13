@@ -5,6 +5,7 @@ import {
   HeartIcon,
   HomeIcon,
   RocketLaunchIcon,
+  WalletIcon,
 } from '@heroicons/react/24/outline'
 
 export const defaultMainNav = [
@@ -73,6 +74,11 @@ export const userMenuNav = [
     name: 'user:menuNav.chat',
     href: '/user/chat/',
     icon: ChatBubbleLeftRightIcon,
+  },
+  {
+    name: 'user:menuNav.solana-nft',
+    href: '/user/solana-nft/',
+    icon: WalletIcon,
   },
   {
     name: 'user:menuNav.settings',

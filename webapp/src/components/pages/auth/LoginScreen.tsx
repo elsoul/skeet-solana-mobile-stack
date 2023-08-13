@@ -192,7 +192,7 @@ export default function LoginScreen() {
                     'flex flex-row items-center justify-center bg-gray-900',
                   )}
                 >
-                  <WalletMultiButton className="" />
+                  <WalletMultiButton />
                 </div>
               </div>
             </div>

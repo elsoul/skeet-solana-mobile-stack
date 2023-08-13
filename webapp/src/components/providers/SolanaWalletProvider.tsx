@@ -26,7 +26,7 @@ export default function SolanaWalletProvider({ children }: Props) {
       new SolflareWalletAdapter({ network }),
       new LedgerWalletAdapter(),
     ],
-    []
+    [],
   )
   const addToast = useToastMessage()
 
@@ -39,7 +39,7 @@ export default function SolanaWalletProvider({ children }: Props) {
       })
       console.error(error)
     },
-    [addToast]
+    [addToast],
   )
 
   return (
