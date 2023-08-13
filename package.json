@@ -14,6 +14,7 @@
     "skeet:skeet": "yarn --cwd functions/skeet dev",
     "skeet:dev": "firebase emulators:start",
     "skeet:solanamobile": "yarn android",
+    "skeet:webapp": "yarn --cwd webapp dev",
     "functions:build": "yarn --cwd functions/skeet build",
     "functions:dev": "firebase emulators:start --only functions",
     "functions:deploy": "firebase deploy --only functions",
@@ -25,6 +26,7 @@
     "build:preview:android": "eas build --platform android --profile preview --local",
     "build:production:android": "eas build --platform android --profile production --local",
     "deploy:rules": "npx firebase deploy --only firestore:rules,storage",
+    "deploy:webapp": "npx firebase deploy --only hosting",
     "start": "expo start --dev-client",
     "ios": "expo run:ios"
   },
