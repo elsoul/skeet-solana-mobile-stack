@@ -4,6 +4,7 @@ import AgreeToPolicy from '@/components/utils/AgreeToPolicy'
 import { AppPropsWithLayout } from '@/pages/_app'
 import { Suspense } from 'react'
 import ToastMessage from '@/components/utils/ToastMessage'
+import SolanaWalletProvider from '@/components/providers/SolanaWalletProvider'
 
 export default function Layout({ Component, pageProps }: AppPropsWithLayout) {
   const [mounted, setMounted] = useState(false)
@@ -48,13 +49,15 @@ export default function Layout({ Component, pageProps }: AppPropsWithLayout) {
         </>
       ) : (
         <>
-          <div className="relative">
-            <Suspense fallback={<AppLoading />}>
-              {getLayout(<Component {...pageProps} />)}
-            </Suspense>
-            <ToastMessage />
-            <AgreeToPolicy />
-          </div>
+          <SolanaWalletProvider>
+            <div className="relative">
+              <Suspense fallback={<AppLoading />}>
+                {getLayout(<Component {...pageProps} />)}
+              </Suspense>
+              <ToastMessage />
+              <AgreeToPolicy />
+            </div>
+          </SolanaWalletProvider>
         </>
       )}
     </>

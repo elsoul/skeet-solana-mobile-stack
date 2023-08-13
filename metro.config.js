@@ -36,7 +36,7 @@ config.resolver = {
   extraNodeModules: {
     crypto: require.resolve('crypto-browserify'),
     stream: require.resolve('readable-stream'),
-    zlib: require.resolve('zlib'),
+    zlib: require.resolve('browserify-zlib'),
     path: require.resolve('path-browserify'),
     url: require.resolve('react-native-url-polyfill'),
   },

@@ -14,6 +14,7 @@ import Link from '@/components/routing/Link'
 import { z } from 'zod'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui'
 
 const schema = z.object({
   email: emailSchema,
@@ -47,7 +48,7 @@ export default function LoginScreen() {
           const userCredential = await signInWithEmailAndPassword(
             auth,
             data.email,
-            data.password
+            data.password,
           )
 
           if (!userCredential.user.emailVerified) {
@@ -87,12 +88,12 @@ export default function LoginScreen() {
         }
       }
     },
-    [t, addToast]
+    [t, addToast],
   )
 
   const isDisabled = useMemo(
     () => isLoading || errors.email != null || errors.password != null,
-    [isLoading, errors.email, errors.password]
+    [isLoading, errors.email, errors.password],
   )
 
   return (
@@ -179,11 +180,20 @@ export default function LoginScreen() {
                     isDisabled
                       ? 'cursor-not-allowed bg-gray-300 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
                       : 'bg-gray-900 text-white hover:bg-gray-700 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200',
-                    'w-full px-3 py-2 text-center text-lg font-bold'
+                    'w-full px-3 py-2 text-center text-lg font-bold',
                   )}
                 >
                   {t('login')}
                 </button>
+              </div>
+              <div className="flex flex-row items-center justify-center">
+                <div
+                  className={clsx(
+                    'flex flex-row items-center justify-center bg-gray-900',
+                  )}
+                >
+                  <WalletMultiButton className="" />
+                </div>
               </div>
             </div>
           </form>
