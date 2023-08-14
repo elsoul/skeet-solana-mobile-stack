@@ -39,6 +39,8 @@ Solana Mobile Stack: https://docs.solanamobile.com/
 - [React i18n - Localization](https://react.i18next.com/)
 - [twrnc - TailwindCSS](https://github.com/jaredh159/tailwind-react-native-classnames)
 - [React Navigation - Routing](https://reactnavigation.org/)
+- [Solana - The fastest L1 Blockchain](https://solana.com/)
+- [Solana Web3.js - Solana JavaScript API](https://github.com/solana-labs/solana-web3.js)
 - [Solana Mobile Wallet Adapter](https://docs.solanamobile.com/react-native/overview)
 - [Next.js - SSG Framework](https://nextjs.org/)
 - [React - UI Framework](https://reactjs.org/)
