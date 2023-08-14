@@ -22,7 +22,7 @@
   </a>
 </p>
 
-## Solana Mobile Stack (Expo) + Web (Next.js) - Firestore Template
+## Skeet Solana Mobile Stack (Expo) + Web (Next.js) - Firestore Template
 
 Solana Mobile Stack: https://docs.solanamobile.com/
 
