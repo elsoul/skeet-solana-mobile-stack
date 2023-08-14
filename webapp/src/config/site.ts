@@ -3,8 +3,8 @@ import skeetCloudConfig from '@root/skeet-cloud.config.json'
 const siteConfig = {
   domain: skeetCloudConfig.app.appDomain,
   copyright: 'ELSOUL LABO B.V.',
-  sitenameJA: 'Skeet Next',
-  sitenameEN: 'Skeet Next',
+  sitenameJA: 'Skeet Solana Web',
+  sitenameEN: 'Skeet Solana Web',
   keywordsJA:
     'Next.js, Firebase, SSG, テンプレート, SEO, 多言語対応, サーバーレス, TypeScript, PWA',
   keywordsEN:
