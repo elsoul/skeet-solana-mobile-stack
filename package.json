@@ -26,10 +26,10 @@
     "build:preview:android": "eas build --platform android --profile preview --local",
     "build:production:android": "eas build --platform android --profile production --local",
     "build": "yarn build:development:android",
-    "deploy": "yarn build:development:android",
-    "build:webapp": "yarn --cwd webapp build",
+    "deploy": "yarn deploy:webapp",
+    "build:production:webapp": "yarn --cwd webapp build",
     "deploy:rules": "npx firebase deploy --only firestore:rules,storage",
-    "deploy:webapp": "yarn build:webapp && npx firebase deploy --only hosting",
+    "deploy:webapp": "yarn build:production:webapp && npx firebase deploy --only hosting",
     "start": "expo start --dev-client",
     "ios": "expo run:ios"
   },
