@@ -90,6 +90,7 @@ $ skeet s
 If you setup the Android Emulator, the mobile app will be launched automatically.
 
 Web-Frontend: http://localhost:4200
+Firebase Emulator: http://localhost:4000
 
 **※ You need OpenAI API key to use ChatGPT.**
 
@@ -105,8 +106,6 @@ Test your app:
 ```bash
 $ skeet test
 ```
-
-Open http://localhost:4000
 
 ## EAS Build
 
