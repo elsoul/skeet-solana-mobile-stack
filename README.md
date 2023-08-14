@@ -77,24 +77,19 @@ $ npm i -g @skeet-framework/cli
 ```bash
 $ skeet create <project-name>
 $ cd <project-name>
-$ yarn build:development
 $ skeet s
 ```
 
 or if you pulled this repo:
 
 ```bash
-$ skeet yarn install
-$ yarn build:development
+$ skeet yarn i
 $ skeet s
 ```
 
-Open a new terminal and run:
+If you setup the Android Emulator, the mobile app will be launched automatically.
 
-```bash
-$ skeet login
-$ export ACCESS_TOKEN=<your-token>
-```
+Web-Frontend: http://localhost:4200
 
 **※ You need OpenAI API key to use ChatGPT.**
 
