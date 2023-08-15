@@ -33,7 +33,7 @@ export default function NewsContents({ article, articleHtml }: Props) {
                 <ScrollSyncToc rawMarkdownBody={article.content} />
               </div>
               <div
-                className="prose break-normal dark:prose-invert lg:prose-lg"
+                className="prose break-all dark:prose-invert lg:prose-lg"
                 dangerouslySetInnerHTML={{ __html: articleHtml }}
               />
             </div>
