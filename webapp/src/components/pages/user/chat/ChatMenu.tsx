@@ -237,7 +237,7 @@ export default function ChatMenu({
             title: t('chat:chatRoomCreatedSuccessTitle'),
             description: t('chat:chatRoomCreatedSuccessBody'),
           })
-          setCurrentChatRoomId(resData.userChatRoomRef.id)
+          setCurrentChatRoomId(resData.userChatRoomId)
         }
       } catch (err) {
         console.error(err)

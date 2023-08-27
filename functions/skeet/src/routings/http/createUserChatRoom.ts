@@ -1,19 +1,11 @@
+import { db } from '@/index'
 import { onRequest } from 'firebase-functions/v2/https'
-import { TypedRequestBody } from '@/index'
-import {
-  User,
-  UserChatRoom,
-  userChatRoomCollectionName,
-  userCollectionName,
-  createUserChatRoomMessage,
-} from '@/models'
-import {
-  addChildCollectionItem,
-  getCollectionItem,
-} from '@skeet-framework/firestore'
+import { UserChatRoom, UserChatRoomCN, UserCN } from '@/models'
+import { add } from '@skeet-framework/firestore'
 import { publicHttpOption } from '@/routings/options'
 import { CreateUserChatRoomParams } from '@/types/http/createUserChatRoomParams'
 import { getUserAuth } from '@/lib'
+import { TypedRequestBody } from '@/types/http'
 
 export const createUserChatRoom = onRequest(
   publicHttpOption,
@@ -35,39 +27,25 @@ export const createUserChatRoom = onRequest(
       }
       const user = await getUserAuth(req)
 
-      const userDoc = await getCollectionItem<User>(
-        userCollectionName,
-        user.uid
-      )
-      if (!userDoc) throw new Error('userDoc is not found')
-      console.log(`userDoc: ${userDoc}`)
-
       const parentId = user.uid || ''
       const params: UserChatRoom = {
-        userRef: userDoc.ref,
         title: '',
         model: body.model,
         maxTokens: body.maxTokens,
         temperature: body.temperature,
         stream: body.stream,
+        context: body.systemContent,
       }
-      const userChatRoomRef = await addChildCollectionItem<UserChatRoom, User>(
-        userCollectionName,
-        userChatRoomCollectionName,
-        parentId,
-        params
+      const userChatRoomPath = `${UserCN}/${parentId}/${UserChatRoomCN}`
+      const userChatRoomDoc = await add<UserChatRoom>(
+        db,
+        userChatRoomPath,
+        params,
       )
-      console.log(`created userChatRoomRef: ${userChatRoomRef.id}`)
-
-      const userChatRoomMessageRef = await createUserChatRoomMessage(
-        userChatRoomRef,
-        user.uid,
-        body.systemContent,
-        'system'
-      )
-      res.json({ status: 'success', userChatRoomRef, userChatRoomMessageRef })
+      console.log(`created userChatRoom: ${userChatRoomDoc.id}`)
+      res.json({ status: 'success', userChatRoomId: userChatRoomDoc.id })
     } catch (error) {
       res.status(500).json({ status: 'error', message: String(error) })
     }
-  }
+  },
 )
