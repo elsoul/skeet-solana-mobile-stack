@@ -44,18 +44,21 @@ import {
   DocumentData,
   QueryDocumentSnapshot,
   Timestamp,
+  addDoc,
   collection,
   getDocs,
   limit,
   orderBy,
   query,
+  serverTimestamp,
   startAfter,
 } from 'firebase/firestore'
-import { db } from '@/lib/firebase'
+import { createFirestoreDataConverter, db } from '@/lib/firebase'
 import { format } from 'date-fns'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { auth } from '@/lib/firebase'
 import { signOut } from 'firebase/auth'
+import { UserChatRoom } from '@/types/models'
 
 export type ChatRoom = {
   id: string
@@ -64,6 +67,7 @@ export type ChatRoom = {
   model: GPTModel
   maxTokens: number
   temperature: number
+  context: string
   title: string
 }
 
@@ -109,7 +113,7 @@ export default function ChatMenu({
           orderBy('createdAt', 'desc'),
           limit(15),
           startAfter(lastChat)
-        )
+        ).withConverter(createFirestoreDataConverter<UserChatRoom>())
 
         const querySnapshot = await getDocs(q)
         setDataLoading(true)
@@ -259,22 +263,22 @@ export default function ChatMenu({
   const newChatSubmit = useCallback(async () => {
     try {
       setCreateLoading(true)
-      if (!isNewChatDisabled) {
-        const res = await fetchSkeetFunctions<CreateUserChatRoomParams>(
-          'skeet',
-          'createUserChatRoom',
-          {
-            model,
-            systemContent,
-            maxTokens: Number(maxTokens),
-            temperature: Number(temperature),
-            stream: true,
-          }
-        )
-        const data = await res?.json()
-        if (data?.status == 'error') {
-          throw new Error(data.message)
-        }
+      if (!isNewChatDisabled && db) {
+        const chatRoomsRef = collection(
+          db,
+          `User/${user.uid}/UserChatRoom`
+        ).withConverter(createFirestoreDataConverter<UserChatRoom>())
+        const docRef = await addDoc(chatRoomsRef, {
+          title: '',
+          model,
+          context: systemContent,
+          maxTokens: Number(maxTokens),
+          temperature: Number(temperature),
+          stream: true,
+          createdAt: serverTimestamp(),
+          updatedAt: serverTimestamp(),
+        })
+
         Toast.show({
           type: 'success',
           text1:
@@ -283,7 +287,7 @@ export default function ChatMenu({
             t('openAiChat.chatRoomCreatedSuccessBody') ??
             'Chat room has been created successfully.',
         })
-        setCurrentChatRoomId(data.userChatRoomId)
+        setCurrentChatRoomId(docRef.id)
       } else {
         throw new Error('validateError')
       }

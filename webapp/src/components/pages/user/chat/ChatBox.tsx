@@ -11,7 +11,7 @@ import {
 } from 'react'
 import { useRecoilValue } from 'recoil'
 import { userState } from '@/store/user'
-import { db } from '@/lib/firebase'
+import { createFirestoreDataConverter, db } from '@/lib/firebase'
 import {
   collection,
   doc,
@@ -40,6 +40,7 @@ import remarkSlug from 'remark-slug'
 import remarkGfm from 'remark-gfm'
 import remarkDirective from 'remark-directive'
 import remarkExternalLinks from 'remark-external-links'
+import { UserChatRoom } from '@/types/models'
 
 type ChatMessage = {
   id: string
@@ -103,8 +104,8 @@ export default function ChatBox({
     if (db && user.uid && currentChatRoomId) {
       const docRef = doc(
         db,
-        `User/${user.uid}/UserChatRoom/${currentChatRoomId}`
-      )
+        `User/${user.uid}/UserChatRoom/${currentChatRoomId}`,
+      ).withConverter(createFirestoreDataConverter<UserChatRoom>())
       const docSnap = await getDoc(docRef)
       if (docSnap.exists()) {
         const data = docSnap.data()
@@ -129,9 +130,9 @@ export default function ChatBox({
       const q = query(
         collection(
           db,
-          `User/${user.uid}/UserChatRoom/${currentChatRoomId}/UserChatRoomMessage`
+          `User/${user.uid}/UserChatRoom/${currentChatRoomId}/UserChatRoomMessage`,
         ),
-        orderBy('createdAt', 'asc')
+        orderBy('createdAt', 'asc'),
       )
       const querySnapshot = await getDocs(q)
       const messages: ChatMessage[] = []
@@ -209,7 +210,7 @@ export default function ChatBox({
                 userChatRoomId: currentChatRoomId,
                 content: data.chatContent,
                 isFirstMessage,
-              }
+              },
             )
           const reader = await res?.body?.getReader()
           const decoder = new TextDecoder('utf-8')
@@ -288,7 +289,7 @@ export default function ChatBox({
       addToast,
       reset,
       getChatRooms,
-    ]
+    ],
   )
 
   const onKeyDown = useCallback(
@@ -297,7 +298,7 @@ export default function ChatBox({
         handleSubmit(onSubmit)()
       }
     },
-    [handleSubmit, onSubmit]
+    [handleSubmit, onSubmit],
   )
 
   return (
@@ -314,7 +315,7 @@ export default function ChatBox({
                   setNewChatModalOpen(true)
                 }}
                 className={clsx(
-                  'flex w-full flex-row items-center justify-center gap-4 bg-gray-900 px-3 py-2 hover:cursor-pointer hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-400'
+                  'flex w-full flex-row items-center justify-center gap-4 bg-gray-900 px-3 py-2 hover:cursor-pointer hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-400',
                 )}
               >
                 <PlusCircleIcon className="h-6 w-6 text-white" />
@@ -339,9 +340,53 @@ export default function ChatBox({
                   : chatContentLines == 2
                   ? 'chat-height-2'
                   : 'chat-height-1',
-                'w-full overflow-y-auto pb-24'
+                'w-full overflow-y-auto pb-24',
               )}
             >
+              <div
+                className={clsx('bg-gray-50 dark:bg-gray-800', 'w-full p-4')}
+              >
+                <div className="mx-auto flex w-full max-w-3xl flex-row items-start justify-center gap-4 p-4 sm:p-6 md:gap-6">
+                  {chatRoom?.model === 'gpt-3.5-turbo' && (
+                    <Image
+                      src={
+                        'https://storage.googleapis.com/epics-bucket/BuidlersCollective/Jake.png'
+                      }
+                      alt="Jake icon"
+                      className="my-3 aspect-square h-6 w-6 rounded-full sm:h-10 sm:w-10"
+                      unoptimized
+                      width={40}
+                      height={40}
+                    />
+                  )}
+
+                  {chatRoom?.model === 'gpt-4' && (
+                    <Image
+                      src={
+                        'https://storage.googleapis.com/epics-bucket/BuidlersCollective/Legend.png'
+                      }
+                      alt="Legend icon"
+                      className="my-3 aspect-square h-6 w-6 rounded-full sm:h-10 sm:w-10"
+                      unoptimized
+                      width={40}
+                      height={40}
+                    />
+                  )}
+                  <div className="flex w-full flex-col">
+                    <div className="pb-2">
+                      <p className="text-base font-bold text-gray-900 dark:text-white">
+                        {chatRoom?.title ? chatRoom?.title : t('noTitle')}
+                      </p>
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        {chatRoom?.model}: {chatRoom?.maxTokens} {t('tokens')}
+                      </p>
+                    </div>
+                    <div className="prose w-full max-w-none dark:prose-invert lg:prose-lg">
+                      {chatRoom?.context}
+                    </div>
+                  </div>
+                </div>
+              </div>
               {chatMessages.map((chatMessage) => (
                 <div
                   key={chatMessage.id}
@@ -350,7 +395,7 @@ export default function ChatBox({
                       'bg-gray-50 dark:bg-gray-800',
                     chatMessage.role === 'assistant' &&
                       'bg-gray-50 dark:bg-gray-800',
-                    'w-full p-4'
+                    'w-full p-4',
                   )}
                 >
                   <div className="mx-auto flex w-full max-w-3xl flex-row items-start justify-center gap-4 p-4 sm:p-6 md:gap-6">
@@ -438,7 +483,7 @@ export default function ChatBox({
                             : chatContentLines == 2
                             ? 'h-20'
                             : `h-10`,
-                          'flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:text-white sm:text-lg'
+                          'flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:text-white sm:text-lg',
                         )}
                       />
                     )}
@@ -451,7 +496,7 @@ export default function ChatBox({
                       'flex h-10 w-10 flex-row items-center justify-center',
                       isDisabled
                         ? 'bg-gray-300 hover:cursor-wait dark:bg-gray-800 dark:text-gray-400'
-                        : 'bg-gray-900 hover:cursor-pointer dark:bg-gray-600'
+                        : 'bg-gray-900 hover:cursor-pointer dark:bg-gray-600',
                     )}
                   >
                     <PaperAirplaneIcon className="mx-3 h-6 w-6 flex-shrink-0 text-white" />

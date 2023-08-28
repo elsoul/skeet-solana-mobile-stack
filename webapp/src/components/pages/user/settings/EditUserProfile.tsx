@@ -6,13 +6,14 @@ import LogoHorizontal from '@/components/common/atoms/LogoHorizontal'
 import { useRecoilState } from 'recoil'
 import { userState } from '@/store/user'
 import { usernameSchema } from '@/utils/form'
-import { db } from '@/lib/firebase'
+import { createFirestoreDataConverter, db } from '@/lib/firebase'
 import { doc, updateDoc } from 'firebase/firestore'
 import useToastMessage from '@/hooks/useToastMessage'
 import { Dialog, Transition } from '@headlessui/react'
 import { z } from 'zod'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { User } from '@/types/models'
 
 const schema = z.object({
   username: usernameSchema,
@@ -43,7 +44,9 @@ export default function EditUserProfile() {
       if (db) {
         try {
           setLoading(true)
-          const docRef = doc(db, 'User', user.uid)
+          const docRef = doc(db, 'User', user.uid).withConverter(
+            createFirestoreDataConverter<User>(),
+          )
           await updateDoc(docRef, { username: data.username })
           setUser({
             ...user,
@@ -79,12 +82,12 @@ export default function EditUserProfile() {
         }
       }
     },
-    [t, user, setUser, addToast, setModalOpen, setLoading]
+    [t, user, setUser, addToast, setModalOpen, setLoading],
   )
 
   const isDisabled = useMemo(
     () => isLoading || errors.username != null,
-    [isLoading, errors.username]
+    [isLoading, errors.username],
   )
 
   return (
@@ -100,7 +103,7 @@ export default function EditUserProfile() {
       <div className="flex flex-row justify-center p-2 sm:justify-start">
         <button
           className={clsx(
-            'flex flex-row items-center px-2 py-2 text-sm font-medium text-gray-900 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300'
+            'flex flex-row items-center px-2 py-2 text-sm font-medium text-gray-900 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300',
           )}
           onClick={() => {
             setModalOpen(true)
@@ -190,7 +193,7 @@ export default function EditUserProfile() {
                                   isDisabled
                                     ? 'cursor-not-allowed bg-gray-300 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
                                     : 'bg-gray-900 text-white hover:bg-gray-700 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200',
-                                  'w-full px-3 py-2 text-center text-lg font-bold'
+                                  'w-full px-3 py-2 text-center text-lg font-bold',
                                 )}
                               >
                                 {t('settings:register')}

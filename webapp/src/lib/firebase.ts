@@ -2,7 +2,13 @@ import firebaseConfig from '@lib/firebaseConfig'
 import { initializeApp, getApp, getApps } from 'firebase/app'
 import { connectAuthEmulator, getAuth } from 'firebase/auth'
 import { getStorage, connectStorageEmulator } from 'firebase/storage'
-import { getFirestore, connectFirestoreEmulator } from 'firebase/firestore'
+import {
+  getFirestore,
+  connectFirestoreEmulator,
+  DocumentData,
+  FirestoreDataConverter,
+  QueryDocumentSnapshot,
+} from 'firebase/firestore'
 
 export const firebaseApp = !getApps().length
   ? initializeApp(firebaseConfig)
@@ -39,3 +45,16 @@ const getFirebaseFirestore = () => {
 }
 
 export const db = firebaseApp ? getFirebaseFirestore() : undefined
+
+export const createFirestoreDataConverter = <
+  T extends DocumentData,
+>(): FirestoreDataConverter<T> => {
+  return {
+    toFirestore(data: T): DocumentData {
+      return data
+    },
+    fromFirestore(snapshot: QueryDocumentSnapshot<T>): T {
+      return snapshot.data()
+    },
+  }
+}
