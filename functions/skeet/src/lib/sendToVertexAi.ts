@@ -1,10 +1,10 @@
-import { VertexChatRoom, VertexExample } from '@/models/vertexModels'
+import { VertexChatRoom, VertexExampleInput } from '@/models/vertexModels'
 import { VertexAI } from '@skeet-framework/ai'
 import skeetOptions from '../../skeetOptions.json'
 
 export const sendToVertexAI = async (
   vertexChatRoomData: VertexChatRoom,
-  vertexExampleData: VertexExample,
+  vertexExampleData: VertexExampleInput[],
   content: string,
 ) => {
   try {
@@ -13,16 +13,9 @@ export const sendToVertexAI = async (
       location: skeetOptions.region,
     })
 
-    const examples = vertexExampleData.examples.map((example) => {
-      return {
-        input: { content: example.input },
-        output: { content: example.output },
-      }
-    })
-
     return vertexAi.prompt({
       context: vertexChatRoomData.context,
-      examples,
+      examples: vertexExampleData,
       messages: [
         {
           author: 'user',
