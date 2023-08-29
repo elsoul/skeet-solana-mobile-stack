@@ -13,9 +13,16 @@ export const sendToVertexAI = async (
       location: skeetOptions.region,
     })
 
+    const examples = vertexExampleData.map((example: VertexExampleInput) => {
+      return {
+        input: { content: example.input },
+        output: { content: example.output },
+      }
+    })
+
     return vertexAi.prompt({
       context: vertexChatRoomData.context,
-      examples: vertexExampleData,
+      examples,
       messages: [
         {
           author: 'user',
