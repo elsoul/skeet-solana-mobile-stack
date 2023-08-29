@@ -328,6 +328,7 @@ export default function ChatMenu({
     isNewChatDisabled,
     setCurrentChatRoomId,
     getChatRooms,
+    user.uid,
   ])
 
   return (
