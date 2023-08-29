@@ -19,8 +19,6 @@ import {
 import { XMarkIcon } from 'react-native-heroicons/outline'
 import LogoHorizontal from '@/components/common/atoms/LogoHorizontal'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { fetchSkeetFunctions } from '@/lib/skeet'
-import { CreateUserChatRoomParams } from '@/types/http/skeet/createUserChatRoomParams'
 import Toast from 'react-native-toast-message'
 import { useRecoilValue } from 'recoil'
 import { userState } from '@/store/user'
