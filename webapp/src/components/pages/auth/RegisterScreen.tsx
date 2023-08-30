@@ -53,7 +53,7 @@ export default function RegisterScreen() {
           const userCredential = await createUserWithEmailAndPassword(
             auth,
             data.email,
-            data.password
+            data.password,
           )
           await sendEmailVerification(userCredential.user)
           await signOut(auth)
@@ -89,7 +89,7 @@ export default function RegisterScreen() {
         }
       }
     },
-    [t, isJapanese, addToast, router]
+    [t, isJapanese, addToast, router],
   )
 
   const isDisabled = useMemo(
@@ -98,7 +98,7 @@ export default function RegisterScreen() {
       errors.email != null ||
       errors.password != null ||
       errors.privacy != null,
-    [isLoading, errors.email, errors.password, errors.privacy]
+    [isLoading, errors.email, errors.password, errors.privacy],
   )
 
   return (
@@ -140,7 +140,7 @@ export default function RegisterScreen() {
                     render={({ field }) => (
                       <input
                         {...field}
-                        className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:text-white sm:leading-6"
+                        className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:leading-6"
                         inputMode="email"
                       />
                     )}
@@ -165,7 +165,7 @@ export default function RegisterScreen() {
                       <input
                         {...field}
                         type="password"
-                        className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:text-white sm:leading-6"
+                        className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:leading-6"
                       />
                     )}
                   />
@@ -211,7 +211,7 @@ export default function RegisterScreen() {
                     isDisabled
                       ? 'cursor-not-allowed bg-gray-300 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
                       : 'bg-gray-900 text-white hover:bg-gray-700 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200',
-                    'w-full px-3 py-2 text-center text-lg font-bold'
+                    'w-full px-3 py-2 text-center text-lg font-bold',
                   )}
                 >
                   {t('register')}
