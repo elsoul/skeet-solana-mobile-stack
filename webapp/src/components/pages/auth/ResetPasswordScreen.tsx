@@ -76,12 +76,12 @@ export default function ResetPasswordScreen() {
         }
       }
     },
-    [t, addToast, router]
+    [t, addToast, router],
   )
 
   const isDisabled = useMemo(
     () => isLoading || errors.email != null,
-    [isLoading, errors.email]
+    [isLoading, errors.email],
   )
 
   return (
@@ -122,7 +122,7 @@ export default function ResetPasswordScreen() {
                     render={({ field }) => (
                       <input
                         {...field}
-                        className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:text-white sm:leading-6"
+                        className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:leading-6"
                         inputMode="email"
                       />
                     )}
@@ -138,7 +138,7 @@ export default function ResetPasswordScreen() {
                     isDisabled
                       ? 'cursor-not-allowed bg-gray-300 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
                       : 'bg-gray-900 text-white hover:bg-gray-700 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200',
-                    'w-full px-3 py-2 text-center text-lg font-bold'
+                    'w-full px-3 py-2 text-center text-lg font-bold',
                   )}
                 >
                   {t('auth:reset')}

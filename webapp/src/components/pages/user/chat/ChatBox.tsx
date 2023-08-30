@@ -483,7 +483,7 @@ export default function ChatBox({
                             : chatContentLines == 2
                             ? 'h-20'
                             : `h-10`,
-                          'flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:text-white sm:text-lg',
+                          'flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:text-lg',
                         )}
                       />
                     )}
