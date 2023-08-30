@@ -9,9 +9,17 @@ type Props = {
   skipLocaleHandling?: boolean
   locale?: string
   onClick?: () => void
+  target?: string
+  rel?: string
 }
 
-export default function Link({ children, skipLocaleHandling, ...rest }: Props) {
+export default function Link({
+  children,
+  skipLocaleHandling,
+  target,
+  rel,
+  ...rest
+}: Props) {
   const router = useRouter()
   const locale = rest.locale || router.query.locale || ''
 
@@ -25,7 +33,7 @@ export default function Link({ children, skipLocaleHandling, ...rest }: Props) {
 
   return (
     <>
-      <NextLink href={href}>
+      <NextLink href={href} target={target} rel={rel}>
         <span {...rest}>{children}</span>
       </NextLink>
     </>
