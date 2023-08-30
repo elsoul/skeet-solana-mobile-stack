@@ -15,5 +15,5 @@ export default function useRedirect(to?: string) {
 
     languageDetector.cache?.(detectedLng)
     router.replace('/' + detectedLng + to)
-  })
+  }, [router, to])
 }
