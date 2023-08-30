@@ -7,8 +7,9 @@ import { useRouter } from 'next/router'
 import AuthHeader from './AuthHeader'
 import { useRecoilState } from 'recoil'
 import { defaultUser, userState } from '@/store/user'
-import { auth, db } from '@/lib/firebase'
+import { auth, createFirestoreDataConverter, db } from '@/lib/firebase'
 import { doc, getDoc } from 'firebase/firestore'
+import { User as UserModel } from '@/types/models/userModels'
 
 type Props = {
   children: ReactNode
@@ -39,7 +40,9 @@ export default function AuthLayout({ children }: Props) {
   const onAuthStateChanged = useCallback(
     async (fbUser: User | null) => {
       if (auth && db && fbUser && fbUser.emailVerified) {
-        const docRef = doc(db, 'User', fbUser.uid)
+        const docRef = doc(db, 'User', fbUser.uid).withConverter(
+          createFirestoreDataConverter<UserModel>(),
+        )
         const docSnap = await getDoc(docRef)
         if (docSnap.exists()) {
           setUser({
@@ -58,7 +61,7 @@ export default function AuthLayout({ children }: Props) {
         setUser(defaultUser)
       }
     },
-    [setUser, router]
+    [setUser, router],
   )
 
   useEffect(() => {
