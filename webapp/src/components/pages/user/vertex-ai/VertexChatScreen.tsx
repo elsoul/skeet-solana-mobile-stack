@@ -1,7 +1,7 @@
 import VertexChatMenu, {
   ChatRoom,
 } from '@/components/pages/user/vertex-ai/VertexChatMenu'
-import ChatBox from '@/components/pages/user/vertex-ai/VertexChatBox'
+import VertexChatBox from '@/components/pages/user/vertex-ai/VertexChatBox'
 import { Suspense, useCallback, useEffect, useState } from 'react'
 import UserScreenLoading from '@/components/loading/UserScreenLoading'
 import clsx from 'clsx'
@@ -124,7 +124,7 @@ export default function VertexChatScreen() {
         {currentChatRoomId && (
           <>
             <Suspense fallback={<UserScreenLoading />}>
-              <ChatBox
+              <VertexChatBox
                 setNewChatModalOpen={setNewChatModalOpen}
                 currentChatRoomId={currentChatRoomId}
                 getChatRooms={getChatRooms}
