@@ -2,11 +2,12 @@ import skeetCloudConfig from '@root/skeet-cloud.config.json'
 import { toKebabCase } from '@/utils/character'
 import { auth } from '@/lib/firebase'
 import { signOut } from 'firebase/auth'
+import { platformDevIP } from '@/lib/firebase'
 
 export const fetchSkeetFunctions = async <T>(
   functionName: string,
   methodName: string,
-  params: T
+  params: T,
 ) => {
   try {
     const url =
@@ -16,7 +17,7 @@ export const fetchSkeetFunctions = async <T>(
               skeetCloudConfig.app.lbDomain
             }/${functionName}/${toKebabCase(methodName)}`
           : `https://${skeetCloudConfig.app.region}-${skeetCloudConfig.app.projectId}.cloudfunctions.net/${methodName}`
-        : `http://127.0.0.1:5001/${skeetCloudConfig.app.projectId}/${skeetCloudConfig.app.region}/${methodName}`
+        : `http://${platformDevIP}:5001/${skeetCloudConfig.app.projectId}/${skeetCloudConfig.app.region}/${methodName}`
     const skeetToken = await auth?.currentUser?.getIdToken()
     const res = await fetch(`${url}`, {
       method: 'POST',
