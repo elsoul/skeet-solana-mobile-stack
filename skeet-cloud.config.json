@@ -5,8 +5,9 @@
     "region": "europe-west6",
     "template": "Solana Mobile Stack (Expo) + Web (Next.js) - Firestore",
     "appDomain": "",
-    "functionsDomain": "",
-    "secretKeys": []
+    "lbDomain": "",
+    "secretKeys": [],
+    "hasLoadBalancer": false
   },
   "cloudArmor": [
     {

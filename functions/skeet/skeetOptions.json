@@ -3,5 +3,5 @@
   "projectId": "skeet-solana-mobile-stack",
   "region": "europe-west6",
   "appDomain": "",
-  "functionsDomain": ""
+  "lbDomain": ""
 }

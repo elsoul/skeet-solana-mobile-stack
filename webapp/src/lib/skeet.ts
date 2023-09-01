@@ -11,9 +11,11 @@ export const fetchSkeetFunctions = async <T>(
   try {
     const url =
       process.env.NODE_ENV === 'production'
-        ? `https://${
-            skeetCloudConfig.app.functionsDomain
-          }/${functionName}/${toKebabCase(methodName)}`
+        ? skeetCloudConfig.app.hasLoadBalancer
+          ? `https://${
+              skeetCloudConfig.app.lbDomain
+            }/${functionName}/${toKebabCase(methodName)}`
+          : `https://${skeetCloudConfig.app.region}-${skeetCloudConfig.app.projectId}.cloudfunctions.net/${methodName}`
         : `http://127.0.0.1:5001/${skeetCloudConfig.app.projectId}/${skeetCloudConfig.app.region}/${methodName}`
     const skeetToken = await auth?.currentUser?.getIdToken()
     const res = await fetch(`${url}`, {
