@@ -20,13 +20,13 @@ import {
 import { useRecoilValue } from 'recoil'
 import { userState } from '@/store/user'
 import { createFirestoreDataConverter, db } from '@/lib/firebase'
-import { VertexChatRoom } from '@/types/models'
+import { VertexChatRoom, genVertexChatRoomPath } from '@/types/models'
 
 export default function VertexChatScreen() {
   const { t } = useTranslation()
   const [isNewChatModalOpen, setNewChatModalOpen] = useState(false)
   const [currentChatRoomId, setCurrentChatRoomId] = useState<string | null>(
-    null
+    null,
   )
   const user = useRecoilValue(userState)
 
@@ -43,9 +43,9 @@ export default function VertexChatScreen() {
         setDataLoading(true)
 
         const q = query(
-          collection(db, `User/${user.uid}/VertexChatRoom`),
+          collection(db, genVertexChatRoomPath(user.uid)),
           orderBy('createdAt', 'desc'),
-          limit(15)
+          limit(15),
         ).withConverter(createFirestoreDataConverter<VertexChatRoom>())
 
         const querySnapshot = await getDocs(q)
@@ -110,7 +110,7 @@ export default function VertexChatScreen() {
                   setNewChatModalOpen(true)
                 }}
                 className={clsx(
-                  'flex w-full flex-row items-center justify-center gap-4 bg-gray-900 px-3 py-2 hover:cursor-pointer hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-400'
+                  'flex w-full flex-row items-center justify-center gap-4 bg-gray-900 px-3 py-2 hover:cursor-pointer hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-400',
                 )}
               >
                 <PlusCircleIcon className="h-6 w-6 text-white" />

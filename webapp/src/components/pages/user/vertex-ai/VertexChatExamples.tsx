@@ -19,7 +19,7 @@ import { createFirestoreDataConverter, db } from '@/lib/firebase'
 import { doc, updateDoc } from 'firebase/firestore'
 import { useRecoilValue } from 'recoil'
 import { userState } from '@/store/user'
-import { VertexChatRoom } from '@/types/models'
+import { VertexChatRoom, genVertexChatRoomPath } from '@/types/models'
 
 type Inputs = z.infer<typeof vertexExampleFormSchema>
 
@@ -84,7 +84,8 @@ export default function VertexChatExamples({
         if (!isDisabled && db) {
           const chatRoomRef = doc(
             db,
-            `User/${user.uid}/VertexChatRoom/${currentChatRoomId}`,
+            genVertexChatRoomPath(user.uid),
+            currentChatRoomId,
           ).withConverter(createFirestoreDataConverter<VertexChatRoom>())
           await updateDoc(chatRoomRef, {
             examples: data.inputOutputPairs,

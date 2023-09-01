@@ -48,7 +48,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { z } from 'zod'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { UserChatRoom } from '@/types/models'
+import { UserChatRoom, genUserChatRoomPath } from '@/types/models'
 
 export type ChatRoom = {
   id: string
@@ -127,7 +127,7 @@ export default function ChatMenu({
       try {
         setDataLoading(true)
         const q = query(
-          collection(db, `User/${user.uid}/UserChatRoom`),
+          collection(db, genUserChatRoomPath(user.uid)),
           orderBy('createdAt', 'desc'),
           limit(15),
           startAfter(lastChat),
@@ -226,7 +226,7 @@ export default function ChatMenu({
         if (!isDisabled && db) {
           const chatRoomsRef = collection(
             db,
-            `User/${user.uid}/UserChatRoom`,
+            genUserChatRoomPath(user.uid),
           ).withConverter(createFirestoreDataConverter<UserChatRoom>())
           const docRef = await addDoc(chatRoomsRef, {
             title: '',

@@ -13,7 +13,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { z } from 'zod'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { User } from '@/types/models'
+import { User, genUserPath } from '@/types/models'
 
 const schema = z.object({
   username: usernameSchema,
@@ -44,7 +44,7 @@ export default function EditUserProfile() {
       if (db) {
         try {
           setLoading(true)
-          const docRef = doc(db, 'User', user.uid).withConverter(
+          const docRef = doc(db, genUserPath(), user.uid).withConverter(
             createFirestoreDataConverter<User>(),
           )
           await updateDoc(docRef, { username: data.username })

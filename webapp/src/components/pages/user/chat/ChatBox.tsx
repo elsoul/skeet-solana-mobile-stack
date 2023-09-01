@@ -40,7 +40,11 @@ import remarkSlug from 'remark-slug'
 import remarkGfm from 'remark-gfm'
 import remarkDirective from 'remark-directive'
 import remarkExternalLinks from 'remark-external-links'
-import { UserChatRoom } from '@/types/models'
+import {
+  UserChatRoom,
+  genUserChatRoomMessagePath,
+  genUserChatRoomPath,
+} from '@/types/models'
 
 type ChatMessage = {
   id: string
@@ -104,7 +108,8 @@ export default function ChatBox({
     if (db && user.uid && currentChatRoomId) {
       const docRef = doc(
         db,
-        `User/${user.uid}/UserChatRoom/${currentChatRoomId}`,
+        genUserChatRoomPath(user.uid),
+        currentChatRoomId,
       ).withConverter(createFirestoreDataConverter<UserChatRoom>())
       const docSnap = await getDoc(docRef)
       if (docSnap.exists()) {
@@ -128,10 +133,7 @@ export default function ChatBox({
   const getUserChatRoomMessage = useCallback(async () => {
     if (db && user.uid && currentChatRoomId) {
       const q = query(
-        collection(
-          db,
-          `User/${user.uid}/UserChatRoom/${currentChatRoomId}/UserChatRoomMessage`,
-        ),
+        collection(db, genUserChatRoomMessagePath(user.uid, currentChatRoomId)),
         orderBy('createdAt', 'asc'),
       )
       const querySnapshot = await getDocs(q)

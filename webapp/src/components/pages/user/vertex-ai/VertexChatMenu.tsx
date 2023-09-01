@@ -49,7 +49,11 @@ import {
   startAfter,
 } from 'firebase/firestore'
 import { createFirestoreDataConverter, db } from '@/lib/firebase'
-import { VertexChatRoom, VertexExampleInput } from '@/types/models'
+import {
+  VertexChatRoom,
+  VertexExampleInput,
+  genVertexChatRoomPath,
+} from '@/types/models'
 
 export type ChatRoom = {
   id: string
@@ -135,7 +139,7 @@ export default function VertexChatMenu({
       try {
         setDataLoading(true)
         const q = query(
-          collection(db, `User/${user.uid}/VertexChatRoom`),
+          collection(db, genVertexChatRoomPath(user.uid)),
           orderBy('createdAt', 'desc'),
           limit(15),
           startAfter(lastChat),
@@ -235,7 +239,7 @@ export default function VertexChatMenu({
         if (!isDisabled && db) {
           const chatRoomsRef = collection(
             db,
-            `User/${user.uid}/VertexChatRoom`,
+            genVertexChatRoomPath(user.uid),
           ).withConverter(createFirestoreDataConverter<VertexChatRoom>())
           const docRef = await addDoc(chatRoomsRef, {
             title: '',

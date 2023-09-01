@@ -15,7 +15,7 @@ import {
 } from 'firebase/firestore'
 import { createFirestoreDataConverter, db } from '@/lib/firebase'
 import { useTranslation } from 'next-i18next'
-import { UserChatRoom } from '@/types/models'
+import { UserChatRoom, genUserChatRoomPath } from '@/types/models'
 
 export default function ChatScreen() {
   const { t } = useTranslation()
@@ -38,7 +38,7 @@ export default function ChatScreen() {
         setDataLoading(true)
 
         const q = query(
-          collection(db, `User/${user.uid}/UserChatRoom`),
+          collection(db, genUserChatRoomPath(user.uid)),
           orderBy('createdAt', 'desc'),
           limit(15),
         ).withConverter(createFirestoreDataConverter<UserChatRoom>())

@@ -100,3 +100,4 @@ firebase-debug.log
 
 # tmp
 tmp/
+firebase-export-*

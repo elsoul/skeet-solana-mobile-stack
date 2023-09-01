@@ -33,6 +33,7 @@ import CodeEditor, {
 } from '@rivascva/react-native-code-editor'
 import { signOut } from 'firebase/auth'
 import { TextDecoder } from 'text-encoding'
+import { genUserChatRoomMessagePath, genUserChatRoomPath } from '@/types/models'
 
 type ChatMessage = {
   id: string
@@ -68,10 +69,7 @@ export default function ChatBox({
 
   const getChatRoom = useCallback(async () => {
     if (db && user.uid && currentChatRoomId) {
-      const docRef = doc(
-        db,
-        `User/${user.uid}/UserChatRoom/${currentChatRoomId}`
-      )
+      const docRef = doc(db, genUserChatRoomPath(user.uid), currentChatRoomId)
       const docSnap = await getDoc(docRef)
       if (docSnap.exists()) {
         const data = docSnap.data()
@@ -94,10 +92,7 @@ export default function ChatBox({
   const getUserChatRoomMessage = useCallback(async () => {
     if (db && user.uid && currentChatRoomId) {
       const q = query(
-        collection(
-          db,
-          `User/${user.uid}/UserChatRoom/${currentChatRoomId}/UserChatRoomMessage`
-        ),
+        collection(db, genUserChatRoomMessagePath(user.uid, currentChatRoomId)),
         orderBy('createdAt', 'asc')
       )
       const querySnapshot = await getDocs(q)

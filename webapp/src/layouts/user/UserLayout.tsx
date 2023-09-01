@@ -14,7 +14,7 @@ import { auth, createFirestoreDataConverter, db } from '@/lib/firebase'
 import { doc, getDoc } from 'firebase/firestore'
 import LogoHorizontal from '@/components/common/atoms/LogoHorizontal'
 import Image from 'next/image'
-import { User as UserModel } from '@/types/models/userModels'
+import { User as UserModel, genUserPath } from '@/types/models/userModels'
 
 type Props = {
   children: ReactNode
@@ -52,7 +52,7 @@ export default function UserLayout({ children }: Props) {
   const onAuthStateChanged = useCallback(
     async (fbUser: User | null) => {
       if (auth && db && fbUser && fbUser.emailVerified) {
-        const docRef = doc(db, 'User', fbUser.uid).withConverter(
+        const docRef = doc(db, genUserPath(), fbUser.uid).withConverter(
           createFirestoreDataConverter<UserModel>(),
         )
         const docSnap = await getDoc(docRef)

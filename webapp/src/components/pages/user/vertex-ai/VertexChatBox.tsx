@@ -43,7 +43,12 @@ import {
   orderBy,
   query,
 } from 'firebase/firestore'
-import { VertexChatRoom, VertexChatRoomMessage } from '@/types/models'
+import {
+  VertexChatRoom,
+  VertexChatRoomMessage,
+  genVertexChatRoomMessagePath,
+  genVertexChatRoomPath,
+} from '@/types/models'
 import { Timestamp } from '@skeet-framework/firestore'
 
 type ChatMessage = {
@@ -107,7 +112,8 @@ export default function ChatBox({
     if (db && user.uid && currentChatRoomId) {
       const docRef = doc(
         db,
-        `User/${user.uid}/VertexChatRoom/${currentChatRoomId}`,
+        genVertexChatRoomPath(user.uid),
+        currentChatRoomId,
       ).withConverter(createFirestoreDataConverter<VertexChatRoom>())
       const docSnap = await getDoc(docRef)
       if (docSnap.exists()) {
@@ -130,7 +136,7 @@ export default function ChatBox({
       const q = query(
         collection(
           db,
-          `User/${user.uid}/VertexChatRoom/${currentChatRoomId}/VertexChatRoomMessage`,
+          genVertexChatRoomMessagePath(user.uid, currentChatRoomId),
         ),
         orderBy('createdAt', 'asc'),
       ).withConverter(createFirestoreDataConverter<VertexChatRoomMessage>())
