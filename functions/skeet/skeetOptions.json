@@ -1,6 +1,7 @@
 {
   "name": "skeet-solana-mobile-stack",
   "projectId": "skeet-solana-mobile-stack",
+  "fbProjectId": "skeet-solana-mobile-stack",
   "region": "europe-west6",
   "appDomain": "",
   "lbDomain": ""

@@ -2,6 +2,7 @@
   "app": {
     "name": "skeet-solana-mobile-stack",
     "projectId": "skeet-solana-mobile-stack",
+    "fbProjectId": "skeet-solana-mobile-stack",
     "region": "europe-west6",
     "template": "Solana Mobile Stack (Expo) + Web (Next.js) - Firestore",
     "appDomain": "",
