@@ -97,11 +97,13 @@ export default function EditUserProfile() {
     <>
       <View style={tw`p-4 text-center sm:text-left`}>
         <Text
-          style={tw`font-loaded-bold text-3xl text-gray-900 dark:text-gray-50`}
+          style={tw`font-loaded-bold text-3xl text-gray-900 dark:text-gray-50 text-center sm:text-left`}
         >
           {user.username}
         </Text>
-        <Text style={tw`font-loaded-medium text-gray-500 dark:text-gray-300`}>
+        <Text
+          style={tw`font-loaded-medium text-gray-500 dark:text-gray-300 text-center sm:text-left`}
+        >
           {user.email}
         </Text>
       </View>
@@ -114,7 +116,11 @@ export default function EditUserProfile() {
             setIsModalOpen(true)
           }}
         >
-          <PencilSquareIcon style={tw`${clsx('mr-3 h-6 w-6 flex-shrink-0')}`} />
+          <PencilSquareIcon
+            style={tw`${clsx(
+              'mr-3 h-6 w-6 flex-shrink-0 text-gray-900 dark:text-gray-50'
+            )}`}
+          />
           <Text
             style={tw`py-2 font-loaded-medium text-gray-900 dark:text-gray-50`}
           >
@@ -155,7 +161,9 @@ export default function EditUserProfile() {
               </Pressable>
             </View>
             <View style={tw`flex flex-grow flex-col pt-10 gap-8`}>
-              <Text style={tw`text-center font-loaded-bold text-lg`}>
+              <Text
+                style={tw`text-center font-loaded-bold text-lg text-gray-900 dark:text-gray-50`}
+              >
                 {t('settings.editProfile')}
               </Text>
               <View style={tw`w-full sm:mx-auto sm:max-w-md`}>
@@ -193,7 +201,7 @@ export default function EditUserProfile() {
                       className={clsx(
                         isDisabled
                           ? 'bg-gray-300 dark:bg-gray-800 dark:text-gray-400'
-                          : '',
+                          : 'dark:bg-gray-300',
                         'w-full px-3 py-2'
                       )}
                     >

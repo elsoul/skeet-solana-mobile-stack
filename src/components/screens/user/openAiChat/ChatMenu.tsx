@@ -351,7 +351,9 @@ export default function ChatMenu({
               />
             </Pressable>
             <View style={tw`flex-grow`} />
-            <Text style={tw`text-center font-loaded-bold`}>
+            <Text
+              style={tw`text-center font-loaded-bold text-gray-900 dark:text-white`}
+            >
               {t('openAiChat.title')}
             </Text>
             <View style={tw`flex-grow`} />
@@ -477,7 +479,9 @@ export default function ChatMenu({
                   </Pressable>
                 </View>
                 <View style={tw`flex flex-grow flex-col gap-8`}>
-                  <Text style={tw`text-center font-loaded-bold text-lg`}>
+                  <Text
+                    style={tw`text-center font-loaded-bold text-lg text-gray-900 dark:text-gray-50`}
+                  >
                     {t('openAiChat.newChat')}
                   </Text>
                   <View style={tw`w-full sm:mx-auto sm:max-w-md`}>
@@ -679,11 +683,13 @@ export default function ChatMenu({
                 </Pressable>
               </View>
               <View style={tw`flex flex-grow flex-col gap-8`}>
-                <Text style={tw`text-center font-loaded-bold text-lg`}>
+                <Text
+                  style={tw`text-center font-loaded-bold text-lg text-gray-900 dark:text-gray-50`}
+                >
                   {t('openAiChat.chatList')}
                 </Text>
                 <View style={tw`w-full sm:mx-auto sm:max-w-md`}>
-                  <View style={tw`px-4 sm:px-10 gap-6 pb-20`}>
+                  <View style={tw`px-4 sm:px-10 gap-6 pb-20 w-full`}>
                     {chatList.map((chat) => (
                       <Pressable
                         onPress={() => {
@@ -694,7 +700,7 @@ export default function ChatMenu({
                         style={tw`${clsx(
                           currentChatRoomId === chat.id &&
                             'border-2 border-gray-900 dark:border-gray-50',
-                          'p-2 bg-gray-50 dark:bg-gray-800 flex flex-row items-start justify-start gap-2'
+                          'p-2 pr-8 bg-gray-50 dark:bg-gray-800 flex flex-row items-start justify-start gap-2 overflow-hidden'
                         )}`}
                       >
                         <ChatBubbleLeftIcon
