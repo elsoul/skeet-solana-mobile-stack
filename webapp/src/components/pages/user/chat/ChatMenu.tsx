@@ -510,7 +510,7 @@ export default function ChatMenu({
                                       {...field}
                                       type="number"
                                       inputMode="decimal"
-                                      className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:text-white sm:leading-6"
+                                      className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:leading-6"
                                       onChange={(e) =>
                                         field.onChange(
                                           e.target.value
