@@ -278,6 +278,7 @@ export default function ChatMenu({
       setCurrentChatRoomId,
       addToast,
       getChatRooms,
+      user.uid,
     ],
   )
 
