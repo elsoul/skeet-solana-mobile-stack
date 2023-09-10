@@ -36,10 +36,9 @@ export const addCollectionItem = async <T extends DocumentData>(
   db: Firestore,
   collectionPath: string,
   params: T,
-  id?: string
+  id?: string,
 ): Promise<DocumentReference<T>> => {
   try {
-    console.log('new version')
     if (id) {
       const docRef = createDocRef<T>(db, collectionPath, id)
       await setDoc(docRef, {
@@ -55,7 +54,7 @@ export const addCollectionItem = async <T extends DocumentData>(
         createdAt: serverTimestamp(),
         updatedAt: serverTimestamp(),
       })
-      console.log('data:', data)
+
       if (!data) {
         throw new Error('no data')
       }
