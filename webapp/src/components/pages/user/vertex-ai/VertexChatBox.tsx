@@ -13,7 +13,7 @@ import { useRecoilValue } from 'recoil'
 import { userState } from '@/store/user'
 
 import { chatContentSchema } from '@/utils/form'
-import { fetchSkeetFunctions } from '@/lib/skeet'
+import { fetchSkeetFunctions } from '@/lib/skeet/functions'
 import Image from 'next/image'
 import { ChatRoom } from './VertexChatMenu'
 import { z } from 'zod'
@@ -34,15 +34,8 @@ import remarkExternalLinks from 'remark-external-links'
 import { sleep } from '@/utils/time'
 import VertexChatExamples from './VertexChatExamples'
 import { AddVertexMessageParams } from '@/types/http/skeet/addVertexMessageParams'
-import { createFirestoreDataConverter, db } from '@/lib/firebase'
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  orderBy,
-  query,
-} from 'firebase/firestore'
+import { db } from '@/lib/firebase'
+import { collection, orderBy } from 'firebase/firestore'
 import {
   VertexChatRoom,
   VertexChatRoomMessage,
@@ -50,6 +43,7 @@ import {
   genVertexChatRoomPath,
 } from '@/types/models'
 import { Timestamp } from '@skeet-framework/firestore'
+import { get, query } from '@/lib/skeet/firestore'
 
 type ChatMessage = {
   id: string
@@ -71,7 +65,7 @@ type Props = {
   currentChatRoomId: string
 }
 
-export default function ChatBox({
+export default function VertexChatBox({
   currentChatRoomId,
   setNewChatModalOpen,
   getChatRooms,
@@ -110,17 +104,15 @@ export default function ChatBox({
 
   const getChatRoom = useCallback(async () => {
     if (db && user.uid && currentChatRoomId) {
-      const docRef = doc(
-        db,
-        genVertexChatRoomPath(user.uid),
-        currentChatRoomId,
-      ).withConverter(createFirestoreDataConverter<VertexChatRoom>())
-      const docSnap = await getDoc(docRef)
-      if (docSnap.exists()) {
-        const data = docSnap.data()
-        setChatRoom({ id: docSnap.id, ...data } as ChatRoom)
-      } else {
-        console.log('No such document!')
+      try {
+        const data = await get<VertexChatRoom>(
+          db,
+          genVertexChatRoomPath(user.uid),
+          currentChatRoomId
+        )
+        setChatRoom(data as ChatRoom)
+      } catch (e) {
+        console.error(e)
       }
     }
   }, [currentChatRoomId, user.uid])
@@ -133,14 +125,11 @@ export default function ChatBox({
 
   const getUserChatRoomMessage = useCallback(async () => {
     if (db && user.uid && currentChatRoomId) {
-      const q = query(
-        collection(
-          db,
-          genVertexChatRoomMessagePath(user.uid, currentChatRoomId),
-        ),
-        orderBy('createdAt', 'asc'),
-      ).withConverter(createFirestoreDataConverter<VertexChatRoomMessage>())
-      const querySnapshot = await getDocs(q)
+      const querySnapshot = await query<VertexChatRoomMessage>(
+        db,
+        genVertexChatRoomMessagePath(user.uid, currentChatRoomId),
+        [orderBy('createdAt', 'asc')]
+      )
       const messages: ChatMessage[] = []
       for await (const qs of querySnapshot.docs) {
         const data = qs.data()
@@ -214,7 +203,7 @@ export default function ChatBox({
             {
               vertexChatRoomId: currentChatRoomId,
               content: inputs.chatContent,
-            },
+            }
           )
           const reader = await res?.body?.getReader()
           const decoder = new TextDecoder('utf-8')
@@ -291,7 +280,7 @@ export default function ChatBox({
       getChatRoom,
       getChatRooms,
       getUserChatRoomMessage,
-    ],
+    ]
   )
 
   const onKeyDown = useCallback(
@@ -300,7 +289,7 @@ export default function ChatBox({
         handleSubmit(onSubmit)()
       }
     },
-    [handleSubmit, onSubmit],
+    [handleSubmit, onSubmit]
   )
 
   return (
@@ -319,7 +308,7 @@ export default function ChatBox({
                 : chatContentLines == 2
                 ? 'chat-height-2'
                 : 'chat-height-1',
-              'w-full overflow-y-auto pb-24',
+              'w-full overflow-y-auto pb-24'
             )}
           >
             <div className={clsx('bg-gray-50 dark:bg-gray-800', 'w-full p-4')}>
@@ -372,7 +361,7 @@ export default function ChatBox({
                   chatMessage.role === 'system' &&
                     'bg-gray-50 dark:bg-gray-800',
                   chatMessage.role === 'ai' && 'bg-gray-50 dark:bg-gray-800',
-                  'w-full p-4',
+                  'w-full p-4'
                 )}
               >
                 <div className="mx-auto flex w-full max-w-3xl flex-row items-start justify-center gap-4 p-4 sm:p-6 md:gap-6">
@@ -446,7 +435,7 @@ export default function ChatBox({
                           : chatContentLines == 2
                           ? 'h-20'
                           : `h-10`,
-                        'flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:text-lg',
+                        'flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:text-lg'
                       )}
                     />
                   )}
@@ -459,7 +448,7 @@ export default function ChatBox({
                     'flex h-10 w-10 flex-row items-center justify-center',
                     isDisabled
                       ? 'bg-gray-300 hover:cursor-wait dark:bg-gray-800 dark:text-gray-400'
-                      : 'bg-gray-900 hover:cursor-pointer dark:bg-gray-600',
+                      : 'bg-gray-900 hover:cursor-pointer dark:bg-gray-600'
                   )}
                 >
                   <PaperAirplaneIcon className="mx-3 h-6 w-6 flex-shrink-0 text-white" />

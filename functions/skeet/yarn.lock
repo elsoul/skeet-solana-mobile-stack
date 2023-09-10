@@ -1571,10 +1571,10 @@
     node-fetch "2.6.9"
     openai "4.2.0"
 
-"@skeet-framework/firestore@2.1.1":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@skeet-framework/firestore/-/firestore-2.1.1.tgz#f325c12212a47da0834456f33da777cf6d8fce69"
-  integrity sha512-njfp45zBJHEo/mzH8NDDmLjCfYFvHUyXSw+zknKF0eFwakkWrX9y7XVZ3ab0XgsILfUpJToJO1Cjc37QbAmBdg==
+"@skeet-framework/firestore@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@skeet-framework/firestore/-/firestore-2.3.0.tgz#f7bf046c61ef96dcfde1104c9b00c0cd40008a88"
+  integrity sha512-0oCHF6omVGJX3r8gtO7ng8du3I55FTjD4TlDSzyrapO/PduXuA9t860tcEI92ByMhglZKfZHzI+OekNn7+aU0A==
   dependencies:
     dotenv "16.0.3"
     firebase "10.3.0"
