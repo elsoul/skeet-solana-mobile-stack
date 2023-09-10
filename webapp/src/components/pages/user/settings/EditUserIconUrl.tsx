@@ -7,17 +7,16 @@ import {
 } from '@heroicons/react/24/outline'
 import { useTranslation } from 'next-i18next'
 import { Fragment, useCallback, useMemo, useState } from 'react'
-
-import { doc, updateDoc } from 'firebase/firestore'
 import { useRecoilState } from 'recoil'
 import { userState } from '@/store/user'
-import { createFirestoreDataConverter, db, storage } from '@/lib/firebase'
+import { db, storage } from '@/lib/firebase'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import useToastMessage from '@/hooks/useToastMessage'
 import { Dialog, Transition } from '@headlessui/react'
 import { useDropzone } from 'react-dropzone'
 import LogoHorizontal from '@/components/common/atoms/LogoHorizontal'
 import { User, genUserPath } from '@/types/models'
+import { update } from '@/lib/skeet/firestore'
 
 export default function EditUserIconUrl() {
   const { t } = useTranslation()
@@ -46,16 +45,15 @@ export default function EditUserIconUrl() {
       if (image && storage && user.uid !== '' && db) {
         const newProfileIconRef = ref(
           storage,
-          `User/${user.uid}/profileIcon/profile.${image.type.split('/')[1]}`,
+          `User/${user.uid}/profileIcon/profile.${image.type.split('/')[1]}`
         )
         await uploadBytes(newProfileIconRef, image)
 
         const downloadUrl = await getDownloadURL(newProfileIconRef)
 
-        const docRef = doc(db, genUserPath(), user.uid).withConverter(
-          createFirestoreDataConverter<User>(),
-        )
-        await updateDoc(docRef, { iconUrl: downloadUrl })
+        await update<User>(db, genUserPath(), user.uid, {
+          iconUrl: downloadUrl,
+        })
         setUser({
           ...user,
           iconUrl: downloadUrl,
@@ -113,7 +111,7 @@ export default function EditUserIconUrl() {
       <div className="flex w-full flex-col items-center justify-center">
         <button
           className={clsx(
-            'flex flex-row items-center px-2 py-2 text-sm font-medium text-gray-900 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300',
+            'flex flex-row items-center px-2 py-2 text-sm font-medium text-gray-900 hover:text-gray-700 dark:text-gray-50 dark:hover:text-gray-300'
           )}
           onClick={() => {
             setModalOpen(true)
@@ -209,7 +207,7 @@ export default function EditUserIconUrl() {
                           isDisabled
                             ? 'cursor-not-allowed bg-gray-300 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
                             : 'bg-gray-900 text-white hover:bg-gray-700 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200',
-                          'w-full px-3 py-2 text-center text-lg font-bold',
+                          'w-full px-3 py-2 text-center text-lg font-bold'
                         )}
                       >
                         {t('settings:upload')}

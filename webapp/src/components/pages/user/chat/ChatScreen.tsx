@@ -7,21 +7,19 @@ import useToastMessage from '@/hooks/useToastMessage'
 import {
   DocumentData,
   QueryDocumentSnapshot,
-  collection,
-  getDocs,
   limit,
   orderBy,
-  query,
 } from 'firebase/firestore'
-import { createFirestoreDataConverter, db } from '@/lib/firebase'
+import { db } from '@/lib/firebase'
 import { useTranslation } from 'next-i18next'
 import { UserChatRoom, genUserChatRoomPath } from '@/types/models'
+import { query } from '@/lib/skeet/firestore'
 
 export default function ChatScreen() {
   const { t } = useTranslation()
   const [isNewChatModalOpen, setNewChatModalOpen] = useState(false)
   const [currentChatRoomId, setCurrentChatRoomId] = useState<string | null>(
-    null,
+    null
   )
 
   const user = useRecoilValue(userState)
@@ -37,18 +35,17 @@ export default function ChatScreen() {
       try {
         setDataLoading(true)
 
-        const q = query(
-          collection(db, genUserChatRoomPath(user.uid)),
-          orderBy('createdAt', 'desc'),
-          limit(15),
-        ).withConverter(createFirestoreDataConverter<UserChatRoom>())
-        const querySnapshot = await getDocs(q)
+        const querySnapshot = await query<UserChatRoom>(
+          db,
+          genUserChatRoomPath(user.uid),
+          [orderBy('createdAt', 'desc'), limit(15)]
+        )
         const list: ChatRoom[] = []
         querySnapshot.forEach((doc) => {
           const data = doc.data()
           list.push({ id: doc.id, ...data } as ChatRoom)
         })
-
+        console.log(list)
         setChatList(list)
         setLastChat(querySnapshot.docs[querySnapshot.docs.length - 1])
       } catch (err) {

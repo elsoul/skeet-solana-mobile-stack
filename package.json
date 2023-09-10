@@ -42,7 +42,7 @@
     "@react-navigation/native": "6.1.6",
     "@react-navigation/native-stack": "6.9.12",
     "@rivascva/react-native-code-editor": "1.2.2",
-    "@skeet-framework/firestore": "2.1.1",
+    "@skeet-framework/firestore": "2.3.0",
     "@solana-mobile/mobile-wallet-adapter-protocol": "2.0.1",
     "@solana-mobile/mobile-wallet-adapter-protocol-web3js": "2.0.1",
     "@solana/wallet-adapter-react": "0.15.33",

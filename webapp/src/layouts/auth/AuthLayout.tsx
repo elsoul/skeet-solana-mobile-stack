@@ -7,9 +7,9 @@ import { useRouter } from 'next/router'
 import AuthHeader from './AuthHeader'
 import { useRecoilState } from 'recoil'
 import { defaultUser, userState } from '@/store/user'
-import { auth, createFirestoreDataConverter, db } from '@/lib/firebase'
-import { doc, getDoc } from 'firebase/firestore'
+import { auth, db } from '@/lib/firebase'
 import { User as UserModel, genUserPath } from '@/types/models/userModels'
+import { get } from '@/lib/skeet/firestore'
 
 type Props = {
   children: ReactNode
@@ -40,20 +40,22 @@ export default function AuthLayout({ children }: Props) {
   const onAuthStateChanged = useCallback(
     async (fbUser: User | null) => {
       if (auth && db && fbUser && fbUser.emailVerified) {
-        const docRef = doc(db, genUserPath(), fbUser.uid).withConverter(
-          createFirestoreDataConverter<UserModel>(),
-        )
-        const docSnap = await getDoc(docRef)
-        if (docSnap.exists()) {
+        try {
+          const { username, iconUrl } = await get<UserModel>(
+            db,
+            genUserPath(),
+            fbUser.uid
+          )
           setUser({
             uid: fbUser.uid,
             email: fbUser.email ?? '',
-            username: docSnap.data().username,
-            iconUrl: docSnap.data().iconUrl,
+            username,
+            iconUrl,
             emailVerified: fbUser.emailVerified,
           })
           router.push('/user/chat')
-        } else {
+        } catch (e) {
+          console.error(e)
           setUser(defaultUser)
           signOut(auth)
         }
@@ -61,7 +63,7 @@ export default function AuthLayout({ children }: Props) {
         setUser(defaultUser)
       }
     },
-    [setUser, router],
+    [setUser, router]
   )
 
   useEffect(() => {

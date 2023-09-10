@@ -11,22 +11,20 @@ import useToastMessage from '@/hooks/useToastMessage'
 import {
   DocumentData,
   QueryDocumentSnapshot,
-  collection,
-  getDocs,
   limit,
   orderBy,
-  query,
 } from 'firebase/firestore'
 import { useRecoilValue } from 'recoil'
 import { userState } from '@/store/user'
-import { createFirestoreDataConverter, db } from '@/lib/firebase'
+import { db } from '@/lib/firebase'
 import { VertexChatRoom, genVertexChatRoomPath } from '@/types/models'
+import { query } from '@/lib/skeet/firestore'
 
 export default function VertexChatScreen() {
   const { t } = useTranslation()
   const [isNewChatModalOpen, setNewChatModalOpen] = useState(false)
   const [currentChatRoomId, setCurrentChatRoomId] = useState<string | null>(
-    null,
+    null
   )
   const user = useRecoilValue(userState)
 
@@ -42,19 +40,16 @@ export default function VertexChatScreen() {
       try {
         setDataLoading(true)
 
-        const q = query(
-          collection(db, genVertexChatRoomPath(user.uid)),
-          orderBy('createdAt', 'desc'),
-          limit(15),
-        ).withConverter(createFirestoreDataConverter<VertexChatRoom>())
-
-        const querySnapshot = await getDocs(q)
+        const querySnapshot = await query<VertexChatRoom>(
+          db,
+          genVertexChatRoomPath(user.uid),
+          [orderBy('createdAt', 'desc'), limit(15)]
+        )
         const list: ChatRoom[] = []
         querySnapshot.forEach((doc) => {
           const data = doc.data()
           list.push({ id: doc.id, ...data } as ChatRoom)
         })
-        console.log(list)
         setChatList(list)
         setLastChat(querySnapshot.docs[querySnapshot.docs.length - 1])
       } catch (err) {
@@ -110,7 +105,7 @@ export default function VertexChatScreen() {
                   setNewChatModalOpen(true)
                 }}
                 className={clsx(
-                  'flex w-full flex-row items-center justify-center gap-4 bg-gray-900 px-3 py-2 hover:cursor-pointer hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-400',
+                  'flex w-full flex-row items-center justify-center gap-4 bg-gray-900 px-3 py-2 hover:cursor-pointer hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-400'
                 )}
               >
                 <PlusCircleIcon className="h-6 w-6 text-white" />
