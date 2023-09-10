@@ -12,18 +12,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useRecoilValue } from 'recoil'
 import { userState } from '@/store/user'
 import { auth, db } from '@/lib/firebase'
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  orderBy,
-  query,
-} from 'firebase/firestore'
+import { orderBy } from 'firebase/firestore'
 import { ScrollView, TextInput } from 'react-native-gesture-handler'
 import { chatContentSchema } from '@/utils/form'
 import Toast from 'react-native-toast-message'
-import { fetchSkeetFunctions } from '@/lib/skeet'
+import { fetchSkeetFunctions } from '@/lib/skeet/functions'
 import { Image } from 'expo-image'
 import { blurhash } from '@/utils/placeholder'
 import { ChatRoom } from './ChatMenu'
@@ -33,13 +26,20 @@ import CodeEditor, {
 } from '@rivascva/react-native-code-editor'
 import { signOut } from 'firebase/auth'
 import { TextDecoder } from 'text-encoding'
-import { genUserChatRoomMessagePath, genUserChatRoomPath } from '@/types/models'
+import {
+  UserChatRoom,
+  UserChatRoomMessage,
+  genUserChatRoomPath,
+  genUserChatRoomMessagePath,
+} from '@/types/models'
+import { Timestamp } from '@skeet-framework/firestore'
+import { get, query } from '@/lib/skeet/firestore'
 
 type ChatMessage = {
   id: string
   role: string
-  createdAt: string
-  updatedAt: string
+  createdAt: Timestamp | undefined
+  updatedAt: Timestamp | undefined
   content: string
   viewWithCodeEditor: boolean
 }
@@ -69,16 +69,18 @@ export default function ChatBox({
 
   const getChatRoom = useCallback(async () => {
     if (db && user.uid && currentChatRoomId) {
-      const docRef = doc(db, genUserChatRoomPath(user.uid), currentChatRoomId)
-      const docSnap = await getDoc(docRef)
-      if (docSnap.exists()) {
-        const data = docSnap.data()
+      try {
+        const data = await get<UserChatRoom>(
+          db,
+          genUserChatRoomPath(user.uid),
+          currentChatRoomId
+        )
         if (data.title !== '') {
           setFirstMessage(false)
         }
-        setChatRoom({ id: docSnap.id, ...data } as ChatRoom)
-      } else {
-        console.log('No such document!')
+        setChatRoom(data as ChatRoom)
+      } catch (e) {
+        console.error(e)
       }
     }
   }, [currentChatRoomId, user.uid])
@@ -91,11 +93,11 @@ export default function ChatBox({
 
   const getUserChatRoomMessage = useCallback(async () => {
     if (db && user.uid && currentChatRoomId) {
-      const q = query(
-        collection(db, genUserChatRoomMessagePath(user.uid, currentChatRoomId)),
-        orderBy('createdAt', 'asc')
+      const querySnapshot = await query<UserChatRoomMessage>(
+        db,
+        genUserChatRoomMessagePath(user.uid, currentChatRoomId),
+        [orderBy('createdAt', 'asc')]
       )
-      const querySnapshot = await getDocs(q)
       const messages: ChatMessage[] = []
       querySnapshot.forEach((doc) => {
         const data = doc.data()
@@ -149,16 +151,16 @@ export default function ChatBox({
           prev.push({
             id: `UserSendingMessage${new Date().toISOString()}`,
             role: 'user',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
+            createdAt: undefined,
+            updatedAt: undefined,
             content: chatContent,
             viewWithCodeEditor: false,
           })
           prev.push({
             id: `AssistantAnsweringMessage${new Date().toISOString()}`,
             role: 'assistant',
-            createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString(),
+            createdAt: undefined,
+            updatedAt: undefined,
             content: '',
             viewWithCodeEditor: false,
           })

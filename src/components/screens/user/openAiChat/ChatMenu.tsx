@@ -42,21 +42,17 @@ import {
   DocumentData,
   QueryDocumentSnapshot,
   Timestamp,
-  addDoc,
-  collection,
-  getDocs,
   limit,
   orderBy,
-  query,
-  serverTimestamp,
   startAfter,
 } from 'firebase/firestore'
-import { createFirestoreDataConverter, db } from '@/lib/firebase'
+import { db } from '@/lib/firebase'
 import { format } from 'date-fns'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { auth } from '@/lib/firebase'
 import { signOut } from 'firebase/auth'
 import { UserChatRoom, genUserChatRoomPath } from '@/types/models'
+import { add, query } from '@/lib/skeet/firestore'
 
 export type ChatRoom = {
   id: string
@@ -65,8 +61,8 @@ export type ChatRoom = {
   model: GPTModel
   maxTokens: number
   temperature: number
-  context: string
   title: string
+  context: string
 }
 
 type Props = {
@@ -106,14 +102,11 @@ export default function ChatMenu({
   const queryMore = useCallback(async () => {
     if (db && lastChat) {
       try {
-        const q = query(
-          collection(db, genUserChatRoomPath(user.uid)),
-          orderBy('createdAt', 'desc'),
-          limit(15),
-          startAfter(lastChat)
-        ).withConverter(createFirestoreDataConverter<UserChatRoom>())
-
-        const querySnapshot = await getDocs(q)
+        const querySnapshot = await query<UserChatRoom>(
+          db,
+          genUserChatRoomPath(user.uid),
+          [orderBy('createdAt', 'desc'), limit(15), startAfter(lastChat)]
+        )
         setDataLoading(true)
         const list: ChatRoom[] = []
         querySnapshot.forEach((doc) => {
@@ -262,21 +255,14 @@ export default function ChatMenu({
     try {
       setCreateLoading(true)
       if (!isNewChatDisabled && db) {
-        const chatRoomsRef = collection(
-          db,
-          genUserChatRoomPath(user.uid)
-        ).withConverter(createFirestoreDataConverter<UserChatRoom>())
-        const docRef = await addDoc(chatRoomsRef, {
+        const docRef = await add(db, genUserChatRoomPath(user.uid), {
           title: '',
           model,
           context: systemContent,
           maxTokens: Number(maxTokens),
           temperature: Number(temperature),
           stream: true,
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp(),
         })
-
         Toast.show({
           type: 'success',
           text1:
@@ -478,7 +464,9 @@ export default function ChatMenu({
                     />
                   </Pressable>
                 </View>
-                <View style={tw`flex flex-grow flex-col gap-8`}>
+                <View
+                  style={tw`flex flex-grow flex-col gap-8 text-gray-900 dark:text-gray-50`}
+                >
                   <Text
                     style={tw`text-center font-loaded-bold text-lg text-gray-900 dark:text-gray-50`}
                   >
@@ -689,7 +677,7 @@ export default function ChatMenu({
                   {t('openAiChat.chatList')}
                 </Text>
                 <View style={tw`w-full sm:mx-auto sm:max-w-md`}>
-                  <View style={tw`px-4 sm:px-10 gap-6 pb-20 w-full`}>
+                  <View style={tw`px-4 sm:px-10 gap-6 pb-20`}>
                     {chatList.map((chat) => (
                       <Pressable
                         onPress={() => {
