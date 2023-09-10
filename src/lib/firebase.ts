@@ -4,9 +4,6 @@ import { initializeApp, getApp, getApps } from 'firebase/app'
 import { connectAuthEmulator, getAuth } from 'firebase/auth'
 import { getStorage, connectStorageEmulator } from 'firebase/storage'
 import {
-  DocumentData,
-  FirestoreDataConverter,
-  QueryDocumentSnapshot,
   connectFirestoreEmulator,
   initializeFirestore,
 } from 'firebase/firestore'
@@ -64,16 +61,3 @@ export const analytics =
   firebaseApp
     ? getAnalytics(firebaseApp)
     : undefined
-
-export const createFirestoreDataConverter = <
-  T extends DocumentData
->(): FirestoreDataConverter<T> => {
-  return {
-    toFirestore(data: T): DocumentData {
-      return data
-    },
-    fromFirestore(snapshot: QueryDocumentSnapshot<T>): T {
-      return snapshot.data()
-    },
-  }
-}
