@@ -43,12 +43,18 @@ export default function ResetPasswordAction({ oobCode }: Props) {
         title: t('auth:verifyErrorTitle'),
         description: t('auth:verifyErrorBody'),
       })
-      router.push('/auth/login')
+      await router.push('/auth/login')
     }
   }, [router, t, oobCode, addToast])
 
   useEffect(() => {
-    verifyEmail()
+    void (async () => {
+      try {
+        await verifyEmail()
+      } catch (e) {
+        console.error(e)
+      }
+    })()
   }, [verifyEmail])
 
   const {
@@ -73,7 +79,7 @@ export default function ResetPasswordAction({ oobCode }: Props) {
           title: t('auth:resetPasswordSuccessTitle'),
           description: t('auth:resetPasswordSuccessBody'),
         })
-        router.push('/auth/login')
+        await router.push('/auth/login')
       } catch (err) {
         console.error(err)
         addToast({
@@ -85,12 +91,12 @@ export default function ResetPasswordAction({ oobCode }: Props) {
         setRegisterLoading(false)
       }
     },
-    [oobCode, t, router, addToast]
+    [oobCode, t, router, addToast],
   )
 
   const isDisabled = useMemo(
     () => isLoading || isRegisterLoading || errors.password != null,
-    [isLoading, isRegisterLoading, errors.password]
+    [isLoading, isRegisterLoading, errors.password],
   )
 
   if (isLoading) {
@@ -149,7 +155,7 @@ export default function ResetPasswordAction({ oobCode }: Props) {
                     isDisabled
                       ? 'cursor-not-allowed bg-gray-300 text-gray-500 dark:bg-gray-800 dark:text-gray-400'
                       : 'bg-gray-900 text-white hover:bg-gray-700 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200',
-                    'w-full px-3 py-2 text-center text-lg font-bold'
+                    'w-full px-3 py-2 text-center text-lg font-bold',
                   )}
                 >
                   {t('auth:registerAccount')}

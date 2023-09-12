@@ -36,13 +36,19 @@ export default function VerifyEmailAction({ oobCode }: Props) {
           title: t('auth:verifyErrorTitle'),
           description: t('auth:verifyErrorBody'),
         })
-        router.push('/auth/login')
+        await router.push('/auth/login')
       }
     }
   }, [router, t, oobCode, addToast, setLoading])
 
   useEffect(() => {
-    verifyUser()
+    void (async () => {
+      try {
+        await verifyUser()
+      } catch (e) {
+        console.error(e)
+      }
+    })()
   }, [verifyUser])
 
   if (isLoading) {

@@ -115,7 +115,7 @@ export default function LoginScreen() {
           })
         }
         if (auth?.currentUser) {
-          signOut(auth)
+          await signOut(auth)
         }
       } finally {
         setLoading(false)
@@ -228,8 +228,8 @@ export default function LoginScreen() {
               </View>
               <View>
                 <Button
-                  onPress={() => {
-                    login()
+                  onPress={async () => {
+                    await login()
                   }}
                   disabled={isDisabled}
                   className={clsx(
@@ -248,8 +248,8 @@ export default function LoginScreen() {
               </View>
 
               <Pressable
-                onPress={() => {
-                  transact(async (mobileWallet) => {
+                onPress={async () => {
+                  await transact(async (mobileWallet) => {
                     const authorization = await mobileWallet.authorize({
                       cluster: 'devnet',
                       identity: APP_IDENTITY,

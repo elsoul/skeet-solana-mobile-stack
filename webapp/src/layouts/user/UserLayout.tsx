@@ -38,11 +38,15 @@ export default function UserLayout({ children }: Props) {
     }
   }, [])
   useEffect(() => {
-    ;(async () => {
-      setSidebarOpen(false)
-      await new Promise((resolve) => setTimeout(resolve, 100))
-      if (!router.asPath.includes('#')) {
-        resetWindowScrollPosition()
+    void (async () => {
+      try {
+        setSidebarOpen(false)
+        await new Promise((resolve) => setTimeout(resolve, 100))
+        if (!router.asPath.includes('#')) {
+          resetWindowScrollPosition()
+        }
+      } catch (e) {
+        console.error(e)
       }
     })()
   }, [router.asPath, resetWindowScrollPosition])
@@ -56,7 +60,7 @@ export default function UserLayout({ children }: Props) {
           const { username, iconUrl } = await get<UserModel>(
             db,
             genUserPath(),
-            fbUser.uid
+            fbUser.uid,
           )
           setUser({
             uid: fbUser.uid,
@@ -68,15 +72,15 @@ export default function UserLayout({ children }: Props) {
         } catch (e) {
           console.error(e)
           setUser(defaultUser)
-          signOut(auth)
-          router.push('/auth/login')
+          await signOut(auth)
+          await router.push('/auth/login')
         }
       } else {
         setUser(defaultUser)
-        router.push('/auth/login')
+        await router.push('/auth/login')
       }
     },
-    [setUser, router]
+    [setUser, router],
   )
 
   useEffect(() => {
@@ -156,7 +160,7 @@ export default function UserLayout({ children }: Props) {
                             asPathWithoutLang === item.href
                               ? 'bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white'
                               : 'text-gray-700 hover:bg-gray-50 dark:text-gray-50 dark:hover:bg-gray-800',
-                            'group flex items-center px-2 py-2 text-base font-medium'
+                            'group flex items-center px-2 py-2 text-base font-medium',
                           )}
                         >
                           {item.icon && (
@@ -165,7 +169,7 @@ export default function UserLayout({ children }: Props) {
                                 asPathWithoutLang === item.href
                                   ? 'text-gray-900 dark:text-white'
                                   : 'text-gray-700 dark:text-gray-50',
-                                'mr-4 h-6 w-6 flex-shrink-0'
+                                'mr-4 h-6 w-6 flex-shrink-0',
                               )}
                               aria-hidden="true"
                             />
@@ -183,7 +187,7 @@ export default function UserLayout({ children }: Props) {
         </Transition.Root>
 
         <div className="z-10 hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-          <div className="flex flex-grow flex-col overflow-y-auto break-words bg-white pt-5 scrollbar-hide dark:bg-gray-900">
+          <div className="scrollbar-hide flex flex-grow flex-col overflow-y-auto break-words bg-white pt-5 dark:bg-gray-900">
             <div className="flex flex-shrink-0 items-center px-4">
               <LogoHorizontal className="h-8 w-auto sm:h-10" />
             </div>
@@ -197,7 +201,7 @@ export default function UserLayout({ children }: Props) {
                       asPathWithoutLang === item.href
                         ? 'bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-white'
                         : 'text-gray-700 hover:bg-gray-50 dark:text-gray-50 dark:hover:bg-gray-800',
-                      'group flex items-center px-2 py-2 text-sm font-medium'
+                      'group flex items-center px-2 py-2 text-sm font-medium',
                     )}
                   >
                     {item.icon && (
@@ -206,7 +210,7 @@ export default function UserLayout({ children }: Props) {
                           asPathWithoutLang === item.href
                             ? 'text-gray-900  dark:text-white'
                             : 'text-gray-700 dark:text-gray-50',
-                          'mr-3 h-6 w-6 flex-shrink-0'
+                          'mr-3 h-6 w-6 flex-shrink-0',
                         )}
                         aria-hidden="true"
                       />
@@ -270,7 +274,7 @@ export default function UserLayout({ children }: Props) {
                               active
                                 ? 'bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-white'
                                 : '',
-                              'block px-4 py-2 text-sm text-gray-700 dark:text-gray-50'
+                              'block px-4 py-2 text-sm text-gray-700 dark:text-gray-50',
                             )}
                           >
                             {t(item.name)}
@@ -281,17 +285,17 @@ export default function UserLayout({ children }: Props) {
                     <Menu.Item>
                       {({ active }) => (
                         <p
-                          onClick={() => {
+                          onClick={async () => {
                             if (auth) {
                               setUser(defaultUser)
-                              signOut(auth)
+                              await signOut(auth)
                             }
                           }}
                           className={clsx(
                             active
                               ? 'bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-white'
                               : '',
-                            'block px-4 py-2 text-sm text-gray-700 hover:cursor-pointer dark:text-gray-50'
+                            'block px-4 py-2 text-sm text-gray-700 hover:cursor-pointer dark:text-gray-50',
                           )}
                         >
                           {t('logout')}

@@ -11,12 +11,14 @@ export default function useChangeLanguage() {
       const oldLang = currentLanguage.slice()
       await i18n.changeLanguage(lang)
       if (router.asPath === '/en' || router.asPath === '/ja') {
-        router.push(`${router.asPath.replace(`/${oldLang}`, `/${lang}`)}`)
+        await router.push(`${router.asPath.replace(`/${oldLang}`, `/${lang}`)}`)
       } else {
-        router.push(`${router.asPath.replace(`/${oldLang}/`, `/${lang}/`)}`)
+        await router.push(
+          `${router.asPath.replace(`/${oldLang}/`, `/${lang}/`)}`,
+        )
       }
     },
-    [i18n, router, currentLanguage]
+    [i18n, router, currentLanguage],
   )
   return {
     currentLanguage,

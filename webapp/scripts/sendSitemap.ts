@@ -14,7 +14,7 @@ const main = async () => {
       `https://www.google.com/ping?sitemap=https://${domain}/sitemap.xml`,
       {
         method: 'GET',
-      }
+      },
     )
     console.log(googlePing)
     // bing
@@ -44,7 +44,7 @@ const main = async () => {
         console.error('Please set Bing API key in .env')
       } else if (error.message.includes('ENOENT: no such file or directory')) {
         console.error(
-          'There is no sitemap.xml. please run `yarn build` to make sitemap on your local '
+          'There is no sitemap.xml. please run `yarn build` to make sitemap on your local ',
         )
       } else {
         console.error(error)
@@ -53,4 +53,4 @@ const main = async () => {
   }
 }
 
-main()
+void main()

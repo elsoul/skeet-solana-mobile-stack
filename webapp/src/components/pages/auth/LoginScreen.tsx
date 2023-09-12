@@ -81,7 +81,7 @@ export default function LoginScreen() {
             })
           }
           if (auth?.currentUser) {
-            signOut(auth)
+            await signOut(auth)
           }
         } finally {
           setLoading(false)

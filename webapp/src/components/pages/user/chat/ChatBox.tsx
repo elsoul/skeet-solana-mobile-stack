@@ -106,7 +106,7 @@ export default function ChatBox({
         const data = await get<UserChatRoom>(
           db,
           genUserChatRoomPath(user.uid),
-          currentChatRoomId
+          currentChatRoomId,
         )
         if (data.title !== '') {
           setFirstMessage(false)
@@ -119,7 +119,13 @@ export default function ChatBox({
   }, [currentChatRoomId, user.uid])
 
   useEffect(() => {
-    getChatRoom()
+    void (async () => {
+      try {
+        await getChatRoom()
+      } catch (e) {
+        console.error(e)
+      }
+    })()
   }, [getChatRoom])
 
   const [isSending, setSending] = useState(false)
@@ -129,7 +135,7 @@ export default function ChatBox({
       const querySnapshot = await query<UserChatRoomMessage>(
         db,
         genUserChatRoomMessagePath(user.uid, currentChatRoomId),
-        [orderBy('createdAt', 'asc')]
+        [orderBy('createdAt', 'asc')],
       )
       const messages: ChatMessage[] = []
       for await (const qs of querySnapshot.docs) {
@@ -161,7 +167,13 @@ export default function ChatBox({
   }, [currentChatRoomId, user.uid])
 
   useEffect(() => {
-    getUserChatRoomMessage()
+    void (async () => {
+      try {
+        await getUserChatRoomMessage()
+      } catch (e) {
+        console.error(e)
+      }
+    })()
   }, [getUserChatRoomMessage])
 
   useEffect(() => {
@@ -206,7 +218,7 @@ export default function ChatBox({
                 userChatRoomId: currentChatRoomId,
                 content: data.chatContent,
                 isFirstMessage,
-              }
+              },
             )
           const reader = await res?.body?.getReader()
           const decoder = new TextDecoder('utf-8')
@@ -285,16 +297,16 @@ export default function ChatBox({
       addToast,
       reset,
       getChatRooms,
-    ]
+    ],
   )
 
   const onKeyDown = useCallback(
-    (event: KeyboardEvent) => {
+    async (event: KeyboardEvent) => {
       if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
-        handleSubmit(onSubmit)()
+        await handleSubmit(onSubmit)()
       }
     },
-    [handleSubmit, onSubmit]
+    [handleSubmit, onSubmit],
   )
 
   return (
@@ -311,7 +323,7 @@ export default function ChatBox({
                   setNewChatModalOpen(true)
                 }}
                 className={clsx(
-                  'flex w-full flex-row items-center justify-center gap-4 bg-gray-900 px-3 py-2 hover:cursor-pointer hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-400'
+                  'flex w-full flex-row items-center justify-center gap-4 bg-gray-900 px-3 py-2 hover:cursor-pointer hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-400',
                 )}
               >
                 <PlusCircleIcon className="h-6 w-6 text-white" />
@@ -336,7 +348,7 @@ export default function ChatBox({
                   : chatContentLines == 2
                   ? 'chat-height-2'
                   : 'chat-height-1',
-                'w-full overflow-y-auto pb-24'
+                'w-full overflow-y-auto pb-24',
               )}
             >
               <div
@@ -377,7 +389,7 @@ export default function ChatBox({
                         {chatRoom?.model}: {chatRoom?.maxTokens} {t('tokens')}
                       </p>
                     </div>
-                    <div className="prose w-full max-w-none dark:prose-invert lg:prose-lg">
+                    <div className="prose dark:prose-invert lg:prose-lg w-full max-w-none">
                       {chatRoom?.context}
                     </div>
                   </div>
@@ -391,7 +403,7 @@ export default function ChatBox({
                       'bg-gray-50 dark:bg-gray-800',
                     chatMessage.role === 'assistant' &&
                       'bg-gray-50 dark:bg-gray-800',
-                    'w-full p-4'
+                    'w-full p-4',
                   )}
                 >
                   <div className="mx-auto flex w-full max-w-3xl flex-row items-start justify-center gap-4 p-4 sm:p-6 md:gap-6">
@@ -445,7 +457,7 @@ export default function ChatBox({
                           </p>
                         </div>
                       )}
-                      <div className="prose w-full max-w-none dark:prose-invert lg:prose-lg">
+                      <div className="prose dark:prose-invert lg:prose-lg w-full max-w-none">
                         <div
                           className="w-full max-w-none"
                           dangerouslySetInnerHTML={{
@@ -479,7 +491,7 @@ export default function ChatBox({
                             : chatContentLines == 2
                             ? 'h-20'
                             : `h-10`,
-                          'flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:text-lg'
+                          'flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:text-lg',
                         )}
                       />
                     )}
@@ -492,7 +504,7 @@ export default function ChatBox({
                       'flex h-10 w-10 flex-row items-center justify-center',
                       isDisabled
                         ? 'bg-gray-300 hover:cursor-wait dark:bg-gray-800 dark:text-gray-400'
-                        : 'bg-gray-900 hover:cursor-pointer dark:bg-gray-600'
+                        : 'bg-gray-900 hover:cursor-pointer dark:bg-gray-600',
                     )}
                   >
                     <PaperAirplaneIcon className="mx-3 h-6 w-6 flex-shrink-0 text-white" />

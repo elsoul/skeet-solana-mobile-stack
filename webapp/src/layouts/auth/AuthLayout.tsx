@@ -27,10 +27,14 @@ export default function AuthLayout({ children }: Props) {
     }
   }, [])
   useEffect(() => {
-    ;(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 100))
-      if (!router.asPath.includes('#')) {
-        resetWindowScrollPosition()
+    void (async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 100))
+        if (!router.asPath.includes('#')) {
+          resetWindowScrollPosition()
+        }
+      } catch (e) {
+        console.error(e)
       }
     })()
   }, [router.asPath, resetWindowScrollPosition])
@@ -44,7 +48,7 @@ export default function AuthLayout({ children }: Props) {
           const { username, iconUrl } = await get<UserModel>(
             db,
             genUserPath(),
-            fbUser.uid
+            fbUser.uid,
           )
           setUser({
             uid: fbUser.uid,
@@ -53,17 +57,17 @@ export default function AuthLayout({ children }: Props) {
             iconUrl,
             emailVerified: fbUser.emailVerified,
           })
-          router.push('/user/chat')
+          await router.push('/user/chat')
         } catch (e) {
           console.error(e)
           setUser(defaultUser)
-          signOut(auth)
+          await signOut(auth)
         }
       } else {
         setUser(defaultUser)
       }
     },
-    [setUser, router]
+    [setUser, router],
   )
 
   useEffect(() => {

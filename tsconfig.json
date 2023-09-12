@@ -17,7 +17,8 @@
     "lib/**/*",
     "custom.d.ts",
     "App.tsx",
-    "functions/skeet/src/types"
-, "webapp/src/types"  ],
+    "functions/skeet/src/types",
+    "webapp/src/types"
+  ],
   "exclude": ["node_modules", ".expo", "dist", "webapp", "functions"]
 }
