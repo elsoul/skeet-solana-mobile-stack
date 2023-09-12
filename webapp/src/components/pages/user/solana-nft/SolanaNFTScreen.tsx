@@ -58,7 +58,13 @@ export default function SolanaNFTScreen() {
   }, [publicKey, connection])
 
   useEffect(() => {
-    getUserNfts()
+    void (async () => {
+      try {
+        await getUserNfts()
+      } catch (e) {
+        console.error(e)
+      }
+    })()
   }, [getUserNfts])
 
   return (

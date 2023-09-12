@@ -171,18 +171,18 @@ export default function ChatMenu({
   const chatMenuRef = useRef<HTMLDivElement>(null)
   const chatMenuRefMobile = useRef<HTMLDivElement>(null)
 
-  const handleScroll = useCallback(() => {
+  const handleScroll = useCallback(async () => {
     const current = chatMenuRef.current
     if (current) {
       const isBottom =
         current.scrollHeight - current.scrollTop === current.clientHeight
       if (isBottom && !reachLast) {
-        queryMore()
+        await queryMore()
       }
     }
   }, [queryMore, chatMenuRef, reachLast])
 
-  const handleScrollMobile = useCallback(() => {
+  const handleScrollMobile = useCallback(async () => {
     const current = chatMenuRefMobile.current
 
     if (current) {
@@ -190,7 +190,7 @@ export default function ChatMenu({
         Math.floor(current.scrollHeight - current.scrollTop) ===
         current.clientHeight
       if (isBottom && !reachLast) {
-        queryMore()
+        await queryMore()
       }
     }
   }, [queryMore, chatMenuRefMobile, reachLast])
@@ -273,9 +273,9 @@ export default function ChatMenu({
   )
 
   const onKeyDown = useCallback(
-    (event: KeyboardEvent) => {
+    async (event: KeyboardEvent) => {
       if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
-        handleSubmit(onSubmit)()
+        await handleSubmit(onSubmit)()
       }
     },
     [handleSubmit, onSubmit],

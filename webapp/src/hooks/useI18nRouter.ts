@@ -7,10 +7,10 @@ export default function useI18nRouter() {
   const currentLanguage = useMemo(() => i18n.language, [i18n])
   const router = useRouter()
   const routerPush = useCallback(
-    (path: string) => {
-      router.push(`/${currentLanguage}${path}`)
+    async (path: string) => {
+      await router.push(`/${currentLanguage}${path}`)
     },
-    [router, currentLanguage]
+    [router, currentLanguage],
   )
   return {
     router,

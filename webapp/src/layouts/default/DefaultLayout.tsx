@@ -21,10 +21,14 @@ export default function DefaultLayout({ children }: Props) {
     }
   }, [])
   useEffect(() => {
-    ;(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 100))
-      if (!router.asPath.includes('#')) {
-        resetWindowScrollPosition()
+    void (async () => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 100))
+        if (!router.asPath.includes('#')) {
+          resetWindowScrollPosition()
+        }
+      } catch (e) {
+        console.error(e)
       }
     })()
   }, [router.asPath, resetWindowScrollPosition])

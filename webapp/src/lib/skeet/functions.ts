@@ -36,7 +36,7 @@ export const fetchSkeetFunctions = async <T>(
         err.message.includes('Error: getUserAuth'))
     ) {
       if (auth) {
-        signOut(auth)
+        await signOut(auth)
       }
     }
   }

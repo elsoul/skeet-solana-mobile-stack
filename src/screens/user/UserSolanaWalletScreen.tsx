@@ -46,8 +46,8 @@ export default function UserSolanaWalletScreen() {
             >
               <View style={tw`flex flex-col w-full`}>
                 <Pressable
-                  onPress={() => {
-                    transact(async (mobileWallet) => {
+                  onPress={async () => {
+                    await transact(async (mobileWallet) => {
                       const authorization = await mobileWallet.authorize({
                         cluster: 'devnet',
                         identity: APP_IDENTITY,

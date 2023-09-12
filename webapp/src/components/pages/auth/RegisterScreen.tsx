@@ -64,7 +64,7 @@ export default function RegisterScreen() {
             description: t('auth:sentConfirmEmailBody'),
           })
 
-          router.push('/auth/check-email')
+          await router.push('/auth/check-email')
         } catch (err) {
           console.error(err)
 

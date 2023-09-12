@@ -7,13 +7,19 @@ export default function useRedirect(to?: string) {
   to = to || router.asPath
 
   useEffect(() => {
-    const detectedLng = languageDetector.detect() as string
-    if (to?.startsWith('/' + detectedLng) && router.route === '/404') {
-      router.replace('/' + detectedLng + router.route)
-      return
-    }
+    void (async () => {
+      try {
+        const detectedLng = languageDetector.detect() as string
+        if (to?.startsWith('/' + detectedLng) && router.route === '/404') {
+          await router.replace('/' + detectedLng + router.route)
+          return
+        }
 
-    languageDetector.cache?.(detectedLng)
-    router.replace('/' + detectedLng + to)
+        languageDetector.cache?.(detectedLng)
+        await router.replace('/' + detectedLng + to)
+      } catch (e) {
+        console.error(e)
+      }
+    })()
   }, [router, to])
 }

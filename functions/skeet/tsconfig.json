@@ -23,6 +23,6 @@
     }
   },
   "compileOnSave": true,
-  "include": ["src/*", "src/**/*"],
-  "exclude": ["node_modules", "**/*.spec.ts", "scripts/*"]
+  "include": ["src/*", "src/**/*", "build.ts", "devBuild.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

@@ -108,7 +108,7 @@ export default function VertexChatBox({
         const data = await get<VertexChatRoom>(
           db,
           genVertexChatRoomPath(user.uid),
-          currentChatRoomId
+          currentChatRoomId,
         )
         setChatRoom(data as ChatRoom)
       } catch (e) {
@@ -118,7 +118,13 @@ export default function VertexChatBox({
   }, [currentChatRoomId, user.uid])
 
   useEffect(() => {
-    getChatRoom()
+    void (async () => {
+      try {
+        await getChatRoom()
+      } catch (e) {
+        console.error(e)
+      }
+    })()
   }, [getChatRoom])
 
   const [isSending, setSending] = useState(false)
@@ -128,7 +134,7 @@ export default function VertexChatBox({
       const querySnapshot = await query<VertexChatRoomMessage>(
         db,
         genVertexChatRoomMessagePath(user.uid, currentChatRoomId),
-        [orderBy('createdAt', 'asc')]
+        [orderBy('createdAt', 'asc')],
       )
       const messages: ChatMessage[] = []
       for await (const qs of querySnapshot.docs) {
@@ -160,7 +166,13 @@ export default function VertexChatBox({
   }, [currentChatRoomId, user.uid])
 
   useEffect(() => {
-    getUserChatRoomMessage()
+    void (async () => {
+      try {
+        await getUserChatRoomMessage()
+      } catch (e) {
+        console.error(e)
+      }
+    })()
   }, [getUserChatRoomMessage])
 
   useEffect(() => {
@@ -203,7 +215,7 @@ export default function VertexChatBox({
             {
               vertexChatRoomId: currentChatRoomId,
               content: inputs.chatContent,
-            }
+            },
           )
           const reader = await res?.body?.getReader()
           const decoder = new TextDecoder('utf-8')
@@ -280,16 +292,16 @@ export default function VertexChatBox({
       getChatRoom,
       getChatRooms,
       getUserChatRoomMessage,
-    ]
+    ],
   )
 
   const onKeyDown = useCallback(
-    (event: KeyboardEvent) => {
+    async (event: KeyboardEvent) => {
       if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
-        handleSubmit(onSubmit)()
+        await handleSubmit(onSubmit)()
       }
     },
-    [handleSubmit, onSubmit]
+    [handleSubmit, onSubmit],
   )
 
   return (
@@ -308,7 +320,7 @@ export default function VertexChatBox({
                 : chatContentLines == 2
                 ? 'chat-height-2'
                 : 'chat-height-1',
-              'w-full overflow-y-auto pb-24'
+              'w-full overflow-y-auto pb-24',
             )}
           >
             <div className={clsx('bg-gray-50 dark:bg-gray-800', 'w-full p-4')}>
@@ -337,7 +349,7 @@ export default function VertexChatBox({
                       {chatRoom?.topP}, {'Top-k'}: {chatRoom?.topK}
                     </p>
                   </div>
-                  <div className="prose w-full max-w-none dark:prose-invert lg:prose-lg">
+                  <div className="prose dark:prose-invert lg:prose-lg w-full max-w-none">
                     <p className="text-base font-medium text-gray-800 dark:text-gray-50">
                       {chatRoom?.context}
                     </p>
@@ -361,7 +373,7 @@ export default function VertexChatBox({
                   chatMessage.role === 'system' &&
                     'bg-gray-50 dark:bg-gray-800',
                   chatMessage.role === 'ai' && 'bg-gray-50 dark:bg-gray-800',
-                  'w-full p-4'
+                  'w-full p-4',
                 )}
               >
                 <div className="mx-auto flex w-full max-w-3xl flex-row items-start justify-center gap-4 p-4 sm:p-6 md:gap-6">
@@ -401,7 +413,7 @@ export default function VertexChatBox({
                         </p>
                       </div>
                     )}
-                    <div className="prose w-full max-w-none dark:prose-invert lg:prose-lg">
+                    <div className="prose dark:prose-invert lg:prose-lg w-full max-w-none">
                       <div
                         className="w-full max-w-none"
                         dangerouslySetInnerHTML={{
@@ -435,7 +447,7 @@ export default function VertexChatBox({
                           : chatContentLines == 2
                           ? 'h-20'
                           : `h-10`,
-                        'flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:text-lg'
+                        'flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:text-lg',
                       )}
                     />
                   )}
@@ -448,7 +460,7 @@ export default function VertexChatBox({
                     'flex h-10 w-10 flex-row items-center justify-center',
                     isDisabled
                       ? 'bg-gray-300 hover:cursor-wait dark:bg-gray-800 dark:text-gray-400'
-                      : 'bg-gray-900 hover:cursor-pointer dark:bg-gray-600'
+                      : 'bg-gray-900 hover:cursor-pointer dark:bg-gray-600',
                   )}
                 >
                   <PaperAirplaneIcon className="mx-3 h-6 w-6 flex-shrink-0 text-white" />

@@ -14,13 +14,13 @@ export default function LanguageChanger() {
         <Menu.Button
           className={clsx(
             'text-gray-700 dark:text-gray-50',
-            'group inline-flex items-center p-1 text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2'
+            'group inline-flex items-center p-1 text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2',
           )}
         >
           <LanguageIcon
             className={clsx(
               'text-gray-700 dark:text-gray-50',
-              'h-5 w-5 group-hover:text-gray-900 dark:group-hover:text-gray-200'
+              'h-5 w-5 group-hover:text-gray-900 dark:group-hover:text-gray-200',
             )}
             aria-hidden="true"
           />
@@ -42,8 +42,8 @@ export default function LanguageChanger() {
                     <div
                       className="relative grid gap-6 bg-white px-5 py-6 hover:cursor-pointer hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700"
                       role="button"
-                      onClick={() => {
-                        changeLanguage('en')
+                      onClick={async () => {
+                        await changeLanguage('en')
                         close()
                       }}
                     >
@@ -58,8 +58,8 @@ export default function LanguageChanger() {
                     <div
                       className="relative grid gap-6 bg-white px-5 py-6 hover:cursor-pointer hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700"
                       role="button"
-                      onClick={() => {
-                        changeLanguage('ja')
+                      onClick={async () => {
+                        await changeLanguage('ja')
                         close()
                       }}
                     >

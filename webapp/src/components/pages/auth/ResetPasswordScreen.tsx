@@ -46,7 +46,7 @@ export default function ResetPasswordScreen() {
             title: t('auth:sentResetPasswordRequest'),
             description: t('auth:confirmEmail'),
           })
-          router.push('/auth/check-email')
+          await router.push('/auth/check-email')
         } catch (err) {
           console.error(err)
           if (err instanceof Error && err.message === 'Not verified') {
