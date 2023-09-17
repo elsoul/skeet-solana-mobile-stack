@@ -21,7 +21,7 @@ import {
   COLLECTION_DESCRIPTION,
   FEE_PERCENT,
   EXTERNAL_URL,
-  COLLECTION_IMAGE_URL,
+  COLLECTION_IMAGE_PATH,
 } from './config'
 
 const rpcURL =
@@ -35,7 +35,7 @@ const secretKey = new Uint8Array(JSON.parse(keyData))
 
 const nftStorageToken = process.env.NFT_STORAGE_KEY || ''
 
-const collectionImageBuffer = fs.readFileSync(COLLECTION_IMAGE_URL)
+const collectionImageBuffer = fs.readFileSync(COLLECTION_IMAGE_PATH)
 
 const run = async () => {
   try {
@@ -61,7 +61,7 @@ const run = async () => {
       collectionImageUri
     )
 
-    const colelctionJsonObject = {
+    const collectionObject = {
       name: COLLECTION_NAME,
       symbol: COLLECTION_SYMBOL,
       description: COLLECTION_DESCRIPTION,
@@ -79,9 +79,7 @@ const run = async () => {
       },
     }
 
-    const collectionJsonUri = await umi.uploader.uploadJson(
-      colelctionJsonObject
-    )
+    const collectionJsonUri = await umi.uploader.uploadJson(collectionObject)
     console.log('collectionJsonUri:', collectionJsonUri)
     fs.writeFileSync(
       'scripts/solana/cNFT/example/collectionJsonUri.txt',
