@@ -37,7 +37,7 @@ export const MERKLE_TREE = publicKey(
 export const MINT_ITEM_TO = publicKey(
   'ELLBGa6DTdEVui6Ydt8vqsnsyybAxyVLPwY7oH6onbUq'
 )
-export const NFT_ITEM_NAME = 'Skeet The Epics Dev LE'
+export const NFT_ITEM_NAME = 'STED Limited Edition #0'
 export const NFT_ITEM_IMAGE_URL =
   'https://bafkreihwkrj3su3r6mz5wvmu46h5iriomh2b6njwd3m2s3f6whwd3qxude.ipfs.nftstorage.link/'
 export const NFT_ITEM_ATTRIBUTES = [
