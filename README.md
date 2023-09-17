@@ -127,7 +127,9 @@ Phantom's Show Private Key gives us the strings which is not compatible with Sol
 So we need to convert it to the Uint8Array and made the script for it.
 
 ```
-yarn solana:key:convert -- keyfile.json (optional. default: key.json)
+$ yarn solana:key:convert (default: key.json)
+// or if you want to name the file.
+$ yarn solana:key:convert -- keyfile.json
 ```
 
 ## Contributing

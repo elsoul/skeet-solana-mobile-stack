@@ -33,11 +33,19 @@
     "deploy:webapp": "yarn build:production:webapp && npx firebase deploy --only hosting",
     "start": "expo start --dev-client",
     "ios": "expo run:ios",
-    "solana:key:convert": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/privateKeyConverter.ts"
+    "solana:key:convert": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/privateKeyConverter.ts",
+    "solana:nft:create:collection": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/cNFT/createNFTCollection.ts",
+    "solana:nft:mint:cnft": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/cNFT/mintCNFT.ts"
   },
   "dependencies": {
     "@expo-google-fonts/noto-sans-jp": "0.2.3",
     "@expo-google-fonts/outfit": "0.2.3",
+    "@metaplex-foundation/mpl-bubblegum": "1.0.1",
+    "@metaplex-foundation/mpl-token-metadata": "3.0.0",
+    "@metaplex-foundation/umi": "0.8.9",
+    "@metaplex-foundation/umi-bundle-defaults": "0.8.9",
+    "@metaplex-foundation/umi-uploader-nft-storage": "0.8.9",
+    "@metaplex-foundation/umi-web3js-adapters": "^0.8.9",
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-native-community/cli-platform-android": "10.2.0",
     "@react-native-community/cli-platform-ios": "10.2.0",

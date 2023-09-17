@@ -2,10 +2,8 @@ import * as bs58 from 'bs58'
 import * as fs from 'fs'
 import * as readlineSync from 'readline-sync'
 
-// コマンドライン引数からファイル名を取得（デフォルトは "key.json"）
 const fileName = process.argv[2] || 'key.json'
 
-// マスクされた入力を取得
 const input = readlineSync.question(
   'Please enter the string displayed in Phantom\'s "Show Private Key": ',
   {
