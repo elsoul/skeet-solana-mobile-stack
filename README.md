@@ -120,6 +120,16 @@ You need to run this command to setup EAS Build project.
 yarn build:configure
 ```
 
+## Solana Wallet
+
+You can use Solana Wallet Private key converter to get the keyfile.json.
+Phantom's Show Private Key gives us the strings which is not compatible with Solana CLI.
+So we need to convert it to the Uint8Array and made the script for it.
+
+```
+yarn solana:key:convert -- keyfile.json (optional. default: key.json)
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/elsoul/skeet-solana-mobile-stack This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
