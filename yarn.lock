@@ -3534,7 +3534,7 @@
     node-fetch "^2.6.7"
     tweetnacl "^1.0.3"
 
-"@metaplex-foundation/umi-web3js-adapters@^0.8.9":
+"@metaplex-foundation/umi-web3js-adapters@0.8.9", "@metaplex-foundation/umi-web3js-adapters@^0.8.9":
   version "0.8.9"
   resolved "https://registry.yarnpkg.com/@metaplex-foundation/umi-web3js-adapters/-/umi-web3js-adapters-0.8.9.tgz#5541159e1c69a9c984cde5e7015247dad4af39ea"
   integrity sha512-WKdWUEiDnoWKKEETy6DjLWyHlMwKi5OPJ6eeApeui6ITkTTAs3z3BAf3NYDYywmN/DgeXPIbJkwwkwfvcHg3xw==

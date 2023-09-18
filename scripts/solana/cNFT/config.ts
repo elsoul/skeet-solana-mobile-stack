@@ -51,7 +51,10 @@ export const NFT_ITEM_ATTRIBUTES = [
   },
 ]
 
-// To get cNFTs, for now we can't use umi
+// for RPC
 export const OWNER_ADDRESS = 'ELLBGa6DTdEVui6Ydt8vqsnsyybAxyVLPwY7oH6onbUq'
 export const COLLECTION_MINT_ADDRESS =
   'itzdT5XgD9cLRtFSTbLAeEqKM3aT3UeSTCJ5h1A9cNN'
+// for umi
+export const OWNER_PUBKEY = publicKey(OWNER_ADDRESS)
+export const COLLECTION_MINT_PUBKEY = publicKey(COLLECTION_MINT_ADDRESS)

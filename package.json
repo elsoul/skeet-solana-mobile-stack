@@ -47,7 +47,7 @@
     "@metaplex-foundation/umi": "0.8.9",
     "@metaplex-foundation/umi-bundle-defaults": "0.8.9",
     "@metaplex-foundation/umi-uploader-nft-storage": "0.8.9",
-    "@metaplex-foundation/umi-web3js-adapters": "^0.8.9",
+    "@metaplex-foundation/umi-web3js-adapters": "0.8.9",
     "@react-native-async-storage/async-storage": "1.17.11",
     "@react-native-community/cli-platform-android": "10.2.0",
     "@react-native-community/cli-platform-ios": "10.2.0",
