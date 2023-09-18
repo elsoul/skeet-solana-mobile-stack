@@ -46,6 +46,8 @@ Solana Mobile Stack: https://docs.solanamobile.com/
 - [React - UI Framework](https://reactjs.org/)
 - [Tailwind - CSS Framework](https://tailwindcss.com/)
 - [Solana Wallet Adapter (Web)](https://github.com/solana-labs/wallet-adapter)
+- [umi - Solana Token Management](https://github.com/metaplex-foundation/umi)
+- [Bubblegum - Solana Compressed NFTs (cNFTs)](https://developers.metaplex.com/bubblegum)
 
 ## What's Skeet?
 
@@ -131,6 +133,14 @@ $ yarn solana:key:convert (default: key.json)
 // or if you want to name the file.
 $ yarn solana:key:convert -- keyfile.json
 ```
+
+## How to create Compressed NFTs (cNFTs)?
+
+The articles for how to create cNFTs are here.
+
+EN: https://medium.com/@KishiTheMechanic/how-to-mint-solana-compressed-nfts-cnfts-with-typescript-be9d0fa7ce30
+
+JA: https://zenn.dev/ki4themecha2q/articles/7dcb9753783a23
 
 ## Contributing
 
