@@ -50,3 +50,8 @@ export const NFT_ITEM_ATTRIBUTES = [
     value: format(new Date(), 'yyyy-MM-dd HH:mm:ss'),
   },
 ]
+
+// To get cNFTs, for now we can't use umi
+export const OWNER_ADDRESS = 'ELLBGa6DTdEVui6Ydt8vqsnsyybAxyVLPwY7oH6onbUq'
+export const COLLECTION_MINT_ADDRESS =
+  'itzdT5XgD9cLRtFSTbLAeEqKM3aT3UeSTCJ5h1A9cNN'

@@ -35,6 +35,7 @@
     "ios": "expo run:ios",
     "solana:key:convert": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/privateKeyConverter.ts",
     "solana:nft:create:collection": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/cNFT/createNFTCollection.ts",
+    "solana:nft:create:merkleTree": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/cNFT/createMerkleTree.ts",
     "solana:nft:mint:cnft": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/cNFT/mintCNFT.ts",
     "solana:nft:get:cnft": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/cNFT/getCNFT.ts"
   },
