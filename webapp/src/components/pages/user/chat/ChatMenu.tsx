@@ -106,7 +106,7 @@ export default function ChatMenu({
   } = useForm<Inputs>({
     resolver: zodResolver(schema),
     defaultValues: {
-      model: 'gpt-3.5-turbo',
+      model: allowedGPTModel[0],
       maxTokens: 1000,
       temperature: 1,
       systemContent: isJapanese
@@ -465,19 +465,26 @@ export default function ChatMenu({
                                   name="maxTokens"
                                   control={control}
                                   render={({ field }) => (
-                                    <input
-                                      {...field}
-                                      className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:leading-6"
-                                      type="number"
-                                      inputMode="numeric"
-                                      onChange={(e) =>
-                                        field.onChange(
-                                          e.target.value
-                                            ? parseFloat(e.target.value)
-                                            : 0,
-                                        )
-                                      }
-                                    />
+                                    <>
+                                      <input
+                                        {...field}
+                                        type="range"
+                                        min={100}
+                                        max={4096}
+                                        step={4}
+                                        className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
+                                        onChange={(e) =>
+                                          field.onChange(
+                                            e.target.value
+                                              ? parseFloat(e.target.value)
+                                              : 0,
+                                          )
+                                        }
+                                      />
+                                      <p className="text-bold text-gray-900 dark:text-white">
+                                        {field.value}
+                                      </p>
+                                    </>
                                   )}
                                 />
                               </div>
@@ -497,19 +504,26 @@ export default function ChatMenu({
                                   name="temperature"
                                   control={control}
                                   render={({ field }) => (
-                                    <input
-                                      {...field}
-                                      type="number"
-                                      inputMode="decimal"
-                                      className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:leading-6"
-                                      onChange={(e) =>
-                                        field.onChange(
-                                          e.target.value
-                                            ? parseFloat(e.target.value)
-                                            : 0,
-                                        )
-                                      }
-                                    />
+                                    <>
+                                      <input
+                                        {...field}
+                                        type="range"
+                                        min={0}
+                                        max={2.0}
+                                        step={0.01}
+                                        className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
+                                        onChange={(e) =>
+                                          field.onChange(
+                                            e.target.value
+                                              ? parseFloat(e.target.value)
+                                              : 0,
+                                          )
+                                        }
+                                      />
+                                      <p className="text-bold text-gray-900 dark:text-white">
+                                        {field.value}
+                                      </p>
+                                    </>
                                   )}
                                 />
                               </div>

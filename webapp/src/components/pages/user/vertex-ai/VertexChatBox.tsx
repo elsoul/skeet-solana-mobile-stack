@@ -35,7 +35,7 @@ import { sleep } from '@/utils/time'
 import VertexChatExamples from './VertexChatExamples'
 import { AddVertexMessageParams } from '@/types/http/skeet/addVertexMessageParams'
 import { db } from '@/lib/firebase'
-import { collection, orderBy } from 'firebase/firestore'
+import { orderBy } from 'firebase/firestore'
 import {
   VertexChatRoom,
   VertexChatRoomMessage,
@@ -325,16 +325,30 @@ export default function VertexChatBox({
           >
             <div className={clsx('bg-gray-50 dark:bg-gray-800', 'w-full p-4')}>
               <div className="mx-auto flex w-full max-w-3xl flex-row items-start justify-start gap-4 p-4 sm:p-6 md:gap-6">
-                <Image
-                  src={
-                    'https://storage.googleapis.com/skeet-assets/imgs/bdlc/Bison.png'
-                  }
-                  alt="Bison icon"
-                  className="my-3 aspect-square h-6 w-6 rounded-full sm:h-10 sm:w-10"
-                  unoptimized
-                  width={40}
-                  height={40}
-                />
+                {chatRoom?.model === 'chat-bison@001' && (
+                  <Image
+                    src={
+                      'https://storage.googleapis.com/skeet-assets/imgs/bdlc/Bison.png'
+                    }
+                    alt="Bison icon"
+                    className="my-3 aspect-square h-6 w-6 rounded-full sm:h-10 sm:w-10"
+                    unoptimized
+                    width={40}
+                    height={40}
+                  />
+                )}
+                {chatRoom?.model === 'chat-bison-32k' && (
+                  <Image
+                    src={
+                      'https://storage.googleapis.com/skeet-assets/imgs/bdlc/Bison32k.png'
+                    }
+                    alt="Bison icon"
+                    className="my-3 aspect-square h-6 w-6 rounded-full sm:h-10 sm:w-10"
+                    unoptimized
+                    width={40}
+                    height={40}
+                  />
+                )}
 
                 <div className="flex w-full flex-col">
                   <div className="pb-2">
@@ -388,11 +402,27 @@ export default function VertexChatBox({
                     />
                   )}
                   {(chatMessage.role === 'ai' ||
-                    chatMessage.role === 'system') &&
+                    chatMessage.role === 'system' ||
+                    chatMessage.role === 'assistant') &&
                     chatRoom?.model === 'chat-bison@001' && (
                       <Image
                         src={
                           'https://storage.googleapis.com/skeet-assets/imgs/bdlc/Bison.png'
+                        }
+                        alt="Bison icon"
+                        className="my-3 aspect-square h-6 w-6 rounded-full sm:h-10 sm:w-10"
+                        unoptimized
+                        width={40}
+                        height={40}
+                      />
+                    )}
+                  {(chatMessage.role === 'ai' ||
+                    chatMessage.role === 'system' ||
+                    chatMessage.role === 'assistant') &&
+                    chatRoom?.model === 'chat-bison-32k' && (
+                      <Image
+                        src={
+                          'https://storage.googleapis.com/skeet-assets/imgs/bdlc/Bison32k.png'
                         }
                         alt="Bison icon"
                         className="my-3 aspect-square h-6 w-6 rounded-full sm:h-10 sm:w-10"

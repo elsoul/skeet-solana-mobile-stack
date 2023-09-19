@@ -118,8 +118,8 @@ export default function VertexChatMenu({
   } = useForm<Inputs>({
     resolver: zodResolver(schema),
     defaultValues: {
-      model: 'chat-bison@001',
-      maxTokens: 100,
+      model: allowedVertexModel[0],
+      maxTokens: 4000,
       temperature: 0.5,
       systemContent: isJapanese
         ? 'あなたは、親切で、創造的で、賢く、とてもフレンドリーなアシスタントです。'
@@ -484,19 +484,26 @@ export default function VertexChatMenu({
                                   name="maxTokens"
                                   control={control}
                                   render={({ field }) => (
-                                    <input
-                                      {...field}
-                                      className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:leading-6"
-                                      type="number"
-                                      inputMode="numeric"
-                                      onChange={(e) =>
-                                        field.onChange(
-                                          e.target.value
-                                            ? parseFloat(e.target.value)
-                                            : 0,
-                                        )
-                                      }
-                                    />
+                                    <>
+                                      <input
+                                        {...field}
+                                        type="range"
+                                        min={4}
+                                        max={8192}
+                                        step={4}
+                                        className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
+                                        onChange={(e) =>
+                                          field.onChange(
+                                            e.target.value
+                                              ? parseFloat(e.target.value)
+                                              : 0,
+                                          )
+                                        }
+                                      />
+                                      <p className="text-bold text-gray-900 dark:text-white">
+                                        {field.value}
+                                      </p>
+                                    </>
                                   )}
                                 />
                               </div>
@@ -516,19 +523,26 @@ export default function VertexChatMenu({
                                   name="temperature"
                                   control={control}
                                   render={({ field }) => (
-                                    <input
-                                      {...field}
-                                      type="number"
-                                      inputMode="decimal"
-                                      className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:leading-6"
-                                      onChange={(e) =>
-                                        field.onChange(
-                                          e.target.value
-                                            ? parseFloat(e.target.value)
-                                            : 0,
-                                        )
-                                      }
-                                    />
+                                    <>
+                                      <input
+                                        {...field}
+                                        type="range"
+                                        min={0}
+                                        max={1.0}
+                                        step={0.01}
+                                        className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
+                                        onChange={(e) =>
+                                          field.onChange(
+                                            e.target.value
+                                              ? parseFloat(e.target.value)
+                                              : 0,
+                                          )
+                                        }
+                                      />
+                                      <p className="text-bold text-gray-900 dark:text-white">
+                                        {field.value}
+                                      </p>
+                                    </>
                                   )}
                                 />
                               </div>
@@ -547,19 +561,26 @@ export default function VertexChatMenu({
                                     name="topP"
                                     control={control}
                                     render={({ field }) => (
-                                      <input
-                                        {...field}
-                                        type="number"
-                                        inputMode="decimal"
-                                        className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:leading-6"
-                                        onChange={(e) =>
-                                          field.onChange(
-                                            e.target.value
-                                              ? parseFloat(e.target.value)
-                                              : 0,
-                                          )
-                                        }
-                                      />
+                                      <>
+                                        <input
+                                          {...field}
+                                          type="range"
+                                          min={0}
+                                          max={1.0}
+                                          step={0.01}
+                                          className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
+                                          onChange={(e) =>
+                                            field.onChange(
+                                              e.target.value
+                                                ? parseFloat(e.target.value)
+                                                : 0,
+                                            )
+                                          }
+                                        />
+                                        <p className="text-bold text-gray-900 dark:text-white">
+                                          {field.value}
+                                        </p>
+                                      </>
                                     )}
                                   />
                                 </div>
@@ -579,19 +600,26 @@ export default function VertexChatMenu({
                                     name="topK"
                                     control={control}
                                     render={({ field }) => (
-                                      <input
-                                        {...field}
-                                        type="number"
-                                        inputMode="decimal"
-                                        className="w-full border-2 border-gray-900 p-3 text-lg font-bold text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:leading-6"
-                                        onChange={(e) =>
-                                          field.onChange(
-                                            e.target.value
-                                              ? parseInt(e.target.value)
-                                              : 0,
-                                          )
-                                        }
-                                      />
+                                      <>
+                                        <input
+                                          {...field}
+                                          type="range"
+                                          min={0}
+                                          max={40}
+                                          step={1}
+                                          className="h-2 w-full cursor-pointer appearance-none rounded-lg bg-gray-200 dark:bg-gray-700"
+                                          onChange={(e) =>
+                                            field.onChange(
+                                              e.target.value
+                                                ? parseFloat(e.target.value)
+                                                : 0,
+                                            )
+                                          }
+                                        />
+                                        <p className="text-bold text-gray-900 dark:text-white">
+                                          {field.value}
+                                        </p>
+                                      </>
                                     )}
                                   />
                                 </div>
