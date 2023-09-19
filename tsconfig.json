@@ -17,9 +17,7 @@
     "lib/**/*",
     "custom.d.ts",
     "App.tsx",
-    "functions/skeet/src/types",
-    "webapp/src/types",
     "babel.config.js"
   ],
-  "exclude": ["node_modules", ".expo", "dist", "webapp", "functions"]
+  "exclude": ["node_modules", ".expo", "dist"]
 }
