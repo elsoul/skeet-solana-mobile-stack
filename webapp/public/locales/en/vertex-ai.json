@@ -1,5 +1,5 @@
 {
-  "title": "Open AI Chat",
+  "title": "Vertex AI Chat",
   "newChat": "New Chat",
   "chatList": "Chat List",
   "createChatRoom": "Create New Chat",
@@ -7,8 +7,8 @@
   "chatRoomCreatedSuccessBody": "Chat room has been created successfully.",
   "model": "Model",
   "modelErrorText": "Please select a model from the list.",
-  "maxTokens": "Max Tokens (1 ~ 1024: more thinking)",
-  "maxTokensErrorText": "Please enter a number between 1 and 1024.",
+  "maxTokens": "Max Tokens (1 ~ 8196: more thinking)",
+  "maxTokensErrorText": "Please enter a number between 1 and 8196.",
   "temperature": "Temperature (0: most conservative ~ 1: most creative)",
   "temperatureErrorText": "Please enter a number between 0 and 1.",
   "topP": "Top-p (0: most conservative ~ 1: most creative)",
