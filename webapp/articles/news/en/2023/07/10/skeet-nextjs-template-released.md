@@ -59,4 +59,6 @@ Please try it and give us any feedback.
 
 Skeet Tutorial (Document): https://skeet.dev/en/doc/backend/quickstart/
 
-Skeet Tutorial (YouTube): https://www.youtube.com/watch?v=6em68qcSsJE
+Skeet Tutorial (YouTube):
+
+https://www.youtube.com/watch?v=e7J5HDhtpE4

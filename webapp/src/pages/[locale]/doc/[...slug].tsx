@@ -19,6 +19,8 @@ import { getAllArticles, getArticleBySlug } from '@/utils/article'
 import DocLayout from '@/layouts/doc/DocLayout'
 import { getI18nProps } from '@/lib/getStatic'
 import DocContents from '@/components/articles/doc/DocContents'
+import embedder from '@remark-embedder/core'
+import youtubeTransformer from '@/lib/youtubeTransformer'
 
 const articleDirName = 'doc'
 
@@ -56,12 +58,15 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     typeof params.slug == 'string' ? [params.slug] : params.slug,
     ['title', 'description', 'content'],
     articleDirPrefix,
-    (params.locale as string) ?? 'en'
+    (params.locale as string) ?? 'en',
   )
   console.log(article.content)
 
   const articleHtml = await unified()
     .use(remarkParse)
+    .use(embedder, {
+      transformers: [youtubeTransformer],
+    })
     .use(remarkDirective)
     .use(remarkGfm)
     .use(remarkSlug)

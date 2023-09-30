@@ -11,11 +11,17 @@ The video series consists of 7 episodes, with the first episode providing a gene
 
 The following 3 videos have already been released, with more to come:
 
-YouTube: Auto-Coding with ChatGPT / VertexAI in Skeet Framework - $ skeet ai ① Basic Usage 1/7: https://www.youtube.com/watch?v=_aAN1nZ8dwg
+YouTube: Auto-Coding with ChatGPT / VertexAI in Skeet Framework - $ skeet ai ① Basic Usage 1/7:
 
-YouTube: Auto-Coding with ChatGPT / VertexAI in Skeet Framework - GraphQL CRUD/Schema Auto-Generation ② $ prisma mode 2/7: https://www.youtube.com/watch?v=n-ipl8ZFazM
+https://www.youtube.com/watch?v=e7J5HDhtpE4
 
-YouTube: Auto-Coding with ChatGPT / VertexAI in Skeet Framework - TypeScript/Typedoc Function Auto-Generation ③ $ method mode 3/7: https://www.youtube.com/watch?v=_aAN1nZ8dwg
+YouTube: Auto-Coding with ChatGPT / VertexAI in Skeet Framework - GraphQL CRUD/Schema Auto-Generation ② $ prisma mode 2/7:
+
+https://www.youtube.com/watch?v=01a4HIhNuvM
+
+YouTube: Auto-Coding with ChatGPT / VertexAI in Skeet Framework - TypeScript/Typedoc Function Auto-Generation ③ $ method mode 3/7:
+
+https://www.youtube.com/watch?v=GPsWXMIItWE
 
 As demonstrated in the videos, auto-coding with Skeet allows developers to interact with AI to automatically generate code, significantly enhancing productivity.
 
