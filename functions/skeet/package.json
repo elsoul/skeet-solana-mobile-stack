@@ -24,6 +24,8 @@
     "@skeet-framework/ai": "1.5.0",
     "@skeet-framework/firestore": "2.3.0",
     "@skeet-framework/utils": "1.2.1",
+    "@solana/wallet-standard-features": "1.1.0",
+    "@solana/wallet-standard-util": "1.1.0",
     "firebase-admin": "11.10.1",
     "firebase-functions": "4.4.1"
   },

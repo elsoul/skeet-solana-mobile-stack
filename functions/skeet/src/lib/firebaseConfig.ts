@@ -1,10 +1,10 @@
 const firebaseConfig = {
-  projectId: 'skeet-solana-mobile-stack',
-  appId: '1:970336459442:web:292c14b59159c5506407ab',
-  storageBucket: 'skeet-solana-mobile-stack.appspot.com',
-  apiKey: 'AIzaSyBYXs9JEym42gJCuO1OT7mJ_tyJUpJRB84',
+  apiKey: 'AIzaSyDl7zWB82tW34Vs5yQ8On2uFRL9j1JyUVY',
   authDomain: 'skeet-solana-mobile-stack.firebaseapp.com',
-  messagingSenderId: '970336459442',
-  measurementId: 'G-PR5LDPJSPY',
+  projectId: 'skeet-solana-mobile-stack',
+  storageBucket: 'skeet-solana-mobile-stack.appspot.com',
+  messagingSenderId: '825992944489',
+  appId: '1:825992944489:web:970dfd65d38770c4afbbf8',
+  measurementId: 'G-CBHWG9DXFY',
 }
 export default firebaseConfig

@@ -57,7 +57,7 @@ export default function AuthLayout({ children }: Props) {
             iconUrl,
             emailVerified: fbUser.emailVerified,
           })
-          await router.push('/user/chat')
+          await router.push('/user/vertex-ai')
         } catch (e) {
           console.error(e)
           setUser(defaultUser)

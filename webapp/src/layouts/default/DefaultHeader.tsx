@@ -80,9 +80,6 @@ export default function DefaultHeader() {
                   <Button href="/auth/login" variant="outline" className="">
                     {t('login')}
                   </Button>
-                  <Button href="/auth/register" className="">
-                    {t('register')}
-                  </Button>
                   <LanguageChanger />
                   <ColorModeChanger />
                 </div>
@@ -135,13 +132,6 @@ export default function DefaultHeader() {
                           onClick={() => close()}
                         >
                           {t('login')}
-                        </Link>
-                        <Link
-                          href="/auth/register"
-                          className="block w-full text-base font-medium text-gray-700 hover:text-gray-900 active:text-gray-800 dark:text-gray-50 dark:hover:text-gray-200"
-                          onClick={() => close()}
-                        >
-                          {t('register')}
                         </Link>
                         <div className="flex flex-1 items-center justify-end gap-3">
                           <LanguageChanger />
