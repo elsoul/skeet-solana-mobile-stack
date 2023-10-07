@@ -23,7 +23,7 @@ export default function DiscordRow() {
               {t('DiscordRow.title')}
             </h3>
           </div>
-          <div className="ml-12 mt-2 sm:flex sm:items-start sm:justify-between">
+          <div className="ml-12 mt-2 sm:flex sm:items-end sm:justify-between">
             <div className="max-w-xl text-sm text-gray-50">
               <p>{t('DiscordRow.body')}</p>
             </div>
