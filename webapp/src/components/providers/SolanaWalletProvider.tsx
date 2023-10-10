@@ -11,6 +11,9 @@ import type {
   SolanaSignInInput,
   SolanaSignInOutput,
 } from '@solana/wallet-standard-features'
+import { fetchSkeetFunctions } from '@/lib/skeet/functions'
+import { CreateSignInDataParams } from '@/types/http/skeet/createSignInDataParams'
+import { VerifySIWSParams } from '@/types/http/skeet/verifySIWSParams'
 
 type Props = {
   children: ReactNode
@@ -35,36 +38,60 @@ export default function SolanaWalletProvider({ children }: Props) {
     [addToast],
   )
 
-  const autoSignIn = useCallback(async (adapter: Adapter) => {
-    console.log('triggered autoSignIn')
-    if (!('signIn' in adapter)) return true
+  const autoSignIn = useCallback(
+    async (adapter: Adapter) => {
+      if (!('signIn' in adapter)) return true
 
-    // Fetch the signInInput from the backend
-    /*
-    const createResponse = await fetch("/backend/createSignInData");
-    const input: SolanaSignInInput = await createResponse.json();
-    */
-    // const input: SolanaSignInInput = await createSignInData()
+      try {
+        const createResponse =
+          await fetchSkeetFunctions<CreateSignInDataParams>(
+            'skeet',
+            'createSignInData',
+            {},
+          )
+        const signInResponse = await createResponse?.json()
+        const input: SolanaSignInInput = signInResponse?.signInData
+        const signInResult = await adapter.signIn(input)
+        const output: SolanaSignInOutput = {
+          ...signInResult,
+          account: {
+            address: signInResult.account.address,
+            publicKey: signInResult.account.publicKey,
+            chains: signInResult.account.chains,
+            features: signInResult.account.features,
+            label: signInResult.account.label,
+            icon: signInResult.account.icon,
+          },
+        }
+        console.log(output)
+        console.log(output.account)
+        console.log(output.account.address)
+        console.log(output.account.publicKey)
 
-    // Send the signInInput to the wallet and trigger a sign-in request
-    // const output = await adapter.signIn(input)
-    // const constructPayload = JSON.stringify({ input, output })
-
-    // Verify the sign-in output against the generated input server-side
-    /*
-    const verifyResponse = await fetch("/backend/verifySIWS", {
-      method: "POST",
-      body: strPayload,
-    });
-    const success = await verifyResponse.json();
-    */
-
-    return false
-  }, [])
+        const verifyResponse = await fetchSkeetFunctions<VerifySIWSParams>(
+          'skeet',
+          'verifySIWS',
+          { input, output },
+        )
+        const success = await verifyResponse?.json()
+        console.log(success)
+        return false
+      } catch (err) {
+        console.error(err)
+        if (err instanceof Error) {
+          addToast({
+            title: err.name,
+            description: err.message,
+            type: 'error',
+          })
+        }
+      }
+    },
+    [addToast],
+  )
 
   const autoConnect = useCallback(
     async (adapter: Adapter) => {
-      console.log(adapter)
       adapter.autoConnect().catch((e) => {
         return autoSignIn(adapter)
       })
