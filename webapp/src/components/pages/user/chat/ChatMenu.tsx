@@ -117,7 +117,6 @@ export default function ChatMenu({
 
   const queryMore = useCallback(async () => {
     if (db && user.uid && lastChat) {
-      console.log('lastChat')
       try {
         setDataLoading(true)
         const querySnapshot = await query<UserChatRoom>(
@@ -139,7 +138,7 @@ export default function ChatMenu({
           setChatList([...chatList, ...list])
         }
       } catch (err) {
-        console.log(err)
+        console.error(err)
         if (err instanceof Error && err.message.includes('permission-denied')) {
           addToast({
             type: 'error',

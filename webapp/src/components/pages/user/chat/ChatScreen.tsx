@@ -45,11 +45,10 @@ export default function ChatScreen() {
           const data = doc.data()
           list.push({ id: doc.id, ...data } as ChatRoom)
         })
-        console.log(list)
         setChatList(list)
         setLastChat(querySnapshot.docs[querySnapshot.docs.length - 1])
       } catch (err) {
-        console.log(err)
+        console.error(err)
         if (err instanceof Error && err.message.includes('permission-denied')) {
           addToast({
             type: 'error',

@@ -73,7 +73,6 @@ export default function VertexChatBox({
   const { t } = useTranslation()
   const user = useRecoilValue(userState)
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([])
-  console.log(chatMessages)
   const [chatRoom, setChatRoom] = useState<ChatRoom | null>(null)
   const addToast = useToastMessage()
 

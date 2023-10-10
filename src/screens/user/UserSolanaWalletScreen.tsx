@@ -57,7 +57,6 @@ export default function UserSolanaWalletScreen() {
                         text1: 'Welcome to Skeet Dev🎉',
                         text2: `You signed with ${authorization.accounts[0].address}`,
                       })
-                      console.log(authorization)
                     })
                   }}
                   style={tw`${clsx(
