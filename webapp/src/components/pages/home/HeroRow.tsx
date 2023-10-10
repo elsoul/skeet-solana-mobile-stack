@@ -11,6 +11,7 @@ import tailwindcssLogo from '@/assets/img/logo/projects/tailwindcss.svg'
 import typescriptLogo from '@/assets/img/logo/projects/TypeScriptHorizontal.svg'
 import Button from '@/components/common/atoms/Button'
 import clsx from 'clsx'
+import SolanaLogoHorizontal from '@/components/common/atoms/SolanaLogoHorizontal'
 
 export default function HomeHeroRow() {
   const { t } = useTranslation()
@@ -24,6 +25,7 @@ export default function HomeHeroRow() {
         <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-gray-700 dark:text-gray-200">
           {t('home:HeroRow.body')}
         </p>
+        <SolanaLogoHorizontal className="mx-auto mt-8 w-48" />
         <div className="mt-10 flex justify-center gap-x-6">
           <Button href="/auth/login" className="">
             {t('aiChat')}
@@ -104,7 +106,7 @@ export default function HomeHeroRow() {
                             'hover:opacity-60 dark:grayscale',
                             project.name === 'React'
                               ? 'dark:invert-0'
-                              : 'dark:invert'
+                              : 'dark:invert',
                           )}
                           width={168}
                           height={48}
