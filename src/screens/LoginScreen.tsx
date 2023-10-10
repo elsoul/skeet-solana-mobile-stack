@@ -73,12 +73,6 @@ export default function LoginScreen() {
           password
         )
 
-        if (!userCredential.user.emailVerified) {
-          await sendEmailVerification(userCredential.user)
-          await signOut(auth)
-          throw new Error('Not verified')
-        }
-
         Toast.show({
           type: 'success',
           text1: t('succeedLogin') ?? 'Succeed to sign in🎉',
@@ -259,7 +253,6 @@ export default function LoginScreen() {
                       text1: 'Welcome to Skeet Dev🎉',
                       text2: `You signed with ${authorization.accounts[0].address}`,
                     })
-                    console.log(authorization)
                   })
                 }}
                 style={tw`${clsx(

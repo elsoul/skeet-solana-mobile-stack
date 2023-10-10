@@ -51,7 +51,7 @@ export default function AgreeToPolicy() {
   return (
     <>
       {open && (
-        <div className="fixed bottom-4 left-4">
+        <div className="fixed bottom-4 left-4 z-[999]">
           <div className="h-96 w-64 bg-white shadow-lg dark:bg-black sm:h-72 sm:w-96">
             <div className="flex h-full flex-col justify-between p-6 sm:p-8">
               <div>

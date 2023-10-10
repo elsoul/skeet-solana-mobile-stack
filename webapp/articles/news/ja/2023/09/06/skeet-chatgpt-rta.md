@@ -12,7 +12,9 @@ Skeet フレームワークを用いることで、再現性のある爆速ア�
 
 この RTA にはクラウド上にスケーラブルなアプリをリリースできれば、Skeet の利用を問わず、どんな方法でも挑戦することができます。対戦よろしくお願いいたします。
 
-【YouTube】ChatGPT API AI チャットボット開発 RTA [00:37:48(世界新)]: https://www.youtube.com/watch?v=KK-rjjZuXbE
+【YouTube】ChatGPT API AI チャットボット開発 RTA [00:37:48(世界新)]:
+
+https://www.youtube.com/watch?v=KK-rjjZuXbE
 
 ## Google Cloud、Firebase 上でサーバーレスアプリを爆速開発できるオープンソースの Skeet フレームワーク
 

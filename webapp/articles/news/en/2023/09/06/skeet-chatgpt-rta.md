@@ -11,7 +11,9 @@ In this RTA, the time taken to develop an AI chatbot app from scratch using the 
 
 Anyone can participate in this RTA if they can release a scalable app on the cloud. The use of Skeet is not a requirement; you can challenge this with any method. We look forward to your participation.
 
-【YouTube】ChatGPT API AI Chatbot Development RTA [00:37:48(World Record)]: https://www.youtube.com/watch?v=KK-rjjZuXbE
+【YouTube】ChatGPT API AI Chatbot Development RTA [00:37:48(World Record)]:
+
+https://www.youtube.com/watch?v=KK-rjjZuXbE
 
 ## Open-Source Framework "Skeet" Enables Rapid Serverless App Development on Google Cloud and Firebase
 

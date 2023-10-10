@@ -5,7 +5,6 @@ export type UserState = {
   email: string
   username: string
   iconUrl: string
-  emailVerified: boolean
 }
 
 export const defaultUser = {
@@ -13,7 +12,6 @@ export const defaultUser = {
   email: '',
   username: '',
   iconUrl: '',
-  emailVerified: false,
 }
 
 export const userState = atom<UserState>({

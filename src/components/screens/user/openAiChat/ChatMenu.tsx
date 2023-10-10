@@ -122,7 +122,7 @@ export default function ChatMenu({
         }
         setDataLoading(false)
       } catch (err) {
-        console.log(err)
+        console.error(err)
         if (err instanceof Error && err.message.includes('permission-denied')) {
           Toast.show({
             type: 'error',

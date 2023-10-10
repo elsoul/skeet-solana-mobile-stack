@@ -53,7 +53,7 @@ export default function VertexChatScreen() {
         setChatList(list)
         setLastChat(querySnapshot.docs[querySnapshot.docs.length - 1])
       } catch (err) {
-        console.log(err)
+        console.error(err)
         if (err instanceof Error && err.message.includes('permission-denied')) {
           addToast({
             type: 'error',

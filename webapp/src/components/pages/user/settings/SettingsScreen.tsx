@@ -24,7 +24,7 @@ export default function SettingsScreen() {
         </div>
       </div>
       <div className="flex w-full flex-col items-center justify-center bg-white dark:bg-gray-900 sm:items-start">
-        <div className="flex w-full max-w-md flex-col items-center px-4 sm:flex-row sm:gap-8">
+        <div className="flex w-full flex-col items-center px-4 sm:flex-row sm:gap-8">
           <div className="flex w-full flex-col items-center sm:w-96">
             <EditUserIconUrl />
           </div>

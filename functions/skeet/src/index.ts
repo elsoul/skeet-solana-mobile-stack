@@ -11,4 +11,6 @@ export {
   addVertexMessage,
   createUserChatRoom,
   addUserChatRoomMessage,
+  createSignInData,
+  verifySIWS,
 } from '@/routings'

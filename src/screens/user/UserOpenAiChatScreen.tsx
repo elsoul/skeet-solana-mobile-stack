@@ -58,7 +58,7 @@ export default function UserOpenAiChatScreen() {
         setLastChat(querySnapshot.docs[querySnapshot.docs.length - 1])
         setDataLoading(false)
       } catch (err) {
-        console.log(err)
+        console.error(err)
         if (err instanceof Error && err.message.includes('permission-denied')) {
           Toast.show({
             type: 'error',

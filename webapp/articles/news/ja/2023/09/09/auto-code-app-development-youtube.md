@@ -11,11 +11,17 @@ ELSOUL LABO B.V. (エルソウルラボ, 本社: オランダ・アムステル�
 
 既に下記 3 本の動画が公開されており、今後も順次公開予定となっております。
 
-【YouTube】Skeet Framework で ChatGPT / VertexAI を使った Auto コーディング - $ skeet ai ① 基本的な使い方 1/7: https://www.youtube.com/watch?v=_aAN1nZ8dwg
+【YouTube】Skeet Framework で ChatGPT / VertexAI を使った Auto コーディング - $ skeet ai ① 基本的な使い方 1/7:
 
-【YouTube】Skeet Framework で ChatGPT / VertexAI を使った Auto コーディング - GraphQL CRUD/スキーマ 自動生成 ② $ prisma モード 2/7: https://www.youtube.com/watch?v=n-ipl8ZFazM
+https://www.youtube.com/watch?v=_aAN1nZ8dwg
 
-【YouTube】Skeet Framework で ChatGPT / VertexAI を使った Auto コーディング - TypeScript/Typedoc 関数自動生成 ③ $ method モード 3/7: https://www.youtube.com/watch?v=_aAN1nZ8dwg
+【YouTube】Skeet Framework で ChatGPT / VertexAI を使った Auto コーディング - GraphQL CRUD/スキーマ 自動生成 ② $ prisma モード 2/7:
+
+https://www.youtube.com/watch?v=n-ipl8ZFazM
+
+【YouTube】Skeet Framework で ChatGPT / VertexAI を使った Auto コーディング - TypeScript/Typedoc 関数自動生成 ③ $ method モード 3/7:
+
+https://www.youtube.com/watch?v=T9wKnDQq9Q4
 
 動画でご覧いただけるように、Skeet を活用したオート(Auto)コードでは、AI との対話によってコードを自動生成しながらアプリを開発していくことが可能なため、開発者の生産性を大幅に向上させることができます。
 

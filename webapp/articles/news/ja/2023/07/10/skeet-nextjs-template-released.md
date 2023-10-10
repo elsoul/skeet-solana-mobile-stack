@@ -59,4 +59,6 @@ Skeet を使えば、すぐに iOS・Android・Web アプリを開発し公開�
 
 Skeet チュートリアル (ドキュメント): https://skeet.dev/ja/doc/backend/quickstart/
 
-Skeet チュートリアル (YouTube): https://www.youtube.com/watch?v=6em68qcSsJE
+Skeet チュートリアル (YouTube):
+
+https://www.youtube.com/watch?v=6em68qcSsJE

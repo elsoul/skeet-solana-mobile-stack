@@ -20,6 +20,8 @@ import DefaultLayout from '@/layouts/default/DefaultLayout'
 import { getI18nProps } from '@/lib/getStatic'
 import NewsContents from '@/components/articles/news/NewsContents'
 import NewsPageIndex from '@/components/articles/news/NewsPageIndex'
+import youtubeTransformer from '@/lib/youtubeTransformer'
+import embedder from '@remark-embedder/core'
 
 const articleDirName = 'news'
 
@@ -62,11 +64,14 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     typeof params.slug == 'string' ? [params.slug] : params.slug,
     ['title', 'category', 'thumbnail', 'content', 'date', 'id'],
     articleDirPrefix,
-    (params.locale as string) ?? 'en'
+    (params.locale as string) ?? 'en',
   )
 
   const articleHtml = await unified()
     .use(remarkParse)
+    .use(embedder, {
+      transformers: [youtubeTransformer],
+    })
     .use(remarkDirective)
     .use(remarkGfm)
     .use(remarkSlug)
@@ -81,7 +86,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     .process(article.content as string)
 
   const slugs = getAllArticles(articleDirPrefix).filter(
-    (article) => article[0] !== 'ja'
+    (article) => article[0] !== 'ja',
   )
   const articles = slugs
     .map((slug) =>
@@ -89,15 +94,16 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
         slug.filter((_, index) => index !== 0),
         ['title', 'category', 'thumbnail', 'date', 'content'],
         articleDirPrefix,
-        (ctx.params?.locale as string) ?? 'en'
-      )
+        (ctx.params?.locale as string) ?? 'en',
+      ),
     )
     .reverse()
     .slice(0, 3)
 
   const urls = slugs
     .map(
-      (slug) => `/${articleDirName}/${slug[1]}/${slug[2]}/${slug[3]}/${slug[4]}`
+      (slug) =>
+        `/${articleDirName}/${slug[1]}/${slug[2]}/${slug[3]}/${slug[4]}`,
     )
     .reverse()
     .slice(0, 3)

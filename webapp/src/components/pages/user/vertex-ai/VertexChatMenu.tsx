@@ -131,7 +131,6 @@ export default function VertexChatMenu({
 
   const queryMore = useCallback(async () => {
     if (db && user.uid && lastChat) {
-      console.log('lastChat')
       try {
         setDataLoading(true)
 
@@ -154,7 +153,7 @@ export default function VertexChatMenu({
           setChatList([...chatList, ...list])
         }
       } catch (err) {
-        console.log(err)
+        console.error(err)
         if (err instanceof Error && err.message.includes('permission-denied')) {
           addToast({
             type: 'error',

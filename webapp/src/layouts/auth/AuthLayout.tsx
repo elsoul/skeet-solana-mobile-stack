@@ -43,7 +43,7 @@ export default function AuthLayout({ children }: Props) {
 
   const onAuthStateChanged = useCallback(
     async (fbUser: User | null) => {
-      if (auth && db && fbUser && fbUser.emailVerified) {
+      if (auth && db && fbUser) {
         try {
           const { username, iconUrl } = await get<UserModel>(
             db,
@@ -55,9 +55,8 @@ export default function AuthLayout({ children }: Props) {
             email: fbUser.email ?? '',
             username,
             iconUrl,
-            emailVerified: fbUser.emailVerified,
           })
-          await router.push('/user/chat')
+          await router.push('/user/vertex-ai')
         } catch (e) {
           console.error(e)
           setUser(defaultUser)
