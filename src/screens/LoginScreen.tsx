@@ -73,12 +73,6 @@ export default function LoginScreen() {
           password
         )
 
-        if (!userCredential.user.emailVerified) {
-          await sendEmailVerification(userCredential.user)
-          await signOut(auth)
-          throw new Error('Not verified')
-        }
-
         Toast.show({
           type: 'success',
           text1: t('succeedLogin') ?? 'Succeed to sign in🎉',

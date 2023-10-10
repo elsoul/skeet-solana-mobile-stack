@@ -7,6 +7,8 @@ import {
   SolanaSignInOutput,
 } from '@solana/wallet-standard-features'
 import { verifySignIn } from '@solana/wallet-standard-util'
+import { getAuth } from 'firebase-admin/auth'
+import bs58 from 'bs58'
 
 export const verifySIWS = onRequest(
   publicHttpOption,
@@ -28,8 +30,13 @@ export const verifySIWS = onRequest(
         throw new Error('Sign In verification failed!')
       }
 
+      const token = await getAuth().createCustomToken(
+        bs58.encode(backendOutput.account.publicKey),
+      )
+
       res.json({
         status: 'success',
+        token,
       })
     } catch (error) {
       res.status(500).json({ status: 'error', message: String(error) })

@@ -14,6 +14,12 @@ import type {
 import { fetchSkeetFunctions } from '@/lib/skeet/functions'
 import { CreateSignInDataParams } from '@/types/http/skeet/createSignInDataParams'
 import { VerifySIWSParams } from '@/types/http/skeet/verifySIWSParams'
+import { auth, db } from '@/lib/firebase'
+import { signInWithCustomToken, signOut } from 'firebase/auth'
+import { User, genUserPath } from '@/types/models'
+import { useRecoilState } from 'recoil'
+import { defaultUser, userState } from '@/store/user'
+import { get } from '@/lib/skeet/firestore'
 
 type Props = {
   children: ReactNode
@@ -25,6 +31,7 @@ export const solanaEndpoint = 'https://api.mainnet-beta.solana.com'
 export default function SolanaWalletProvider({ children }: Props) {
   const wallets = useMemo(() => [], [])
   const addToast = useToastMessage()
+  const [_user, setUser] = useRecoilState(userState)
 
   const onError = useCallback(
     (error: WalletError) => {
@@ -43,39 +50,51 @@ export default function SolanaWalletProvider({ children }: Props) {
       if (!('signIn' in adapter)) return true
 
       try {
-        const createResponse =
-          await fetchSkeetFunctions<CreateSignInDataParams>(
+        if (db && auth) {
+          const createResponse =
+            await fetchSkeetFunctions<CreateSignInDataParams>(
+              'skeet',
+              'createSignInData',
+              {},
+            )
+          const signInResponse = await createResponse?.json()
+          const input: SolanaSignInInput = signInResponse?.signInData
+          const signInResult = await adapter.signIn(input)
+          const output: SolanaSignInOutput = {
+            ...signInResult,
+            account: {
+              address: signInResult.account.address,
+              publicKey: signInResult.account.publicKey,
+              chains: signInResult.account.chains,
+              features: signInResult.account.features,
+              label: signInResult.account.label,
+              icon: signInResult.account.icon,
+            },
+          }
+          const verifyResponse = await fetchSkeetFunctions<VerifySIWSParams>(
             'skeet',
-            'createSignInData',
-            {},
+            'verifySIWS',
+            { input, output },
           )
-        const signInResponse = await createResponse?.json()
-        const input: SolanaSignInInput = signInResponse?.signInData
-        const signInResult = await adapter.signIn(input)
-        const output: SolanaSignInOutput = {
-          ...signInResult,
-          account: {
-            address: signInResult.account.address,
-            publicKey: signInResult.account.publicKey,
-            chains: signInResult.account.chains,
-            features: signInResult.account.features,
-            label: signInResult.account.label,
-            icon: signInResult.account.icon,
-          },
-        }
-        console.log(output)
-        console.log(output.account)
-        console.log(output.account.address)
-        console.log(output.account.publicKey)
+          const success = await verifyResponse?.json()
+          const userCredential = await signInWithCustomToken(
+            auth,
+            success?.token,
+          )
+          const { uid, email, username, iconUrl } = await get<User>(
+            db,
+            genUserPath(),
+            userCredential.user.uid,
+          )
+          setUser({
+            uid,
+            email,
+            username,
+            iconUrl,
+          })
 
-        const verifyResponse = await fetchSkeetFunctions<VerifySIWSParams>(
-          'skeet',
-          'verifySIWS',
-          { input, output },
-        )
-        const success = await verifyResponse?.json()
-        console.log(success)
-        return false
+          return false
+        }
       } catch (err) {
         console.error(err)
         if (err instanceof Error) {
@@ -85,9 +104,13 @@ export default function SolanaWalletProvider({ children }: Props) {
             type: 'error',
           })
         }
+        if (auth) {
+          setUser(defaultUser)
+          await signOut(auth)
+        }
       }
     },
-    [addToast],
+    [addToast, setUser],
   )
 
   const autoConnect = useCallback(

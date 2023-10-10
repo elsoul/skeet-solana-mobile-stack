@@ -34,10 +34,6 @@ export default function Routes() {
     async (fbUser: User | null) => {
       if (initializing) setInitializing(false)
       if (auth && db && fbUser) {
-        if (!fbUser?.emailVerified) {
-          await signOut(auth)
-          setUser(defaultUser)
-        }
         try {
           const { username, iconUrl } = await get<UserModel>(
             db,
@@ -49,7 +45,6 @@ export default function Routes() {
             email: fbUser.email ?? '',
             username,
             iconUrl,
-            emailVerified: fbUser.emailVerified,
           })
         } catch (e) {
           await signOut(auth)
@@ -104,13 +99,9 @@ export default function Routes() {
       >
         <Stack.Navigator
           screenOptions={{ headerShown: false }}
-          initialRouteName={
-            auth?.currentUser?.emailVerified && user.emailVerified
-              ? 'User'
-              : 'Default'
-          }
+          initialRouteName={auth?.currentUser ? 'User' : 'Default'}
         >
-          {auth?.currentUser?.emailVerified && user.emailVerified ? (
+          {auth?.currentUser ? (
             <Stack.Screen name="User" component={UserRoutes} />
           ) : (
             <Stack.Screen name="Default" component={DefaultRoutes} />

@@ -55,7 +55,7 @@ export default function UserLayout({ children }: Props) {
 
   const onAuthStateChanged = useCallback(
     async (fbUser: User | null) => {
-      if (auth && db && fbUser && fbUser.emailVerified) {
+      if (auth && db && fbUser) {
         try {
           const { username, iconUrl } = await get<UserModel>(
             db,
@@ -67,7 +67,6 @@ export default function UserLayout({ children }: Props) {
             email: fbUser.email ?? '',
             username,
             iconUrl,
-            emailVerified: fbUser.emailVerified,
           })
         } catch (e) {
           console.error(e)
