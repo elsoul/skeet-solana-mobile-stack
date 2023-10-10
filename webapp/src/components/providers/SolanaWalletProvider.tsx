@@ -81,13 +81,13 @@ export default function SolanaWalletProvider({ children }: Props) {
             auth,
             success?.token,
           )
-          const { uid, email, username, iconUrl } = await get<User>(
+          const { email, username, iconUrl } = await get<User>(
             db,
             genUserPath(),
             userCredential.user.uid,
           )
           setUser({
-            uid,
+            uid: userCredential.user.uid,
             email,
             username,
             iconUrl,

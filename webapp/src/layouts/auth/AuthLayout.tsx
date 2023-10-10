@@ -45,14 +45,14 @@ export default function AuthLayout({ children }: Props) {
     async (fbUser: User | null) => {
       if (auth && db && fbUser) {
         try {
-          const { username, iconUrl } = await get<UserModel>(
+          const { email, username, iconUrl } = await get<UserModel>(
             db,
             genUserPath(),
             fbUser.uid,
           )
           setUser({
             uid: fbUser.uid,
-            email: fbUser.email ?? '',
+            email,
             username,
             iconUrl,
           })
