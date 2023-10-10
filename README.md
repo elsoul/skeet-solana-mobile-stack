@@ -48,6 +48,7 @@ Solana Mobile Stack: https://docs.solanamobile.com/
 - [Solana Wallet Adapter (Web)](https://github.com/solana-labs/wallet-adapter)
 - [umi - Solana Token Management](https://github.com/metaplex-foundation/umi)
 - [Bubblegum - Solana Compressed NFTs (cNFTs)](https://developers.metaplex.com/bubblegum)
+- [SIWS - Sign In With Solana](https://github.com/phantom/sign-in-with-solana)
 
 ## What's Skeet?
 
