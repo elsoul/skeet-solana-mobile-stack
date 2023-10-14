@@ -4031,10 +4031,10 @@
   dependencies:
     "@sinonjs/commons" "^3.0.0"
 
-"@skeet-framework/firestore@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@skeet-framework/firestore/-/firestore-2.3.0.tgz#f7bf046c61ef96dcfde1104c9b00c0cd40008a88"
-  integrity sha512-0oCHF6omVGJX3r8gtO7ng8du3I55FTjD4TlDSzyrapO/PduXuA9t860tcEI92ByMhglZKfZHzI+OekNn7+aU0A==
+"@skeet-framework/firestore@2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@skeet-framework/firestore/-/firestore-2.3.2.tgz#a06f81b0f238870642872ddcf864e358a6c14b70"
+  integrity sha512-u4V0dMIFzDZfKVdhQ2fYN8LSmh+rKrHVwTflJjRIALnejXs2H8lToEVsy486RoWczBCwfsHqNpjyCKAC1D0WQQ==
   dependencies:
     dotenv "16.0.3"
     firebase "10.3.0"
