@@ -101,7 +101,7 @@
     "text-encoding": "0.7.0",
     "twrnc": "3.6.1",
     "typesaurus": "7",
-    "zod": "3.21.4"
+    "zod": "3.22.3"
   },
   "devDependencies": {
     "@babel/core": "7.21.0",
