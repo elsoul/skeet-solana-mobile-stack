@@ -69,6 +69,19 @@ Solana Mobile Stack - Development Setup: https://docs.solanamobile.com/getting-s
 - [Yarn](https://yarnpkg.com/)
 - [Google SDK](https://cloud.google.com/sdk/docs)
 
+You might need to install specific java version like here:
+
+```
+$ curl -s "https://get.sdkman.io" | bash
+$ sdk install java 11.0.20-zulu
+$ sdk use java 11.0.20-zulu
+
+$ java --version
+openjdk 11.0.20 2023-07-18 LTS
+OpenJDK Runtime Environment Zulu11.66+15-CA (build 11.0.20+8-LTS)
+OpenJDK 64-Bit Server VM Zulu11.66+15-CA (build 11.0.20+8-LTS, mixed mode)
+```
+
 ## Usage
 
 ※ANDROID_HOME environment is important. Please do not forget to put your ANDROID SDK PATH to eas.json and package.json
