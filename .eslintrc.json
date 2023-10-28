@@ -88,7 +88,7 @@
         "prettier"
       ],
       "parserOptions": {
-        "project": "./tsconfig.json",
+        "project": "./webapp/tsconfig.json",
         "ecmaVersion": "latest",
         "sourceType": "module"
       },
