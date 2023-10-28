@@ -6,7 +6,7 @@
     "development": {
       "developmentClient": true,
       "distribution": "internal",
-      "env": { "ANDROID_HOME": "/Users/ktm/Library/Android/sdk" },
+      "env": { "ANDROID_HOME": "~/Library/Android/sdk" },
       "ios": {
         "resourceClass": "m1-medium"
       }
