@@ -85,7 +85,7 @@ OpenJDK 64-Bit Server VM Zulu11.66+15-CA (build 11.0.20+8-LTS, mixed mode)
 ## Usage
 
 ※ANDROID_HOME environment is important. Please do not forget to put your ANDROID SDK PATH to eas.json and package.json
-(It will be like /Users/ktm/Library/Android/sdk)
+(It will be like ~/Library/Android/sdk)
 
 ```bash
 $ npm i -g firebase-tools
