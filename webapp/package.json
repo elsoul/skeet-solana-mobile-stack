@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "update:packages": "ncu -u -x 'node-fetch,glob' && yarn",
     "dev": "next dev -p 4200 & open http://localhost:4200",
-    "build": "NODE_ENV=production next build && NODE_ENV=production next export -o ../web-build",
+    "build": "NODE_ENV=production next build",
     "postbuild": "npx ts-node -r tsconfig-paths/register --transpile-only ./scripts/generateSitemap.ts",
     "send:sitemap": "npx ts-node -r tsconfig-paths/register --transpile-only ./scripts/sendSitemap.ts"
   },
@@ -45,7 +45,7 @@
     "i18next": "23.4.4",
     "lodash.throttle": "4.1.1",
     "markdown-to-txt": "2.0.1",
-    "next": "13.5.4",
+    "next": "14.0.0",
     "next-i18next": "14.0.0",
     "next-language-detector": "1.0.2",
     "next-pwa": "5.6.0",
