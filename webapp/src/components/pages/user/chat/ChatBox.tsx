@@ -29,10 +29,8 @@ import remark2Rehype from 'remark-rehype'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeStringify from 'rehype-stringify'
 import rehypeCodeTitles from 'rehype-code-titles'
-import remarkSlug from 'remark-slug'
 import remarkGfm from 'remark-gfm'
 import remarkDirective from 'remark-directive'
-import remarkExternalLinks from 'remark-external-links'
 import {
   UserChatRoom,
   UserChatRoomMessage,
@@ -41,6 +39,8 @@ import {
 } from '@/types/models'
 import { Timestamp } from '@skeet-framework/firestore'
 import { get, query } from '@/lib/skeet/firestore'
+import rehypeSlug from 'rehype-slug'
+import rehypeExternalLinks from 'rehype-external-links'
 
 type ChatMessage = {
   id: string
@@ -144,12 +144,12 @@ export default function ChatBox({
           .use(remarkParse)
           .use(remarkDirective)
           .use(remarkGfm)
-          .use(remarkSlug)
-          .use(remarkExternalLinks, {
+          .use(remark2Rehype)
+          .use(rehypeSlug)
+          .use(rehypeExternalLinks, {
             target: '_blank',
             rel: ['noopener noreferrer'],
           })
-          .use(remark2Rehype)
           .use(rehypeCodeTitles)
           .use(rehypeHighlight)
           .use(rehypeStringify)
