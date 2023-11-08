@@ -11,7 +11,7 @@
     "test": "jest --coverage=false --detectOpenHandles --maxWorkers=1",
     "typecheck": "tsc --noEmit",
     "update:packages": "ncu -u -x 'node-fetch,glob,remark,unified,remark-gfm,remark-rehype,remark-stringify,rehype-stringify,remark-parse,remark-directive' && yarn",
-    "dev": "next dev -p 4200 & open http://localhost:4200",
+    "dev": "next dev -p 4200",
     "build": "NODE_ENV=production next build",
     "postbuild": "npx ts-node -r tsconfig-paths/register --transpile-only ./scripts/generateSitemap.ts",
     "send:sitemap": "npx ts-node -r tsconfig-paths/register --transpile-only ./scripts/sendSitemap.ts"
