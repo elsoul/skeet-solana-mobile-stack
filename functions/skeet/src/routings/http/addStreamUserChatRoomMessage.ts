@@ -47,6 +47,7 @@ export const addStreamUserChatRoomMessage = onRequest(
         chatRoomPath,
         body.userChatRoomId,
       )
+      if (!userChatRoom) throw new Error('userChatRoom is not found')
 
       // Add User Message to UserChatRoomMessage
       const messagesPath = genUserChatRoomMessagePath(
@@ -108,7 +109,7 @@ export const addStreamUserChatRoomMessage = onRequest(
       }
 
       // Get OpenAI Stream
-      const stream = await openAi.promptStream(messages)
+      const stream = await openAi.promptStream(messages.messages)
       const messageResults: any[] = []
       for await (const part of stream) {
         const message = String(part.choices[0].delta.content)
