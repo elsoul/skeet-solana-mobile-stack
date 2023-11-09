@@ -1,6 +1,6 @@
 {
   "name": "skeet-solana-mobile-stack",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "🧪 Skeet Framework Boilerplate for Solana Mobile Stack 🌊",
   "author": "ELSOUL LABO B.V.",
   "license": "Apache-2.0",
@@ -108,6 +108,8 @@
     "@babel/core": "7.21.0",
     "@expo/metro-config": "0.7.1",
     "@expo/webpack-config": "18.0.1",
+    "@skeet-framework/discord-utils": "^0.2.4",
+    "@skeet-framework/utils": "^1.2.3",
     "@svgr/webpack": "6.5.1",
     "@types/jest": "29.5.0",
     "@types/node": "18.17.17",
