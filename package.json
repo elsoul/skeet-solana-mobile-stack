@@ -37,7 +37,8 @@
     "solana:nft:create:collection": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/cNFT/createNFTCollection.ts",
     "solana:nft:create:merkleTree": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/cNFT/createMerkleTree.ts",
     "solana:nft:mint:cnft": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/cNFT/mintCNFT.ts",
-    "solana:nft:get:cnft": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/cNFT/getCNFT.ts"
+    "solana:nft:get:cnft": "npx ts-node -r tsconfig-paths/register --transpile-only scripts/solana/cNFT/getCNFT.ts",
+    "discord": "npx ts-node -r tsconfig-paths/register --transpile-only ./.github/workflows/runDiscordChangeLog.ts"
   },
   "dependencies": {
     "@expo-google-fonts/noto-sans-jp": "0.2.3",
