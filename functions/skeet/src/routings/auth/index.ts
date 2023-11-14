@@ -1,1 +1,1 @@
-export * from './authOnCreateUser'
+export {}
