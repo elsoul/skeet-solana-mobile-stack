@@ -17,7 +17,8 @@
     "lib/**/*",
     "custom.d.ts",
     "App.tsx",
-    "babel.config.js"
+    "babel.config.js",
+    ".eslintrc.js"
   ],
   "exclude": ["node_modules", ".expo", "dist", "webapp"]
 }
