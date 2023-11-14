@@ -13,6 +13,14 @@ export default class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="anonymous"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;900&display=swap"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+            rel="stylesheet"
+          />
           <meta name="format-detection" content="telephone=no" />
           <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
           <link
