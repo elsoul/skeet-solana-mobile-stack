@@ -229,7 +229,21 @@ export default function ChatBox({
             try {
               const dataString = decoder.decode(value)
               if (dataString != 'Stream done') {
-                const data = JSON.parse(dataString)
+                const regex = /({"text":".*?"})/g
+                const matches = dataString.match(regex)
+                let text = ''
+
+                if (matches) {
+                  matches.forEach((match) => {
+                    try {
+                      const json = JSON.parse(match)
+                      text = text.concat(json.text)
+                    } catch (e) {
+                      console.error('JSON parse error: ', e)
+                    }
+                  })
+                }
+                const data = { text }
                 setChatMessages((prev) => {
                   const chunkSize = data.text.length
                   if (prev[prev.length - 1].content.length === 0) {
