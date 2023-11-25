@@ -2,7 +2,6 @@ import type { ReactNode } from 'react'
 import { useMemo, useCallback, useEffect, useState, Fragment } from 'react'
 import { Transition, Dialog, Menu } from '@headlessui/react'
 import { XMarkIcon, Bars3BottomLeftIcon } from '@heroicons/react/24/outline'
-import { useRouter } from 'next/router'
 import clsx from 'clsx'
 import { userHeaderNav, userMenuNav } from '@/config/navs'
 import { useTranslation } from 'next-i18next'
@@ -15,6 +14,7 @@ import LogoHorizontal from '@/components/common/atoms/LogoHorizontal'
 import Image from 'next/image'
 import { User as UserModel, genUserPath } from '@/types/models/userModels'
 import { get } from '@/lib/skeet/firestore'
+import useI18nRouter from '@/hooks/useI18nRouter'
 
 type Props = {
   children: ReactNode
@@ -23,7 +23,7 @@ type Props = {
 const mainContentId = 'userMainContent'
 
 export default function UserLayout({ children }: Props) {
-  const router = useRouter()
+  const { router, routerPush } = useI18nRouter()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const { t } = useTranslation()
 
@@ -72,14 +72,14 @@ export default function UserLayout({ children }: Props) {
           console.error(e)
           setUser(defaultUser)
           await signOut(auth)
-          await router.push('/auth/login')
+          await routerPush('/auth/login')
         }
       } else {
         setUser(defaultUser)
-        await router.push('/auth/login')
+        await routerPush('/auth/login')
       }
     },
-    [setUser, router],
+    [setUser, routerPush],
   )
 
   useEffect(() => {
