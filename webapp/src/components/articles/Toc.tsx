@@ -16,7 +16,7 @@ export default function Toc({ toc, activeItemIds }: Props) {
       {toc.length > 0 && (
         <>
           <div className="p-4">
-            <p className="text-base font-semibold">{t('toc')}</p>
+            <p className="text-base font-semibold tracking-tight">{t('toc')}</p>
           </div>
           <div className="max-w-80 border-l p-4">
             <nav className="space-y-1" aria-label="Sidebar">
@@ -30,7 +30,7 @@ export default function Toc({ toc, activeItemIds }: Props) {
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-200 dark:hover:bg-gray-900 dark:hover:text-gray-50',
                     `block px-3 py-2 text-sm font-medium ml-${
                       item.depth > 2 ? 3 : 0
-                    }`
+                    }`,
                   )}
                   aria-current={
                     activeItemIds.includes(item.id) ? 'location' : undefined

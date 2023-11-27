@@ -14,7 +14,9 @@ export default function NewsContents({ article, articleHtml }: Props) {
       <Container>
         <div className="flex justify-center py-12 lg:grid lg:grid-cols-8 lg:gap-12">
           <div className="lg:col-span-5">
-            <h1 className="text-4xl font-bold">{article.title}</h1>
+            <h1 className="text-4xl font-extrabold tracking-tighter">
+              {article.title}
+            </h1>
             <p className="mt-1 text-gray-600 dark:text-gray-200">
               {article.date}
             </p>
