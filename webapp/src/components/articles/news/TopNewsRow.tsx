@@ -13,14 +13,14 @@ export default function TopNewsRow({ articles, urls }: Props) {
 
   return (
     <>
-      <div className="pt-8 pb-24 sm:pt-12 sm:pb-48">
+      <div className="pb-24 pt-8 sm:pb-48 sm:pt-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl">
+            <h2 className="text-5xl font-extrabold tracking-tighter text-gray-900 dark:text-gray-50 sm:text-7xl">
               News
             </h2>
           </div>
-          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-y-20 gap-x-8 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             {articles.slice(0, 1).map((article, index) => (
               <article
                 key={`NewsIndex Article${article.title}`}
@@ -45,12 +45,12 @@ export default function TopNewsRow({ articles, urls }: Props) {
                       >
                         {article.date}
                       </time>
-                      <span className="relative bg-gray-600 py-1.5 px-3 font-medium text-white group-hover:bg-gray-400 dark:bg-gray-400  dark:text-gray-50 dark:group-hover:bg-gray-700">
+                      <span className="relative bg-gray-600 px-3 py-1.5 font-medium text-white group-hover:bg-gray-400 dark:bg-gray-400  dark:text-gray-50 dark:group-hover:bg-gray-700">
                         {article.category}
                       </span>
                     </div>
                     <div className="relative">
-                      <h2 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
+                      <h2 className="mt-3 text-lg font-semibold leading-6 tracking-tight text-gray-900 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
                         <a href={urls[index]}>
                           <span className="absolute inset-0" />
                           {article.title}
@@ -89,11 +89,11 @@ export default function TopNewsRow({ articles, urls }: Props) {
                             >
                               {article.date}
                             </time>
-                            <span className="relative bg-gray-600 py-1.5 px-3 font-medium text-white group-hover:bg-gray-400 dark:bg-gray-400  dark:text-gray-50 dark:group-hover:bg-gray-700">
+                            <span className="relative bg-gray-600 px-3 py-1.5 font-medium text-white group-hover:bg-gray-400 dark:bg-gray-400  dark:text-gray-50 dark:group-hover:bg-gray-700">
                               {article.category}
                             </span>
                           </div>
-                          <h2 className="mt-2 text-lg font-semibold text-gray-900 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
+                          <h2 className="mt-2 text-lg font-semibold tracking-tight text-gray-900 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
                             <span className="absolute inset-0" />
                             {article.title}
                           </h2>

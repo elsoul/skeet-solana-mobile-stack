@@ -21,6 +21,7 @@ import NewsContents from '@/components/articles/news/NewsContents'
 import NewsPageIndex from '@/components/articles/news/NewsPageIndex'
 import youtubeTransformer from '@/lib/youtubeTransformer'
 import embedder from '@remark-embedder/core'
+import { addClassToTitles } from '@/lib/rehypePlugin'
 
 const articleDirName = 'news'
 
@@ -81,6 +82,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     })
     .use(rehypeCodeTitles)
     .use(rehypeHighlight)
+    .use(addClassToTitles)
     .use(rehypeStringify)
     .process(article.content as string)
 

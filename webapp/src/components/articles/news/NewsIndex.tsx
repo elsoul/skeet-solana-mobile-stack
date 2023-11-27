@@ -17,7 +17,7 @@ export default function NewsIndex({ articles, urls }: Props) {
       <div className="pb-24 sm:pb-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <TopNewsRow articles={articles.slice(0, 4)} urls={urls} />
-          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-y-20 gap-x-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {articles.slice(4).map((article, index) => (
               <article
                 key={`NewsIndex Article${article.title}`}
@@ -42,12 +42,12 @@ export default function NewsIndex({ articles, urls }: Props) {
                       >
                         {article.date}
                       </time>
-                      <span className="relative bg-gray-600 py-1.5 px-3 font-medium text-white group-hover:bg-gray-400 dark:bg-gray-400  dark:text-gray-50 dark:group-hover:bg-gray-700">
+                      <span className="relative bg-gray-600 px-3 py-1.5 font-medium text-white group-hover:bg-gray-400 dark:bg-gray-400  dark:text-gray-50 dark:group-hover:bg-gray-700">
                         {article.category}
                       </span>
                     </div>
                     <div className="relative">
-                      <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
+                      <h3 className="mt-3 text-lg font-semibold leading-6 tracking-tight text-gray-900 group-hover:text-gray-600 dark:text-gray-50 dark:group-hover:text-gray-300">
                         <span className="absolute inset-0" />
                         {article.title}
                       </h3>

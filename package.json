@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@expo-google-fonts/noto-sans-jp": "0.2.3",
-    "@expo-google-fonts/outfit": "0.2.3",
+    "@expo-google-fonts/inter": "0.2.3",
     "@metaplex-foundation/mpl-bubblegum": "1.0.1",
     "@metaplex-foundation/mpl-token-metadata": "3.0.0",
     "@metaplex-foundation/umi": "0.8.9",

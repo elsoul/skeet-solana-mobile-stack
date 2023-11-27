@@ -9,7 +9,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Outfit', 'Noto Sans JP', ...fontFamily.sans],
+        sans: ['Inter', 'Noto Sans JP', ...fontFamily.sans],
       },
       colors: {
         discord: '#5865f2',
