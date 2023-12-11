@@ -24,3 +24,21 @@ export const pubsubDefaultOption = (topic: string): PubSubOptions => ({
     skeet: 'pubsub',
   },
 })
+
+export const pubsubPrivateOption = (topic: string): PubSubOptions => ({
+  topic,
+  region,
+  cpu: 1,
+  memory: '1GiB',
+  maxInstances: 100,
+  minInstances: 0,
+  concurrency: 1,
+  serviceAccount,
+  ingressSettings: 'ALLOW_INTERNAL_ONLY',
+  vpcConnector,
+  vpcConnectorEgressSettings: 'PRIVATE_RANGES_ONLY',
+  timeoutSeconds: 540,
+  labels: {
+    skeet: 'pubsub',
+  },
+})

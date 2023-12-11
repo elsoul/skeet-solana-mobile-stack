@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import Link from '@/components/routing/Link'
-import type { NewsIndex } from '@/types/article'
+import type { NewsIndex } from '@common/types/article'
 
 type Props = {
   articles: NewsIndex[]
@@ -13,14 +13,14 @@ export default function TopNewsRow({ articles, urls }: Props) {
 
   return (
     <>
-      <div className="pt-8 pb-24 sm:pt-12 sm:pb-48">
+      <div className="pb-24 pt-8 sm:pb-48 sm:pt-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-5xl">
               News
             </h2>
           </div>
-          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-y-20 gap-x-8 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+          <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             {articles.slice(0, 1).map((article, index) => (
               <article
                 key={`NewsIndex Article${article.title}`}
@@ -45,7 +45,7 @@ export default function TopNewsRow({ articles, urls }: Props) {
                       >
                         {article.date}
                       </time>
-                      <span className="relative bg-gray-600 py-1.5 px-3 font-medium text-white group-hover:bg-gray-400 dark:bg-gray-400  dark:text-gray-50 dark:group-hover:bg-gray-700">
+                      <span className="relative bg-gray-600 px-3 py-1.5 font-medium text-white group-hover:bg-gray-400 dark:bg-gray-400  dark:text-gray-50 dark:group-hover:bg-gray-700">
                         {article.category}
                       </span>
                     </div>
@@ -89,7 +89,7 @@ export default function TopNewsRow({ articles, urls }: Props) {
                             >
                               {article.date}
                             </time>
-                            <span className="relative bg-gray-600 py-1.5 px-3 font-medium text-white group-hover:bg-gray-400 dark:bg-gray-400  dark:text-gray-50 dark:group-hover:bg-gray-700">
+                            <span className="relative bg-gray-600 px-3 py-1.5 font-medium text-white group-hover:bg-gray-400 dark:bg-gray-400  dark:text-gray-50 dark:group-hover:bg-gray-700">
                               {article.category}
                             </span>
                           </div>

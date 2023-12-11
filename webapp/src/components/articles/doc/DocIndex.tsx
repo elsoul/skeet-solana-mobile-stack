@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next'
 import Link from '@/components/routing/Link'
-import type { DocIndex } from '@/types/article'
+import type { DocIndex } from '@common/types/article'
 import {
   HeartIcon,
   RocketLaunchIcon,

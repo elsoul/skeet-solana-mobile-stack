@@ -1,6 +1,6 @@
 import Container from '@/components/common/atoms/Container'
 import ScrollSyncToc from '@/components/articles/ScrollSyncToc'
-import type { DocContent } from '@/types/article'
+import type { DocContent } from '@common/types/article'
 import DocPagination from './DocPagination'
 
 type Props = {
@@ -19,7 +19,7 @@ export default function DocContents({ article, articleHtml }: Props) {
             <div className="py-8 xl:hidden">
               <ScrollSyncToc rawMarkdownBody={article.content} />
             </div>
-            <div className="prose break-all py-8 dark:prose-invert lg:prose-lg">
+            <div className="prose dark:prose-invert lg:prose-lg break-all py-8">
               <div dangerouslySetInnerHTML={{ __html: articleHtml }} />
             </div>
             <div className="py-16">

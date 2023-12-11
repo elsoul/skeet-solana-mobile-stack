@@ -1,6 +1,6 @@
 import ScrollSyncToc from '@/components/articles/ScrollSyncToc'
 import Container from '@/components/common/atoms/Container'
-import type { LegalContent } from '@/types/article'
+import type { LegalContent } from '@common/types/article'
 
 type Props = {
   article: LegalContent
@@ -17,7 +17,7 @@ export default function LegalContents({ article, articleHtml }: Props) {
             <div className="py-8 lg:hidden">
               <ScrollSyncToc rawMarkdownBody={article.content} />
             </div>
-            <div className="prose break-all dark:prose-invert lg:prose-lg">
+            <div className="prose dark:prose-invert lg:prose-lg break-all">
               <div dangerouslySetInnerHTML={{ __html: articleHtml }} />
             </div>
           </div>

@@ -8,7 +8,7 @@ import AuthHeader from './AuthHeader'
 import { useRecoilState } from 'recoil'
 import { defaultUser, userState } from '@/store/user'
 import { auth, db } from '@/lib/firebase'
-import { User as UserModel, genUserPath } from '@/types/models/userModels'
+import { User as UserModel, genUserPath } from '@common/types/models/userModels'
 import { get } from '@/lib/skeet/firestore'
 
 type Props = {
@@ -48,7 +48,7 @@ export default function AuthLayout({ children }: Props) {
           const { email, username, iconUrl } = await get<UserModel>(
             db,
             genUserPath(),
-            fbUser.uid,
+            fbUser.uid
           )
           setUser({
             uid: fbUser.uid,
@@ -66,7 +66,7 @@ export default function AuthLayout({ children }: Props) {
         setUser(defaultUser)
       }
     },
-    [setUser, router],
+    [setUser, router]
   )
 
   useEffect(() => {
