@@ -7,7 +7,8 @@
       "@/*": ["./src/*"],
       "@assets/*": ["./assets/*"],
       "@lib/*": ["lib/*"],
-      "@root/*": ["./*"]
+      "@root/*": ["./*"],
+      "@common/*": ["./common/*"]
     }
   },
   "include": [
@@ -15,9 +16,11 @@
     "**/*.tsx",
     "src/**/*",
     "lib/**/*",
+    "common/**/*",
     "custom.d.ts",
     "App.tsx",
-    "babel.config.js"
+    "babel.config.js",
+    ".eslintrc.js"
   ],
   "exclude": ["node_modules", ".expo", "dist", "webapp"]
 }

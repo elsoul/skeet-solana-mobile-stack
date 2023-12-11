@@ -12,6 +12,9 @@ import typescriptLogo from '@/assets/img/logo/projects/TypeScriptHorizontal.svg'
 import Button from '@/components/common/atoms/Button'
 import clsx from 'clsx'
 import SolanaLogoHorizontal from '@/components/common/atoms/SolanaLogoHorizontal'
+import { ChatBubbleBottomCenterIcon } from '@heroicons/react/24/outline'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 export default function HomeHeroRow() {
   const { t } = useTranslation()
@@ -19,7 +22,7 @@ export default function HomeHeroRow() {
   return (
     <>
       <Container className="pb-40 pt-24 text-center lg:pb-64 lg:pt-40">
-        <h1 className="font-display mx-auto max-w-4xl text-5xl font-bold tracking-tight text-gray-900 dark:text-gray-50 sm:text-7xl">
+        <h1 className="font-display mx-auto max-w-4xl text-6xl font-extrabold tracking-tighter text-gray-900 dark:text-gray-50 sm:text-8xl">
           WebApp Boilerplate
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-gray-700 dark:text-gray-200">
@@ -28,6 +31,10 @@ export default function HomeHeroRow() {
         <SolanaLogoHorizontal className="mx-auto mt-8 w-48" />
         <div className="mt-10 flex justify-center gap-x-6">
           <Button href="/auth/login" className="">
+            <ChatBubbleBottomCenterIcon
+              className="mr-2 inline-block h-5 w-5"
+              aria-hidden="true"
+            />
             {t('aiChat')}
           </Button>
           <Button
@@ -37,6 +44,10 @@ export default function HomeHeroRow() {
             target="_blank"
             rel="noreferrer"
           >
+            <FontAwesomeIcon
+              icon={faGithub}
+              className="mr-2 inline-block h-5 w-5"
+            />
             GitHub
           </Button>
         </div>

@@ -9,6 +9,10 @@ import {
 import { verifySignIn } from '@solana/wallet-standard-util'
 import { getAuth } from 'firebase-admin/auth'
 import bs58 from 'bs58'
+import { User } from '@/models'
+import { db } from '@/index'
+import { gravatarIconUrl } from '@skeet-framework/utils'
+import { add, get } from '@skeet-framework/firestore'
 
 export const verifySIWS = onRequest(
   publicHttpOption,
@@ -30,9 +34,19 @@ export const verifySIWS = onRequest(
         throw new Error('Sign In verification failed!')
       }
 
-      const token = await getAuth().createCustomToken(
-        bs58.encode(backendOutput.account.publicKey),
-      )
+      const uid = bs58.encode(backendOutput.account.publicKey)
+      const userRef = await get<User>(db, 'User', uid)
+      const userParams = {
+        uid,
+        email: '',
+        username: uid.slice(0, 8),
+        iconUrl: gravatarIconUrl('info@skeet.dev'),
+      }
+      if (!userRef) {
+        await add<User>(db, 'User', userParams, uid)
+      }
+
+      const token = await getAuth().createCustomToken(uid)
 
       res.json({
         status: 'success',

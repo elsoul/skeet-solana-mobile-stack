@@ -24,7 +24,7 @@ import {
   temperatureSchema,
   maxTokensSchema,
   systemContentSchema,
-  gptChatRoomName,
+  getGptChatModelName,
 } from '@/utils/form'
 
 import {
@@ -442,7 +442,7 @@ export default function ChatMenu({
                                     >
                                       {allowedGPTModel.map((model) => (
                                         <option key={model} value={model}>
-                                          {gptChatRoomName(model)}
+                                          {getGptChatModelName(model)}
                                         </option>
                                       ))}
                                     </select>

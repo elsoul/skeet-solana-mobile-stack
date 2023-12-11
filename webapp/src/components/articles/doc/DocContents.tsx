@@ -14,7 +14,9 @@ export default function DocContents({ article, articleHtml }: Props) {
       <Container>
         <div className="flex justify-center py-12 lg:gap-12">
           <div>
-            <h1 className="text-4xl font-bold">{article.title}</h1>
+            <h1 className="text-4xl font-extrabold tracking-tighter">
+              {article.title}
+            </h1>
 
             <div className="py-8 xl:hidden">
               <ScrollSyncToc rawMarkdownBody={article.content} />

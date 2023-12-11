@@ -56,6 +56,11 @@ export default function LoginScreen() {
           'verifySIWS',
           { input, output }
         )
+        addToast({
+          title: t('auth:verifyTitle'),
+          description: t('auth:verifyDescription'),
+          type: 'info',
+        })
         const success = await verifyResponse?.json()
         const userCredential = await signInWithCustomToken(auth, success?.token)
         const { email, username, iconUrl } = await get<User>(

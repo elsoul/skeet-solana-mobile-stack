@@ -38,7 +38,7 @@ export default function LoginScreen() {
               <LogoHorizontal className="w-24" />
             </View>
             <Text
-              style={tw`font-loaded-bold mt-6 text-center text-3xl tracking-tight text-gray-900 dark:text-white`}
+              style={tw`font-loaded-bold mt-6 text-center text-3xl tracking-tighter text-gray-900 dark:text-white`}
             >
               Solana Mobile Stack
             </Text>

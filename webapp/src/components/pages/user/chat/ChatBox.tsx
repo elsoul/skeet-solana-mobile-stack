@@ -13,7 +13,7 @@ import { useRecoilValue } from 'recoil'
 import { userState } from '@/store/user'
 import { db } from '@/lib/firebase'
 import { orderBy } from 'firebase/firestore'
-import { chatContentSchema, gptChatRoomName } from '@/utils/form'
+import { chatContentSchema, getGptChatModelName } from '@/utils/form'
 import { fetchSkeetFunctions } from '@/lib/skeet/functions'
 import Image from 'next/image'
 import { ChatRoom } from './ChatMenu'
@@ -229,7 +229,21 @@ export default function ChatBox({
             try {
               const dataString = decoder.decode(value)
               if (dataString != 'Stream done') {
-                const data = JSON.parse(dataString)
+                const regex = /({"text":".*?"})/g
+                const matches = dataString.match(regex)
+                let text = ''
+
+                if (matches) {
+                  matches.forEach((match) => {
+                    try {
+                      const json = JSON.parse(match)
+                      text = text.concat(json.text)
+                    } catch (e) {
+                      console.error('JSON parse error: ', e)
+                    }
+                  })
+                }
+                const data = { text }
                 setChatMessages((prev) => {
                   const chunkSize = data.text.length
                   if (prev[prev.length - 1].content.length === 0) {
@@ -386,7 +400,7 @@ export default function ChatBox({
                         {chatRoom?.title ? chatRoom?.title : t('noTitle')}
                       </p>
                       <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                        {gptChatRoomName(chatRoom?.model)}:{' '}
+                        {getGptChatModelName(chatRoom?.model)}:{' '}
                         {chatRoom?.maxTokens} {t('tokens')}
                       </p>
                     </div>
@@ -453,7 +467,7 @@ export default function ChatBox({
                             {chatRoom?.title ? chatRoom?.title : t('noTitle')}
                           </p>
                           <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                            {gptChatRoomName(chatRoom?.model)}:{' '}
+                            {getGptChatModelName(chatRoom?.model)}:{' '}
                             {chatRoom?.maxTokens} {t('tokens')}
                           </p>
                         </div>
