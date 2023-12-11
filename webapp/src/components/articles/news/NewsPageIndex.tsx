@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import Link from '@/components/routing/Link'
-import type { NewsIndex } from '@/types/article'
+import type { NewsIndex } from '@common/types/article'
 
 type Props = {
   articles: NewsIndex[]

@@ -18,7 +18,7 @@ import { ChatRoom } from './VertexChatMenu'
 import { db } from '@/lib/firebase'
 import { useRecoilValue } from 'recoil'
 import { userState } from '@/store/user'
-import { VertexChatRoom, genVertexChatRoomPath } from '@/types/models'
+import { VertexChatRoom, genVertexChatRoomPath } from '@common/types/models'
 import { update } from '@/lib/skeet/firestore'
 
 type Inputs = z.infer<typeof vertexExampleFormSchema>

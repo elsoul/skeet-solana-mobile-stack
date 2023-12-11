@@ -1,7 +1,7 @@
 import Container from '@/components/common/atoms/Container'
 import ScrollSyncToc from '@/components/articles/ScrollSyncToc'
 import Image from 'next/image'
-import type { NewsContent } from '@/types/article'
+import type { NewsContent } from '@common/types/article'
 
 type Props = {
   article: NewsContent
@@ -20,7 +20,7 @@ export default function NewsContents({ article, articleHtml }: Props) {
             <p className="mt-1 text-gray-600 dark:text-gray-200">
               {article.date}
             </p>
-            <div className="prose break-all dark:prose-invert lg:prose-lg">
+            <div className="prose dark:prose-invert lg:prose-lg break-all">
               <div className="py-8">
                 <Image
                   src={article.thumbnail}
@@ -35,7 +35,7 @@ export default function NewsContents({ article, articleHtml }: Props) {
                 <ScrollSyncToc rawMarkdownBody={article.content} />
               </div>
               <div
-                className="prose break-all dark:prose-invert lg:prose-lg"
+                className="prose dark:prose-invert lg:prose-lg break-all"
                 dangerouslySetInnerHTML={{ __html: articleHtml }}
               />
             </div>

@@ -18,7 +18,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@lib/*": ["../lib/*"],
-      "@root/*": ["../*"]
+      "@root/*": ["../*"],
+      "@common/*": ["../common/*"]
     }
   },
   "ts-node": {
@@ -31,6 +32,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
+    "../common/**/*.ts",
     "../lib/**/*.ts",
     "../skeet-cloud.config.json"
   ],

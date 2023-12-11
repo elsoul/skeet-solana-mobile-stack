@@ -1,7 +1,7 @@
 import { onRequest } from 'firebase-functions/v2/https'
 import { publicHttpOption } from '@/routings/options'
-import { TypedRequestBody } from '@/types/http'
-import { VerifySIWSParams } from '@/types/http/verifySIWSParams'
+import { TypedRequestBody } from '@common/types/http'
+import { VerifySIWSParams } from '@common/types/http/verifySIWSParams'
 import {
   SolanaSignInInput,
   SolanaSignInOutput,

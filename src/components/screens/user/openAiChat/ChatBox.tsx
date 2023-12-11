@@ -20,7 +20,7 @@ import { fetchSkeetFunctions } from '@/lib/skeet/functions'
 import { Image } from 'expo-image'
 import { blurhash } from '@/utils/placeholder'
 import { ChatRoom } from './ChatMenu'
-import { AddStreamUserChatRoomMessageParams } from '@/types/http/skeet/addStreamUserChatRoomMessageParams'
+import { AddStreamUserChatRoomMessageParams } from '@common/types/http/skeet/addStreamUserChatRoomMessageParams'
 import CodeEditor, {
   CodeEditorSyntaxStyles,
 } from '@rivascva/react-native-code-editor'
@@ -31,7 +31,7 @@ import {
   UserChatRoomMessage,
   genUserChatRoomPath,
   genUserChatRoomMessagePath,
-} from '@/types/models'
+} from '@common/types/models'
 import { Timestamp } from '@skeet-framework/firestore'
 import { get, query } from '@/lib/skeet/firestore'
 

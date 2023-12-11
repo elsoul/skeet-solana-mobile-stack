@@ -1,7 +1,7 @@
 import { onRequest } from 'firebase-functions/v2/https'
 import { publicHttpOption } from '@/routings/options'
-import { TypedRequestBody } from '@/types/http'
-import { CreateSignInDataParams } from '@/types/http/createSignInDataParams'
+import { TypedRequestBody } from '@common/types/http'
+import { CreateSignInDataParams } from '@common/types/http/createSignInDataParams'
 import { SolanaSignInInput } from '@solana/wallet-standard-features'
 
 export const createSignInData = onRequest(

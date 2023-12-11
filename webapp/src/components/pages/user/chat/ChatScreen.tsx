@@ -12,14 +12,14 @@ import {
 } from 'firebase/firestore'
 import { db } from '@/lib/firebase'
 import { useTranslation } from 'next-i18next'
-import { UserChatRoom, genUserChatRoomPath } from '@/types/models'
+import { UserChatRoom, genUserChatRoomPath } from '@common/types/models'
 import { query } from '@/lib/skeet/firestore'
 
 export default function ChatScreen() {
   const { t } = useTranslation()
   const [isNewChatModalOpen, setNewChatModalOpen] = useState(false)
   const [currentChatRoomId, setCurrentChatRoomId] = useState<string | null>(
-    null,
+    null
   )
 
   const user = useRecoilValue(userState)
@@ -38,7 +38,7 @@ export default function ChatScreen() {
         const querySnapshot = await query<UserChatRoom>(
           db,
           genUserChatRoomPath(user.uid),
-          [orderBy('createdAt', 'desc'), limit(15)],
+          [orderBy('createdAt', 'desc'), limit(15)]
         )
         const list: ChatRoom[] = []
         querySnapshot.forEach((doc) => {
