@@ -18,8 +18,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@lib/*": ["../lib/*"],
-      "@root/*": ["../*"],
-      "@common/*": ["../common/*"]
+      "@common/*": ["../common/*"],
+      "@root/*": ["../*"]
     }
   },
   "ts-node": {
@@ -29,12 +29,13 @@
     }
   },
   "include": [
-    "next-env.d.ts",
+    "**/*.js",
     "**/*.ts",
     "**/*.tsx",
     "../common/**/*.ts",
     "../lib/**/*.ts",
-    "../skeet-cloud.config.json"
+    "../skeet-cloud.config.json",
+    "./typings.d.ts"
   ],
   "exclude": ["node_modules", "out", ".next", "build", "dist"]
 }
