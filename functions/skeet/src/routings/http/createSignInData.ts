@@ -29,6 +29,7 @@ export const createSignInData = onRequest(
         signInData,
       })
     } catch (error) {
+      console.error(error)
       res.status(500).json({ status: 'error', message: String(error) })
     }
   },

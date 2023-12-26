@@ -126,6 +126,7 @@ export const addStreamUserChatRoomMessage = onRequest(
       })
       res.end()
     } catch (error) {
+      console.error(error)
       res.status(500).json({ status: 'error', message: String(error) })
     }
   },

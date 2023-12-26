@@ -45,6 +45,7 @@ export const createUserChatRoom = onRequest(
       console.log(`created userChatRoom: ${userChatRoomDoc.id}`)
       res.json({ status: 'success', userChatRoomId: userChatRoomDoc.id })
     } catch (error) {
+      console.error(error)
       res.status(500).json({ status: 'error', message: String(error) })
     }
   },

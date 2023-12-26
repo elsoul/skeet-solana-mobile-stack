@@ -10,11 +10,11 @@ import type {
   SolanaSignInOutput,
 } from '@solana/wallet-standard-features'
 import { fetchSkeetFunctions } from '@/lib/skeet/functions'
-import { CreateSignInDataParams } from '@common/types/http/skeet/createSignInDataParams'
-import { VerifySIWSParams } from '@common/types/http/skeet/verifySIWSParams'
+import { CreateSignInDataParams } from '@common/types/http/createSignInDataParams'
+import { VerifySIWSParams } from '@common/types/http/verifySIWSParams'
 import { auth, db } from '@/lib/firebase'
 import { signInWithCustomToken, signOut } from 'firebase/auth'
-import { User, genUserPath } from '@common/types/models'
+import { User, genUserPath } from '@root/common/models'
 import { useRecoilState } from 'recoil'
 import { defaultUser, userState } from '@/store/user'
 import { get } from '@/lib/skeet/firestore'
@@ -35,7 +35,7 @@ export default function LoginScreen() {
           await fetchSkeetFunctions<CreateSignInDataParams>(
             'skeet',
             'createSignInData',
-            {}
+            {},
           )
         const signInResponse = await createResponse?.json()
         const input: SolanaSignInInput = signInResponse?.signInData
@@ -54,7 +54,7 @@ export default function LoginScreen() {
         const verifyResponse = await fetchSkeetFunctions<VerifySIWSParams>(
           'skeet',
           'verifySIWS',
-          { input, output }
+          { input, output },
         )
         addToast({
           title: t('auth:verifyTitle'),
@@ -63,11 +63,11 @@ export default function LoginScreen() {
         })
         const success = await verifyResponse?.json()
         const userCredential = await signInWithCustomToken(auth, success?.token)
-        const { email, username, iconUrl } = await get<User>(
-          db,
-          genUserPath(),
-          userCredential.user.uid
-        )
+        const data = await get<User>(db, genUserPath(), userCredential.user.uid)
+
+        if (!data) throw new Error('User not found')
+
+        const { email, username, iconUrl } = data
         setUser({
           uid: userCredential.user.uid,
           email,
@@ -107,14 +107,14 @@ export default function LoginScreen() {
             <div className="mb-2 flex flex-col items-center justify-center gap-y-10">
               <div
                 className={clsx(
-                  'flex flex-row items-center justify-center rounded-none bg-gray-900 hover:bg-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700'
+                  'flex flex-row items-center justify-center rounded-none bg-gray-900 hover:bg-gray-600 dark:bg-gray-800 dark:hover:bg-gray-700',
                 )}
               >
                 <WalletMultiButton />
               </div>
               <div
                 className={clsx(
-                  'flex flex-col items-center justify-center gap-2'
+                  'flex flex-col items-center justify-center gap-2',
                 )}
               >
                 <button
@@ -126,7 +126,7 @@ export default function LoginScreen() {
                     'px-6 py-2',
                     !connected
                       ? 'bg-gray-300 text-white hover:cursor-not-allowed dark:bg-gray-800 dark:text-gray-400'
-                      : 'bg-green-700 text-white hover:cursor-pointer hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-800'
+                      : 'bg-green-700 text-white hover:cursor-pointer hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-800',
                   )}
                 >
                   {t('auth:signIn')}

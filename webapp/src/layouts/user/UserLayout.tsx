@@ -57,11 +57,9 @@ export default function UserLayout({ children }: Props) {
     async (fbUser: User | null) => {
       if (auth && db && fbUser) {
         try {
-          const { email, username, iconUrl } = await get<UserModel>(
-            db,
-            genUserPath(),
-            fbUser.uid
-          )
+          const data = await get<UserModel>(db, genUserPath(), fbUser.uid)
+          if (!data) throw new Error('User not found')
+          const { email, username, iconUrl } = data
           setUser({
             uid: fbUser.uid,
             email,
@@ -75,15 +73,14 @@ export default function UserLayout({ children }: Props) {
           await routerPush('/auth/login')
         }
       } else {
-        setUser(defaultUser)
-        await routerPush('/auth/login')
+        if (auth && !fbUser) {
+          setUser(defaultUser)
+          await signOut(auth)
+          await routerPush('/auth/login')
+        }
       }
     },
-<<<<<<< HEAD
-    [setUser, router]
-=======
     [setUser, routerPush],
->>>>>>> d8815160c7ec77c3a8e6056ca4df588ac6e7958d
   )
 
   useEffect(() => {
@@ -163,7 +160,7 @@ export default function UserLayout({ children }: Props) {
                             asPathWithoutLang === item.href
                               ? 'bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white'
                               : 'text-gray-700 hover:bg-gray-50 dark:text-gray-50 dark:hover:bg-gray-800',
-                            'group flex items-center px-2 py-2 text-base font-medium'
+                            'group flex items-center px-2 py-2 text-base font-medium',
                           )}
                         >
                           {item.icon && (
@@ -172,7 +169,7 @@ export default function UserLayout({ children }: Props) {
                                 asPathWithoutLang === item.href
                                   ? 'text-gray-900 dark:text-white'
                                   : 'text-gray-700 dark:text-gray-50',
-                                'mr-4 h-6 w-6 flex-shrink-0'
+                                'mr-4 h-6 w-6 flex-shrink-0',
                               )}
                               aria-hidden="true"
                             />
@@ -204,7 +201,7 @@ export default function UserLayout({ children }: Props) {
                       asPathWithoutLang === item.href
                         ? 'bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-white'
                         : 'text-gray-700 hover:bg-gray-50 dark:text-gray-50 dark:hover:bg-gray-800',
-                      'group flex items-center px-2 py-2 text-sm font-medium'
+                      'group flex items-center px-2 py-2 text-sm font-medium',
                     )}
                   >
                     {item.icon && (
@@ -213,7 +210,7 @@ export default function UserLayout({ children }: Props) {
                           asPathWithoutLang === item.href
                             ? 'text-gray-900  dark:text-white'
                             : 'text-gray-700 dark:text-gray-50',
-                          'mr-3 h-6 w-6 flex-shrink-0'
+                          'mr-3 h-6 w-6 flex-shrink-0',
                         )}
                         aria-hidden="true"
                       />
@@ -277,7 +274,7 @@ export default function UserLayout({ children }: Props) {
                               active
                                 ? 'bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-white'
                                 : '',
-                              'block px-4 py-2 text-sm text-gray-700 dark:text-gray-50'
+                              'block px-4 py-2 text-sm text-gray-700 dark:text-gray-50',
                             )}
                           >
                             {t(item.name)}
@@ -298,7 +295,7 @@ export default function UserLayout({ children }: Props) {
                             active
                               ? 'bg-gray-50 text-gray-900 dark:bg-gray-700 dark:text-white'
                               : '',
-                            'block px-4 py-2 text-sm text-gray-700 hover:cursor-pointer dark:text-gray-50'
+                            'block px-4 py-2 text-sm text-gray-700 hover:cursor-pointer dark:text-gray-50',
                           )}
                         >
                           {t('logout')}

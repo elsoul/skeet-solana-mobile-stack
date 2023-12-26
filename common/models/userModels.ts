@@ -40,7 +40,7 @@ export type UserChatRoom = {
 export const UserChatRoomMessageCN = 'UserChatRoomMessage'
 export const genUserChatRoomMessagePath = (
   uid: string,
-  userChatRoomId: string,
+  userChatRoomId: string
 ) =>
   `${UserCN}/${uid}/${UserChatRoomCN}/${userChatRoomId}/${UserChatRoomMessageCN}`
 export type UserChatRoomMessage = {

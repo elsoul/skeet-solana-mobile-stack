@@ -12,14 +12,12 @@ import type {
   SolanaSignInOutput,
 } from '@solana/wallet-standard-features'
 import { fetchSkeetFunctions } from '@/lib/skeet/functions'
-import { CreateSignInDataParams } from '@common/types/http/skeet/createSignInDataParams'
-import { VerifySIWSParams } from '@common/types/http/skeet/verifySIWSParams'
+import { CreateSignInDataParams } from '@common/types/http/createSignInDataParams'
+import { VerifySIWSParams } from '@common/types/http/verifySIWSParams'
 import { auth, db } from '@/lib/firebase'
 import { signInWithCustomToken, signOut } from 'firebase/auth'
-import { User, genUserPath } from '@common/types/models'
 import { useRecoilState } from 'recoil'
 import { defaultUser, userState } from '@/store/user'
-import { get } from '@/lib/skeet/firestore'
 
 type Props = {
   children: ReactNode
@@ -42,7 +40,7 @@ export default function SolanaWalletProvider({ children }: Props) {
       })
       console.error(error)
     },
-    [addToast]
+    [addToast],
   )
 
   const autoSignIn = useCallback(
@@ -55,7 +53,7 @@ export default function SolanaWalletProvider({ children }: Props) {
             await fetchSkeetFunctions<CreateSignInDataParams>(
               'skeet',
               'createSignInData',
-              {}
+              {},
             )
           const signInResponse = await createResponse?.json()
           const input: SolanaSignInInput = signInResponse?.signInData
@@ -74,24 +72,13 @@ export default function SolanaWalletProvider({ children }: Props) {
           const verifyResponse = await fetchSkeetFunctions<VerifySIWSParams>(
             'skeet',
             'verifySIWS',
-            { input, output }
+            { input, output },
           )
           const success = await verifyResponse?.json()
           const userCredential = await signInWithCustomToken(
             auth,
-            success?.token
+            success?.token,
           )
-          const { email, username, iconUrl } = await get<User>(
-            db,
-            genUserPath(),
-            userCredential.user.uid
-          )
-          setUser({
-            uid: userCredential.user.uid,
-            email,
-            username,
-            iconUrl,
-          })
 
           return false
         }
@@ -110,7 +97,7 @@ export default function SolanaWalletProvider({ children }: Props) {
         }
       }
     },
-    [addToast, setUser]
+    [addToast, setUser],
   )
 
   const autoConnect = useCallback(
@@ -120,7 +107,7 @@ export default function SolanaWalletProvider({ children }: Props) {
       })
       return false
     },
-    [autoSignIn]
+    [autoSignIn],
   )
 
   return (

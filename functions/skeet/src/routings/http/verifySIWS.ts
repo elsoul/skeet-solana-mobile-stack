@@ -9,7 +9,7 @@ import {
 import { verifySignIn } from '@solana/wallet-standard-util'
 import { getAuth } from 'firebase-admin/auth'
 import bs58 from 'bs58'
-import { User } from '@/models'
+import { User } from '@common/models'
 import { db } from '@/index'
 import { gravatarIconUrl } from '@skeet-framework/utils'
 import { add, get } from '@skeet-framework/firestore'
@@ -42,8 +42,13 @@ export const verifySIWS = onRequest(
         username: uid.slice(0, 8),
         iconUrl: gravatarIconUrl('info@skeet.dev'),
       }
+      console.log(userParams)
       if (!userRef) {
-        await add<User>(db, 'User', userParams, uid)
+        const userRefTmp = db.collection('User').doc(uid)
+        await userRefTmp.set(userParams, { merge: true })
+        // await add<User>(db, 'User', userParams, uid)
+        // Somehow, here gets weird error from firestore with some createdAt timestamp problem.
+        // Please check it.
       }
 
       const token = await getAuth().createCustomToken(uid)
@@ -53,6 +58,7 @@ export const verifySIWS = onRequest(
         token,
       })
     } catch (error) {
+      console.error(error)
       res.status(500).json({ status: 'error', message: String(error) })
     }
   },
