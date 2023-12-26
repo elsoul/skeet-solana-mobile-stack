@@ -75,8 +75,11 @@ export default function UserLayout({ children }: Props) {
           await routerPush('/auth/login')
         }
       } else {
-        setUser(defaultUser)
-        await routerPush('/auth/login')
+        if (auth && !fbUser) {
+          setUser(defaultUser)
+          await signOut(auth)
+          await routerPush('/auth/login')
+        }
       }
     },
     [setUser, routerPush],

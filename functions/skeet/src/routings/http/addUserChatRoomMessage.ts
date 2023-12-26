@@ -88,6 +88,7 @@ export const addUserChatRoomMessage = onRequest(
       }
       res.json({ status: 'success', response: content })
     } catch (error) {
+      console.error(error)
       res.status(500).json({ status: 'error', message: String(error) })
     }
   },

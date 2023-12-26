@@ -9,7 +9,7 @@ import {
 import { verifySignIn } from '@solana/wallet-standard-util'
 import { getAuth } from 'firebase-admin/auth'
 import bs58 from 'bs58'
-import { User } from '@/models'
+import { User } from '@common/models'
 import { db } from '@/index'
 import { gravatarIconUrl } from '@skeet-framework/utils'
 import { add, get } from '@skeet-framework/firestore'
@@ -42,6 +42,7 @@ export const verifySIWS = onRequest(
         username: uid.slice(0, 8),
         iconUrl: gravatarIconUrl('info@skeet.dev'),
       }
+      console.log(userParams)
       if (!userRef) {
         await add<User>(db, 'User', userParams, uid)
       }
@@ -53,6 +54,7 @@ export const verifySIWS = onRequest(
         token,
       })
     } catch (error) {
+      console.error(error)
       res.status(500).json({ status: 'error', message: String(error) })
     }
   },
