@@ -18,7 +18,7 @@ import { ChatRoom } from './VertexChatMenu'
 import { db } from '@/lib/firebase'
 import { useRecoilValue } from 'recoil'
 import { userState } from '@/store/user'
-import { VertexChatRoom, genVertexChatRoomPath } from '@common/types/models'
+import { VertexChatRoom, genVertexChatRoomPath } from '@common/models'
 import { update } from '@/lib/skeet/firestore'
 
 type Inputs = z.infer<typeof vertexExampleFormSchema>
@@ -88,7 +88,7 @@ export default function VertexChatExamples({
             currentChatRoomId,
             {
               examples: data.inputOutputPairs,
-            }
+            },
           )
           addToast({
             type: 'success',
@@ -117,7 +117,7 @@ export default function VertexChatExamples({
       user.uid,
       isDisabled,
       getChatRoom,
-    ]
+    ],
   )
 
   return (
@@ -127,7 +127,7 @@ export default function VertexChatExamples({
           setExamplesModalOpen(true)
         }}
         className={clsx(
-          'flex flex-row items-center justify-center border border-gray-600 px-2 py-1 hover:border-gray-400 dark:border-gray-200 dark:hover:border-gray-400'
+          'flex flex-row items-center justify-center border border-gray-600 px-2 py-1 hover:border-gray-400 dark:border-gray-200 dark:hover:border-gray-400',
         )}
       >
         <AcademicCapIcon className="mr-2 h-5 w-5 flex-shrink-0 text-gray-800 dark:text-white" />
@@ -191,7 +191,7 @@ export default function VertexChatExamples({
                             style={{ resize: 'none' }}
                             {...field}
                             className={clsx(
-                              'h-full flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:text-lg'
+                              'h-full flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:text-lg',
                             )}
                           />
                         )}
@@ -217,7 +217,7 @@ export default function VertexChatExamples({
                             style={{ resize: 'none' }}
                             {...field}
                             className={clsx(
-                              'h-full flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:text-lg'
+                              'h-full flex-1 border-2 border-gray-900 p-1 font-normal text-gray-900 dark:border-gray-50 dark:bg-gray-800 dark:text-white sm:text-lg',
                             )}
                           />
                         )}
@@ -253,7 +253,7 @@ export default function VertexChatExamples({
                       isDisabled
                         ? 'bg-gray-300 dark:bg-gray-500 dark:text-gray-600'
                         : 'bg-gray-900 hover:bg-gray-600 dark:bg-gray-300 dark:hover:bg-gray-600',
-                      'px-4 py-2 text-white'
+                      'px-4 py-2 text-white',
                     )}
                   >
                     {t('vertex-ai:submit')}

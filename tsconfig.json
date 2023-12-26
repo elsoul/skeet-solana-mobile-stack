@@ -19,8 +19,11 @@
     "common/**/*",
     "custom.d.ts",
     "App.tsx",
+    "tests/**/*",
+    "metro.config.js",
     "babel.config.js",
-    ".eslintrc.js"
+    "jest.config.js",
+    "tsconfig.json"
   ],
-  "exclude": ["node_modules", ".expo", "dist", "webapp"]
+  "exclude": ["node_modules", ".expo", "dist", "webapp", "functions"]
 }
