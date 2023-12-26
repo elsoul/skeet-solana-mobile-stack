@@ -63,11 +63,11 @@ export default function LoginScreen() {
         })
         const success = await verifyResponse?.json()
         const userCredential = await signInWithCustomToken(auth, success?.token)
-        const { email, username, iconUrl } = await get<User>(
-          db,
-          genUserPath(),
-          userCredential.user.uid,
-        )
+        const data = await get<User>(db, genUserPath(), userCredential.user.uid)
+
+        if (!data) throw new Error('User not found')
+
+        const { email, username, iconUrl } = data
         setUser({
           uid: userCredential.user.uid,
           email,

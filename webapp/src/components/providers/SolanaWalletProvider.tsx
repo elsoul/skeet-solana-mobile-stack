@@ -16,10 +16,8 @@ import { CreateSignInDataParams } from '@common/types/http/createSignInDataParam
 import { VerifySIWSParams } from '@common/types/http/verifySIWSParams'
 import { auth, db } from '@/lib/firebase'
 import { signInWithCustomToken, signOut } from 'firebase/auth'
-import { User, genUserPath } from '@common/models'
 import { useRecoilState } from 'recoil'
 import { defaultUser, userState } from '@/store/user'
-import { get } from '@/lib/skeet/firestore'
 
 type Props = {
   children: ReactNode
@@ -81,17 +79,6 @@ export default function SolanaWalletProvider({ children }: Props) {
             auth,
             success?.token,
           )
-          const { email, username, iconUrl } = await get<User>(
-            db,
-            genUserPath(),
-            userCredential.user.uid,
-          )
-          setUser({
-            uid: userCredential.user.uid,
-            email,
-            username,
-            iconUrl,
-          })
 
           return false
         }

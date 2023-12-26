@@ -109,6 +109,7 @@ export default function VertexChatBox({
           genVertexChatRoomPath(user.uid),
           currentChatRoomId,
         )
+        if (!data) throw new Error('Chat room not found')
         setChatRoom(data as ChatRoom)
       } catch (e) {
         console.error(e)

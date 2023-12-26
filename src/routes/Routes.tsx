@@ -35,11 +35,10 @@ export default function Routes() {
       if (initializing) setInitializing(false)
       if (auth && db && fbUser) {
         try {
-          const { email, username, iconUrl } = await get<UserModel>(
-            db,
-            genUserPath(),
-            fbUser.uid
-          )
+          const data = await get<UserModel>(db, genUserPath(), fbUser.uid)
+          if (!data) throw new Error('User not found')
+
+          const { email, username, iconUrl } = data
           setUser({
             uid: fbUser.uid,
             email,
