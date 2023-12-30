@@ -44,11 +44,7 @@ export const verifySIWS = onRequest(
       }
       console.log(userParams)
       if (!userRef) {
-        const userRefTmp = db.collection('User').doc(uid)
-        await userRefTmp.set(userParams, { merge: true })
-        // await add<User>(db, 'User', userParams, uid)
-        // Somehow, here gets weird error from firestore with some createdAt timestamp problem.
-        // Please check it.
+        await add<User>(db, 'User', userParams, uid)
       }
 
       const token = await getAuth().createCustomToken(uid)
