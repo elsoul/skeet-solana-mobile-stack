@@ -21,7 +21,7 @@ Get ready to use scalable Cloud Firestore and Cloud Functions securely right awa
 ## 🧪 Dependency 🧪
 
 - [TypeScript](https://www.typescriptlang.org/) ^5.0.0
-- [Node.js](https://nodejs.org/ja/) ^20.10.0
+- [Node.js](https://nodejs.org/ja/) ^20.11.0
 - [Yarn](https://yarnpkg.com/) ^1.22.19
 - [Google Cloud SDK](https://cloud.google.com/sdk/docs/install) ^430.0.0
 - [Firebase CLI](https://firebase.google.com/docs/cli) ^12.0.0
