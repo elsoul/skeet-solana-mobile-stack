@@ -1,5 +1,5 @@
 {
-  "name": "skeet-solana-web",
+  "name": "webapp",
   "version": "1.0.0",
   "description": "Skeet Framework Boilerplate with Next.js and Solana",
   "author": "ELSOUL LABO B.V.",
@@ -10,7 +10,7 @@
     "lint": "eslint --ext .ts,.tsx --fix .",
     "test": "jest --coverage=false --detectOpenHandles --maxWorkers=1",
     "typecheck": "tsc --noEmit",
-    "update:packages": "ncu -u -x 'node-fetch,glob,remark,unified,remark-gfm,remark-rehype,remark-stringify,rehype-stringify,remark-parse,remark-directive' && yarn",
+    "update:packages": "ncu -u -x 'node-fetch,glob,remark,unified,remark-gfm,remark-rehype,remark-stringify,rehype-stringify,remark-parse,remark-directive' && pnpm install",
     "dev": "next dev -p 4200",
     "build": "NODE_ENV=production next build",
     "postbuild": "npx ts-node -r tsconfig-paths/register --transpile-only ./scripts/generateSitemap.ts",
