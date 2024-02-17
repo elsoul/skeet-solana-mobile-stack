@@ -49,7 +49,7 @@ jobs:
       - name: GitHub repository setting
         run: git config --global url."https://github.com".insteadOf ssh://git@github.com
       - name: Install dependencies
-        run: pnpm install --workspace-root
+        run: pnpm install
       - name: Build App
         run: pnpm build
       - name: Deploy to Firebase

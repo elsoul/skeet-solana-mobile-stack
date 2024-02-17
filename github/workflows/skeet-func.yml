@@ -47,7 +47,7 @@ jobs:
         with:
           credentials_json: ${{ secrets.SKEET_GCP_SA_KEY }}
       - name: Install firebase tools
-        run: pnpm i -g firebase-tools
+        run: pnpm add -g firebase-tools
       - name: GitHub repository setting
         run: git config --global url."https://github.com".insteadOf ssh://git@github.com
       - name: Install dependencies
