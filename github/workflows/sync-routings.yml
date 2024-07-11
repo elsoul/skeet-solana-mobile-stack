@@ -1,0 +1,48 @@
+name: skeet-sync-routings
+on:
+  workflow_run:
+    workflows: ['SkeetFunc']
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        node-version: [20.11.0]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.SKEET_GCP_SA_KEY }}
+      - name: Install firebase tools
+        run: pnpm i -g @skeet-framework/cli
+      - name: GitHub repository setting
+        run: git config --global url."https://github.com".insteadOf ssh://git@github.com
+      - name: Sync routings
+        run: |
+          skeet sync routings || exit 1
